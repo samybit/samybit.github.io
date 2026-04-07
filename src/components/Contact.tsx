@@ -20,9 +20,18 @@ export default function Contact() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setValues(prev => ({ ...prev, [name]: value }));
-    // Clear the error for this field as they type
+
+    // Only clear the error if the new keystroke actually makes the field valid.
     if (errors[name as keyof typeof errors]) {
-      setErrors(prev => ({ ...prev, [name]: undefined }));
+      let isValid = false;
+      if (name === "name") isValid = value.trim().length > 0;
+      if (name === "email") isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+      if (name === "message") isValid = value.trim().length > 0;
+
+      // If they fixed it, remove the error so it instantly shines black
+      if (isValid) {
+        setErrors(prev => ({ ...prev, [name]: undefined }));
+      }
     }
   };
 
