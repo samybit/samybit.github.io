@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
-// Aggressive, geometric font perfect for brutalism
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -22,12 +23,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      {/* selection:bg-black selection:text-white ensures even highlighting text 
-        follows the stark brutalist theme 
-      */}
+    <html lang="en" className="scroll-smooth">
       <body className={`${spaceGrotesk.className} bg-white text-black antialiased selection:bg-black selection:text-white`}>
+        <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
