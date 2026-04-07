@@ -6,7 +6,9 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="min-h-[90vh] flex flex-col justify-center items-start px-6 md:px-12 lg:px-24 border-b-8 border-black">
+    // The pt-32 md:pt-40 creates an invisible barrier at the top so the 
+    // fixed navbar never touches your name.
+    <section className="min-h-[90vh] flex flex-col justify-center items-start px-6 md:px-12 lg:px-24 border-b-8 border-black pt-32 md:pt-40 pb-16">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -14,7 +16,7 @@ export default function Hero() {
         className="max-w-6xl w-full"
       >
         <div className="flex items-center gap-4 mb-6">
-          <TerminalSquare size={32} className="text-black" />
+          {/* <TerminalSquare size={32} className="text-black" /> */}
           <span className="text-xl font-bold uppercase tracking-widest border-b-4 border-black pb-1">
             Available for Freelance & Roles
           </span>
@@ -34,14 +36,14 @@ export default function Hero() {
         </p>
 
         <div className="flex flex-wrap gap-6">
-          <Link
-            href="#projects"
+          <Link 
+            href="#projects" 
             className="brutalist-container !p-5 !bg-black text-white hover:!bg-white hover:text-black flex items-center gap-3 text-2xl font-black uppercase transition-colors"
           >
             See my work <ArrowDownRight size={32} />
           </Link>
-          <Link
-            href="#contact"
+          <Link 
+            href="#contact" 
             className="brutalist-container !p-5 flex items-center gap-3 text-2xl font-black uppercase hover:bg-black hover:text-white transition-colors"
           >
             Hire Me
