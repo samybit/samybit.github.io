@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function Hero() {
   return (
     // Padding and min-height specs are left exactly the same as the previous fix
-    <section className="min-h-[90vh] flex flex-col justify-center items-start px-6 md:px-12 lg:px-24 border-b-8 border-black pt-32 md:pt-40 pb-16 overflow-hidden">
+    <section className="min-h-[90vh] flex flex-col justify-center items-start px-6 md:px-12 lg:px-24 border-b-8 border-black pt-30 md:pt-34 pb-16 overflow-hidden">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
