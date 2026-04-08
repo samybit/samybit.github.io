@@ -73,7 +73,7 @@ export default function AboutPage() {
               <h3 className="text-3xl font-bold uppercase leading-tight mb-2">Ain Shams University</h3>
               <p className="text-xl font-bold text-zinc-400 mb-6 uppercase">Bachelor of Commerce (B.B.A.) // 2019 - 2023</p>
               <p className="text-lg md:text-xl font-medium leading-relaxed">
-                Developed a rigorous foundation in logic, problem-solving, and a strategic mindset for system architecture. This analytical background allows me to flawlessly translate complex business requirements into highly efficient, scalable technical solutions.
+                Studying business gave me a solid grounding in logic and problem-solving,<br /> which helps me understand what a product needs to do before writing a single line of code.
               </p>
             </div>
           </motion.section>
@@ -92,11 +92,11 @@ export default function AboutPage() {
             <div className="flex flex-col gap-6">
               <div className="border-l-8 border-black pl-4">
                 <h3 className="text-2xl font-black uppercase">MERN Stack & AI</h3>
-                <p className="text-lg font-bold text-zinc-500 uppercase">ITI (Information Technology Institute)</p>
+                <p className="text-lg font-bold text-zinc-500 uppercase">ITI</p>
               </div>
               <div className="border-l-8 border-black pl-4">
                 <h3 className="text-2xl font-black uppercase">CS50x</h3>
-                <p className="text-lg font-bold text-zinc-500 uppercase">Harvard University</p>
+                <p className="text-lg font-bold text-zinc-500 uppercase">Harvard University / edX</p>
               </div>
               <div className="border-l-8 border-black pl-4">
                 <h3 className="text-2xl font-black uppercase">Database Fundamentals</h3>

@@ -13,7 +13,7 @@ export default function CTA() {
       {/* --- FULL BLEED BACKGROUND --- */}
       <div className="absolute inset-0 z-0 bg-black">
         <Image
-          src="/painting.jpg"
+          src="/painting2.jpg"
           alt="Classical Art Background"
           fill
           className="object-cover grayscale contrast-[1.2] brightness-[0.35] group-hover:grayscale-0 group-hover:brightness-[0.6] transition-all duration-700 ease-in-out"
