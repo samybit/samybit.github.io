@@ -11,21 +11,22 @@ export default function AboutPage() {
     document.title = "About | Samy Barsoum";
   }, []);
 
+  // Cleaned, deduplicated, and upgraded technical arsenal
   const stack = [
     {
       category: "Frontend & UI",
       icon: <LayoutTemplate size={32} />,
-      tech: ["React.js", "Angular", "JavaScript (ES6+)", "HTML5 & CSS3", "Bootstrap 5", "Figma"]
+      tech: ["React.js", "Next.js", "Angular", "Tailwind CSS", "JavaScript (ES6+)", "Bootstrap 5", "Figma"]
     },
     {
       category: "Backend & DB",
       icon: <Database size={32} />,
-      tech: ["Python", "Node.js", "Express.js", "Flask", "MongoDB", "WTForms"]
+      tech: ["Node.js", "NestJS", "Express.js", "Python", "Flask", "MongoDB", "WTForms"]
     },
     {
       category: "DevOps & Tools",
       icon: <Server size={32} />,
-      tech: ["Docker", "Git / GitHub", "Linux OS", "Nexus Repo Manager"]
+      tech: ["Docker", "Kubernetes", "Git / GitHub", "Linux OS", "Nexus Repo Manager"]
     },
     {
       category: "Automation",
