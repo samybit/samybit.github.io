@@ -39,6 +39,19 @@ function BrutalistGeometry() {
 }
 
 export default function CTA() {
+
+  // Custom scroll handler to force the browser to scroll down 
+  // even if the URL already says #contact
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.preventDefault();
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+      // Update the URL without reloading the page
+      window.history.pushState(null, "", "/#contact");
+    }
+  };
+
   return (
     <section className="relative w-full min-h-[80vh] flex flex-col items-center justify-center overflow-hidden border-t-8 border-b-8 border-black group my-24">
 
@@ -81,8 +94,10 @@ export default function CTA() {
             Currently open for freelance projects and full-time roles. Let's make something impactful.
           </p>
 
+          {/* Added onClick handler to hijack the default routing */}
           <Link
-            href="#contact"
+            href="/#contact"
+            onClick={handleScroll}
             className="group/btn relative inline-flex items-center justify-center bg-black text-white px-10 py-5 text-2xl font-black uppercase tracking-widest border-4 border-black hover:bg-white hover:text-black transition-colors duration-200 mt-6"
           >
             <span>Get in touch</span>
