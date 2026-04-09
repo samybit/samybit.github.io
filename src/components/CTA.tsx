@@ -5,14 +5,26 @@ import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { MeshDistortMaterial } from "@react-three/drei";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useMemo } from "react";
 import * as THREE from "three";
 
-// --- 3D INTERACTIVE OBJECT: THE LIQUID VOID ---
-function LiquidAnomaly() {
-  const meshRef = useRef<THREE.Mesh>(null);
+// --- 3D INTERACTIVE OBJECT: THE SYSTEM LEAK ---
+function SystemLeak() {
+  const coreRef = useRef<THREE.Mesh>(null);
+  const dropsGroupRef = useRef<THREE.Group>(null);
   const mouse = useRef({ x: 0, y: 0 });
+
+  // Generate 25 "drops" with random speeds, sizes, and initial offsets
+  const dropsData = useMemo(() => {
+    return Array.from({ length: 25 }, () => ({
+      offsetX: (Math.random() - 0.5) * 1.5,
+      offsetY: (Math.random() - 0.5) * 1.5,
+      speed: Math.random() * 0.04 + 0.02,
+      scale: Math.random() * 0.2 + 0.05,
+      rotSpeedX: Math.random() * 0.05,
+      rotSpeedY: Math.random() * 0.05,
+    }));
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -24,33 +36,54 @@ function LiquidAnomaly() {
   }, []);
 
   useFrame(() => {
-    if (!meshRef.current) return;
+    if (!coreRef.current || !dropsGroupRef.current) return;
 
-    // Slow, ominous rotation
-    meshRef.current.rotation.x += 0.001;
-    meshRef.current.rotation.y += 0.002;
-
-    const targetX = mouse.current.x * 4; // Exaggerated tracking
+    const targetX = mouse.current.x * 4;
     const targetY = mouse.current.y * 4;
 
-    meshRef.current.position.x += (targetX - meshRef.current.position.x) * 0.05;
-    meshRef.current.position.y += (targetY - meshRef.current.position.y) * 0.05;
+    // 1. Move the central Core
+    coreRef.current.position.x += (targetX - coreRef.current.position.x) * 0.05;
+    coreRef.current.position.y += (targetY - coreRef.current.position.y) * 0.05;
+    coreRef.current.rotation.x += 0.01;
+    coreRef.current.rotation.y += 0.02;
+
+    // 2. Animate the Drops falling from the Core
+    dropsGroupRef.current.children.forEach((drop, index) => {
+      const data = dropsData[index];
+
+      // Gravity: pull it down
+      drop.position.y -= data.speed;
+      drop.rotation.x += data.rotSpeedX;
+      drop.rotation.y += data.rotSpeedY;
+
+      // If the drop falls too far off the screen, respawn it back at the Core's current position
+      if (drop.position.y < -5) {
+        drop.position.x = coreRef.current.position.x + data.offsetX;
+        drop.position.y = coreRef.current.position.y + data.offsetY;
+      }
+    });
   });
 
   return (
-    <mesh ref={meshRef}>
-      {/* High-resolution sphere to allow for smooth liquid distortion */}
-      <sphereGeometry args={[2.5, 64, 64]} />
-      {/* This is where the magic happens. 
-        It mathematically warps the vertices of the sphere in real-time.
-      */}
-      <MeshDistortMaterial
-        color="#ffffff"
-        distort={0.2} // How aggressively the shape morphs
-        speed={2}     // How fast it breathes
-        roughness={0}
-      />
-    </mesh>
+    <>
+      {/* The Anomaly Core: A jagged, flat-shaded geometric shape */}
+      <mesh ref={coreRef}>
+        <icosahedronGeometry args={[1.2, 0]} />
+        <meshBasicMaterial color="#ffffff" wireframe={true} />
+      </mesh>
+
+      {/* The Leaking Data Drops */}
+      <group ref={dropsGroupRef}>
+        {dropsData.map((data, i) => (
+          // Initialize them way off-screen so they spawn naturally
+          <mesh key={i} position={[0, 10, 0]} scale={data.scale}>
+            {/* Boxy, brutalist drops instead of round water */}
+            <boxGeometry args={[1, 1, 1]} />
+            <meshBasicMaterial color="#ffffff" />
+          </mesh>
+        ))}
+      </group>
+    </>
   );
 }
 
@@ -74,6 +107,7 @@ export default function CTA() {
           src="/painting2.jpg"
           alt="Classical Art Background"
           fill
+          priority
           className="object-cover grayscale contrast-[1.2] brightness-[0.35] group-hover:grayscale-0 group-hover:brightness-[0.6] transition-all duration-700 ease-in-out"
         />
         <div className="absolute inset-0 bg-[radial-gradient(#000_3px,transparent_0)] bg-[size:16px_16px] opacity-50 mix-blend-overlay pointer-events-none"></div>
@@ -107,12 +141,7 @@ export default function CTA() {
       {/* --- LAYER 3: 3D SCANNER (z-20) --- */}
       <div className="absolute inset-0 z-20 mix-blend-difference pointer-events-none">
         <Canvas style={{ pointerEvents: "none" }} camera={{ position: [0, 0, 8], fov: 50 }}>
-
-          {/* THE FIX: We must add lights for physical materials to be visible */}
-          <ambientLight intensity={2} />
-          <directionalLight position={[10, 10, 5]} intensity={3} />
-
-          <LiquidAnomaly />
+          <SystemLeak />
         </Canvas>
       </div>
 
