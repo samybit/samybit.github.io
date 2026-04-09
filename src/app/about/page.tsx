@@ -119,22 +119,14 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
             {stack.map((category, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="will-change-[opacity] brutalist-container group hover:!bg-black hover:!text-white transition-colors duration-300"
+                className="brutalist-container group hover:!bg-black hover:!text-white transition-colors duration-300"
               >
-                {/* Synced duration-300 here */}
                 <div className="flex flex-col items-start gap-4 border-b-4 border-black group-hover:border-white pb-4 mb-6 transition-colors duration-300">
-
-                  {/* Added text-black and group-hover:!text-black, and synced duration-300 */}
                   <div className="p-3 border-4 border-black text-black group-hover:border-white group-hover:bg-white group-hover:!text-black transition-colors duration-300">
                     {category.icon}
                   </div>
-
                   <h3 className="text-2xl font-black uppercase leading-none">{category.category}</h3>
                 </div>
 
@@ -146,7 +138,7 @@ export default function AboutPage() {
                     </li>
                   ))}
                 </ul>
-              </motion.div>
+              </div>
             ))}
           </div>
 
