@@ -59,7 +59,7 @@ export default function CTA() {
       <div className="absolute inset-0 z-0 bg-black">
         {/* The Painting */}
         <Image
-          src="/painting2.jpg"
+          src="/painting4.jpg"
           alt="Classical Art Background"
           fill
           className="object-cover grayscale contrast-[1.2] brightness-[0.35] group-hover:grayscale-0 group-hover:brightness-[0.6] transition-all duration-700 ease-in-out"
@@ -81,16 +81,18 @@ export default function CTA() {
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        // pointer-events-none on the wrapper so mouse events pass through to the 3D canvas behind it
-        className="relative z-30 w-full max-w-5xl px-6 pointer-events-none"
+        // CHANGED: Shrunk from max-w-5xl down to max-w-2xl
+        className="relative z-30 w-full max-w-2xl px-6 pointer-events-none"
       >
-        <div className="brutalist-container !bg-white !text-black p-10 md:p-20 text-center flex flex-col items-center gap-8 shadow-[20px_20px_0px_0px_#000000] pointer-events-auto">
+        {/* CHANGED: Tightened padding to p-8 md:p-12, slightly reduced the shadow size */}
+        <div className="brutalist-container !bg-white !text-black p-8 md:p-12 text-center flex flex-col items-center gap-6 shadow-[16px_16px_0px_0px_#000000] pointer-events-auto">
 
-          <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none">
+          {/* CHANGED: Scaled down text slightly to fit the tighter box perfectly */}
+          <h2 className="text-5xl md:text-6xl font-black uppercase tracking-tighter leading-none">
             Ready to build?
           </h2>
 
-          <p className="text-xl md:text-2xl max-w-2xl font-bold uppercase text-zinc-600">
+          <p className="text-lg md:text-xl max-w-lg font-bold uppercase text-zinc-600">
             Currently open for freelance projects and full-time roles. Let's make something impactful.
           </p>
 
@@ -98,10 +100,10 @@ export default function CTA() {
           <Link
             href="/#contact"
             onClick={handleScroll}
-            className="group/btn relative inline-flex items-center justify-center bg-black text-white px-10 py-5 text-2xl font-black uppercase tracking-widest border-4 border-black hover:bg-white hover:text-black transition-colors duration-200 mt-6"
+            className="group/btn relative inline-flex items-center justify-center bg-black text-white px-8 py-4 text-xl font-black uppercase tracking-widest border-4 border-black hover:bg-white hover:text-black transition-colors duration-200 mt-4"
           >
             <span>Get in touch</span>
-            <ArrowUpRight className="ml-3 w-8 h-8 group-hover/btn:rotate-90 transition-transform duration-200" />
+            <ArrowUpRight className="ml-3 w-6 h-6 group-hover/btn:rotate-90 transition-transform duration-200" />
           </Link>
 
         </div>
