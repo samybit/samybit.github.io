@@ -5,10 +5,11 @@ import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Canvas, useFrame } from "@react-three/fiber";
+import { MeshDistortMaterial } from "@react-three/drei";
 import { useRef, useEffect, useMemo } from "react";
 import * as THREE from "three";
 
-// --- 3D INTERACTIVE OBJECT: THE SYSTEM LEAK ---
+// --- 3D INTERACTIVE OBJECT: THE LIQUID ANOMALY LEAK ---
 function SystemLeak() {
   const coreRef = useRef<THREE.Mesh>(null);
   const dropsGroupRef = useRef<THREE.Group>(null);
@@ -20,7 +21,7 @@ function SystemLeak() {
       offsetX: (Math.random() - 0.5) * 1.5,
       offsetY: (Math.random() - 0.5) * 1.5,
       speed: Math.random() * 0.04 + 0.02,
-      scale: Math.random() * 0.2 + 0.05,
+      scale: Math.random() * 0.15 + 0.05, // Slightly scaled down for liquid drops
       rotSpeedX: Math.random() * 0.05,
       rotSpeedY: Math.random() * 0.05,
     }));
@@ -51,12 +52,11 @@ function SystemLeak() {
     dropsGroupRef.current.children.forEach((drop, index) => {
       const data = dropsData[index];
 
-      // Gravity: pull it down
       drop.position.y -= data.speed;
       drop.rotation.x += data.rotSpeedX;
       drop.rotation.y += data.rotSpeedY;
 
-      // If the drop falls too far off the screen, respawn it back at the Core's current position
+      // Respawn the drop back inside the liquid core when it falls off screen
       if (drop.position.y < -5) {
         drop.position.x = coreRef.current.position.x + data.offsetX;
         drop.position.y = coreRef.current.position.y + data.offsetY;
@@ -66,19 +66,24 @@ function SystemLeak() {
 
   return (
     <>
-      {/* The Anomaly Core: A jagged, flat-shaded geometric shape */}
+      {/* The Liquid Core */}
       <mesh ref={coreRef}>
-        <icosahedronGeometry args={[1.2, 0]} />
-        <meshBasicMaterial color="#ffffff" wireframe={true} />
+        <sphereGeometry args={[1.8, 64, 64]} />
+        <MeshDistortMaterial
+          color="#ffffff"
+          distort={0.3}
+          speed={2}
+          roughness={0}
+        />
       </mesh>
 
       {/* The Leaking Data Drops */}
       <group ref={dropsGroupRef}>
         {dropsData.map((data, i) => (
           // Initialize them way off-screen so they spawn naturally
-          <mesh key={i} position={[0, 10, 0]} scale={data.scale}>
+          <mesh key={i} position={[0, -10, 0]} scale={data.scale}>
             {/* Boxy, brutalist drops instead of round water */}
-            <boxGeometry args={[1, 1, 1]} />
+            <boxGeometry args={[1.5, 1.5, 1.5]} />
             <meshBasicMaterial color="#ffffff" />
           </mesh>
         ))}
@@ -141,6 +146,11 @@ export default function CTA() {
       {/* --- LAYER 3: 3D SCANNER (z-20) --- */}
       <div className="absolute inset-0 z-20 mix-blend-difference pointer-events-none">
         <Canvas style={{ pointerEvents: "none" }} camera={{ position: [0, 0, 8], fov: 50 }}>
+
+          {/* THE FIX: Lights restored so the MeshDistortMaterial is visible */}
+          <ambientLight intensity={2} />
+          <directionalLight position={[10, 10, 5]} intensity={3} />
+
           <SystemLeak />
         </Canvas>
       </div>
