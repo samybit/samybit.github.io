@@ -60,48 +60,40 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Menu Dropdown */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
-            className="pointer-events-auto md:hidden w-full mt-4 bg-white border-4 border-black p-6 flex flex-col gap-2 brutalist-shadow"
+      {/* Mobile Menu Dropdown - Ripped out Framer Motion for instant, lag-free rendering */}
+      {isOpen && (
+        <div className="pointer-events-auto md:hidden w-full mt-4 bg-white border-4 border-black p-6 flex flex-col gap-2 brutalist-shadow">
+          <Link
+            href="/about"
+            onClick={() => setIsOpen(false)}
+            className="text-3xl font-black uppercase p-4 border-b-4 border-black hover:bg-black hover:text-white transition-colors"
           >
-            <Link
-              href="/about"
-              onClick={() => setIsOpen(false)}
-              className="text-3xl font-black uppercase p-4 border-b-4 border-black hover:bg-black hover:text-white transition-colors"
-            >
-              About
-            </Link>
-            <Link
-              href="/#projects"
-              onClick={() => setIsOpen(false)}
-              className="text-3xl font-black uppercase p-4 border-b-4 border-black hover:bg-black hover:text-white transition-colors"
-            >
-              Work
-            </Link>
-            <a
-              href="https://github.com/samybit"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex justify-between items-center text-3xl font-black uppercase p-4 border-b-4 border-black hover:bg-black hover:text-white transition-colors"
-            >
-              GitHub <ArrowUpRight size={32} />
-            </a>
-            <Link
-              href="/#contact"
-              onClick={() => setIsOpen(false)}
-              className="mt-4 bg-black text-white text-center p-5 text-3xl font-black uppercase border-4 border-black hover:bg-white hover:text-black transition-colors"
-            >
-              Hire Me
-            </Link>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            About
+          </Link>
+          <Link
+            href="/#projects"
+            onClick={() => setIsOpen(false)}
+            className="text-3xl font-black uppercase p-4 border-b-4 border-black hover:bg-black hover:text-white transition-colors"
+          >
+            Work
+          </Link>
+          <a
+            href="https://github.com/samybit"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex justify-between items-center text-3xl font-black uppercase p-4 border-b-4 border-black hover:bg-black hover:text-white transition-colors"
+          >
+            GitHub <ArrowUpRight size={32} />
+          </a>
+          <Link
+            href="/#contact"
+            onClick={() => setIsOpen(false)}
+            className="mt-4 bg-black text-white text-center p-5 text-3xl font-black uppercase border-4 border-black hover:bg-white hover:text-black transition-colors"
+          >
+            Hire Me
+          </Link>
+        </div>
+      )}
     </motion.nav>
   );
 }
