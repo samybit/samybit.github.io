@@ -40,7 +40,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <main className="min-h-screen px-6 md:px-12 lg:px-24 pt-30 md:pt-34 pb-24">
+    <main className="min-h-screen px-6 md:px-12 lg:px-24 pt-30 md:pt-32 pb-24">
 
       {/* --- HEADER --- */}
       <div className="animate-slide-up max-w-7xl mx-auto mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -68,7 +68,7 @@ export default function AboutPage() {
               <h3 className="text-3xl font-bold uppercase leading-tight mb-2">Ain Shams University</h3>
               <p className="text-xl font-bold text-zinc-400 mb-6 uppercase">Bachelor of Commerce (B.B.A.) // 2019 - 2023</p>
               <p className="text-lg md:text-xl font-medium leading-relaxed">
-                Studying business gave me a solid grounding in logic and problem-solving,<br /> which helps me understand what a product needs to do before writing a single line of code.
+                Specialized in accounting and project management, which strengthened my problem-solving skills and gave me a solid understanding of real-world product needs.
               </p>
             </div>
           </section>
