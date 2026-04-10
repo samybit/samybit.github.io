@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowDownRight, ArrowUpRight, TerminalSquare } from "lucide-react";
 import Link from "next/link";
 
@@ -8,12 +7,8 @@ export default function Hero() {
   return (
     // Padding and min-height specs are left exactly the same as the previous fix
     <section id="hero" className="min-h-[90vh] flex flex-col justify-center items-start px-6 md:px-12 lg:px-24 border-b-8 border-black pt-30 md:pt-34 pb-16 overflow-hidden">
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="w-full max-w-[90rem] mx-auto flex flex-col lg:flex-row lg:items-center justify-between gap-12 lg:gap-16"
-      >
+      <div className="w-full max-w-[90rem] mx-auto flex flex-col lg:flex-row lg:items-center justify-between gap-12 lg:gap-16">
+
         {/* Left Column: Typography Block */}
         <div className="flex-1">
           <div className="flex items-center gap-4 mb-6">
@@ -56,7 +51,7 @@ export default function Hero() {
             <ArrowDownRight size={40} className="group-hover:translate-x-2 group-hover:translate-y-2 transition-transform" />
           </Link>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

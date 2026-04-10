@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowLeft, GraduationCap, Award, LayoutTemplate, Database, Server, Wrench } from "lucide-react";
 import Link from "next/link";
 import { useEffect } from "react";
@@ -11,7 +10,6 @@ export default function AboutPage() {
     document.title = "About | Samy Barsoum";
   }, []);
 
-  // Cleaned, deduplicated, and upgraded technical arsenal
   const stack = [
     {
       category: "Frontend & UI",
@@ -39,11 +37,7 @@ export default function AboutPage() {
     <main className="min-h-screen px-6 md:px-12 lg:px-24 pt-30 md:pt-34 pb-24">
 
       {/* --- HEADER --- */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="max-w-7xl mx-auto mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6"
-      >
+      <div className="max-w-7xl mx-auto mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
           <Link href="/" className="inline-flex items-center gap-2 text-xl font-bold uppercase mb-8 hover:bg-black hover:text-white px-3 py-1 border-4 border-transparent hover:border-black transition-all">
             <ArrowLeft size={24} /> Return to Grid
@@ -52,19 +46,14 @@ export default function AboutPage() {
             System <br /> <span className="bg-black text-white px-4 inline-block mt-2 transform -skew-x-2">Specs</span>
           </h1>
         </div>
-      </motion.div>
+      </div>
 
       <div className="max-w-7xl mx-auto flex flex-col gap-16">
 
         {/* --- EDUCATION & CERTS ROW --- */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
 
-          <motion.section
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="will-change-[opacity] brutalist-container !bg-black !text-white flex flex-col justify-between"
-          >
+          <section className="brutalist-container !bg-black !text-white flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-4 border-b-4 border-white pb-4 mb-6">
                 <GraduationCap size={40} />
@@ -76,14 +65,9 @@ export default function AboutPage() {
                 Studying business gave me a solid grounding in logic and problem-solving,<br /> which helps me understand what a product needs to do before writing a single line of code.
               </p>
             </div>
-          </motion.section>
+          </section>
 
-          <motion.section
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="will-change-[opacity] brutalist-container flex flex-col"
-          >
+          <section className="brutalist-container flex flex-col">
             <div className="flex items-center gap-4 border-b-4 border-black pb-4 mb-6">
               <Award size={40} />
               <h2 className="text-4xl font-black uppercase">Clearances</h2>
@@ -103,16 +87,12 @@ export default function AboutPage() {
                 <p className="text-lg font-bold text-zinc-500 uppercase">egFWD</p>
               </div>
             </div>
-          </motion.section>
+          </section>
 
         </div>
 
         {/* --- TECHNICAL ARSENAL --- */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-        >
+        <section>
           <div className="inline-block bg-black text-white px-6 py-2 mb-8 transform -skew-x-2">
             <h2 className="text-4xl font-black uppercase tracking-widest">Technical Arsenal</h2>
           </div>
@@ -141,8 +121,7 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
-
-        </motion.section>
+        </section>
 
       </div>
     </main>

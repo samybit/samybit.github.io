@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Send, Check, ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import { sendEmail } from "@/actions/send-email";
@@ -124,12 +123,7 @@ export default function Contact() {
           </div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          className="flex-1 w-full"
-        >
+        <div className="flex-1 w-full">
           <form action={clientAction} noValidate className="brutalist-container text-black flex flex-col gap-6">
 
             {status === "success" ? (
@@ -219,7 +213,7 @@ export default function Contact() {
               </>
             )}
           </form>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
