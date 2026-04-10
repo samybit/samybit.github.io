@@ -5,9 +5,15 @@ import Link from "next/link";
 import { useEffect } from "react";
 
 export default function AboutPage() {
-  // Enforce the tab title on mount
+  // Enforce the tab title on mount and fix the refresh scroll-creep
   useEffect(() => {
     document.title = "About | Samy Barsoum";
+
+    // Tell the browser to turn off its automatic scroll memory
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+
   }, []);
 
   const stack = [
