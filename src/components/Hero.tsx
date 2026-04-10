@@ -16,9 +16,9 @@ export default function Hero() {
             </span>
           </div>
 
-          <h1 className="text-7xl md:text-9xl lg:text-[8rem] xl:text-[10rem] font-black uppercase tracking-tighter leading-[0.85] mb-8">
+          <h1 className="text-[18vw] sm:text-7xl md:text-9xl lg:text-[8rem] xl:text-[10rem] font-black uppercase tracking-tighter leading-[0.85] mb-8">
             Samy <br />
-            <span className="bg-black text-white px-4 inline-block mt-2 transform -skew-x-6">
+            <span className="bg-black text-white px-2 sm:px-4 inline-block mt-2 transform -skew-x-6">
               Barsoum
             </span>
           </h1>
