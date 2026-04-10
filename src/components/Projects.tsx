@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 
 // Custom inline SVG to perfectly match Lucide's 24x24 style
@@ -72,8 +71,6 @@ export default function Projects() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14">
         {projects.map((project, index) => (
-          // CHANGED: Removed motion.div, initial, whileInView, viewport, and transition.
-          // Removed will-change-[opacity]. Now it's a perfectly static, instant-loading block.
           <div
             key={index}
             className="brutalist-container flex flex-col justify-between min-h-[350px]"

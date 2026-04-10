@@ -1,6 +1,5 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
 import { TerminalSquare, ArrowUpRight, Menu, X } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
@@ -9,12 +8,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="fixed top-0 left-0 z-50 w-full px-6 md:px-12 py-6 pointer-events-none flex flex-col"
-    >
+    <nav className="fixed top-0 left-0 z-50 w-full px-6 md:px-12 py-6 pointer-events-none flex flex-col">
       <div className="flex justify-between items-start w-full">
         {/* Logo Block */}
         <Link
@@ -94,6 +88,6 @@ export default function Navbar() {
           </Link>
         </div>
       )}
-    </motion.nav>
+    </nav>
   );
 }
