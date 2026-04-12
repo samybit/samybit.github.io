@@ -3,6 +3,8 @@
 import { ArrowLeft, GraduationCap, Award, LayoutTemplate, Database, Server, Wrench, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { useEffect } from "react";
+import AudioPlayer from "@/components/AudioPlayer";
+
 
 export default function AboutPage() {
   // Enforce the tab title on mount and fix the refresh scroll-creep
@@ -43,7 +45,8 @@ export default function AboutPage() {
     <main className="min-h-screen px-6 md:px-12 lg:px-24 pt-30 md:pt-32 pb-24">
 
       {/* --- HEADER --- */}
-      <div className="animate-slide-up max-w-7xl mx-auto mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div className="animate-slide-up max-w-7xl mx-auto mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8 md:gap-6">
+        {/* LEFT SIDE: Title & Back Button */}
         <div>
           <Link href="/" className="inline-flex items-center gap-2 text-xl font-bold uppercase mb-8 hover:bg-black hover:text-white px-3 py-1 border-4 border-transparent hover:border-black transition-all">
             <ArrowLeft size={24} /> Return to Grid
@@ -51,6 +54,12 @@ export default function AboutPage() {
           <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-none">
             System <br /> <span className="bg-black text-white px-4 inline-block mt-2 transform -skew-x-2">Specs</span>
           </h1>
+        </div>
+
+        {/* RIGHT SIDE: The Music Player */}
+        {/* On mobile, it fills the width. On desktop, it hugs the right side. */}
+        <div className="w-full md:w-auto shrink-0">
+          <AudioPlayer />
         </div>
       </div>
 
@@ -81,12 +90,12 @@ export default function AboutPage() {
 
             {/* Returned to gap-6 for the original tight spacing */}
             <div className="flex flex-col gap-6">
-              
+
               {/* ITI CERTIFICATE */}
-              <a 
-                href="#" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group block border-l-8 border-black pl-4 hover:bg-black hover:text-white transition-colors cursor-pointer"
               >
                 <div className="flex justify-between items-center">
@@ -100,10 +109,10 @@ export default function AboutPage() {
               </a>
 
               {/* CS50x CERTIFICATE */}
-              <a 
-                href="https://cs50.harvard.edu/certificates/09d4b4ad-f9dd-4cf3-a1dc-7385742119f9" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://cs50.harvard.edu/certificates/09d4b4ad-f9dd-4cf3-a1dc-7385742119f9"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group block border-l-8 border-black pl-4 hover:bg-black hover:text-white transition-colors cursor-pointer"
               >
                 <div className="flex justify-between items-center">
@@ -116,10 +125,10 @@ export default function AboutPage() {
               </a>
 
               {/* egFWD CERTIFICATE */}
-              <a 
-                href="#" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group block border-l-8 border-black pl-4 hover:bg-black hover:text-white transition-colors cursor-pointer"
               >
                 <div className="flex justify-between items-center">
