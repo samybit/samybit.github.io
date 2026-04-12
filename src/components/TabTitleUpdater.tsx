@@ -13,7 +13,7 @@ export default function TabTitleUpdater() {
             if (entry.target.id === "projects") {
               document.title = "Work | Samy Barsoum";
             } else if (entry.target.id === "contact") {
-              document.title = "Hire Me | Samy Barsoum";
+              document.title = "Contact | Samy Barsoum";
             } else if (entry.target.id === "hero") {
               document.title = "Samy | Full-Stack Developer";
             }

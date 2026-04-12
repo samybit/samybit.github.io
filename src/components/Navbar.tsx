@@ -39,7 +39,7 @@ export default function Navbar() {
             href="/#contact"
             className="bg-black text-white px-5 py-2 text-lg font-bold uppercase border-4 border-black hover:bg-white hover:text-black transition-colors ml-2"
           >
-            Hire Me
+            Contact
           </Link>
         </div>
 
@@ -64,7 +64,7 @@ export default function Navbar() {
             GitHub <ArrowUpRight size={32} />
           </a>
           <Link href="/#contact" onClick={() => setIsOpen(false)} className="mt-4 bg-black text-white text-center p-5 text-3xl font-black uppercase border-4 border-black hover:bg-white hover:text-black transition-colors">
-            Hire Me
+            Contact
           </Link>
         </div>
       )}

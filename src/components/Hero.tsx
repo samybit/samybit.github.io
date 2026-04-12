@@ -40,7 +40,7 @@ export default function Hero() {
           </Link>
 
           <Link href="#contact" className="brutalist-container !p-8 flex justify-between items-center w-full text-3xl font-black uppercase hover:bg-black hover:text-white transition-all group">
-            <span>Hire Me</span>
+            <span>Contact</span>
             <ArrowDownRight size={40} className="group-hover:translate-x-2 group-hover:translate-y-2 transition-transform" />
           </Link>
         </div>

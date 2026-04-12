@@ -118,7 +118,7 @@ export default function CustomContextMenu() {
           onClick={handleCopy}
           className="flex-1 flex flex-col items-center justify-center py-3 border-r-4 border-black hover:bg-black hover:text-white transition-colors group"
         >
-          <Copy size={20} className="mb-1 group-hover:-translate-y-1 transition-transform" />
+          <Copy size={20} className="mb-1" />
           <span className="text-[10px] font-black uppercase tracking-widest">Copy</span>
         </button>
 
@@ -126,7 +126,7 @@ export default function CustomContextMenu() {
           onClick={handlePaste}
           className="flex-1 flex flex-col items-center justify-center py-3 hover:bg-black hover:text-white transition-colors group"
         >
-          <ClipboardPaste size={20} className="mb-1 group-hover:-translate-y-1 transition-transform" />
+          <ClipboardPaste size={20} className="mb-1" />
           <span className="text-[10px] font-black uppercase tracking-widest">Paste</span>
         </button>
       </div>
