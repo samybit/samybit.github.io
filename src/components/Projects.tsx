@@ -22,25 +22,24 @@ const GithubIcon = ({ size = 24 }: { size?: number }) => (
 
 const projects = [
   {
-    title: "3D Solar System",
-    description: "Interactive planetary simulator combining the MERN stack with Three.js rendering.",
-    tech: ["React", "Three.js", "Node.js", "MongoDB"],
-    github: "https://github.com/samybit",
-    // Changed from "#" to an actual link so the button appears!
-    demo: "https://github.com/samybit"
+    title: "Vanilla JS E-Commerce",
+    description: "Full-scale store engine with role-based access control (Admin/User), product management, and persistent data.",
+    tech: ["JavaScript", "HTML", "CSS", "LocalStorage"],
+    github: "https://github.com/samybit/vanilla-js-ecommerce",
+    demo: "https://samybit.github.io/vanilla-js-ecommerce/"
   },
   {
-    title: "Corporate Dashboard",
-    description: "High-performance admin dashboard featuring rich data visualization and strict typing.",
-    tech: ["React", "Material-UI", "TypeScript"],
-    github: "https://github.com/samybit",
-    demo: "#" // Stays hidden until you have a real link
+    title: "Movie Intelligence App",
+    description: "Cinematic platform featuring Firebase authentication, global state management, and localized filtering system.",
+    tech: ["React", "Shadcn UI", "Firebase", "i18n"],
+    github: "https://github.com/samybit/iti-movie-app",
+    demo: "https://iti-movie-app.pages.dev/"
   },
   {
     title: "Lead Scraper",
     description: "Automated freelance lead generation and scraping pipeline built for efficiency.",
-    tech: ["n8n", "Python", "Automation"],
-    github: "https://github.com/samybit",
+    tech: ["n8n", "Python", "Automation", "gemini-ai"],
+    github: "https://github.com/samybit/freelance-lead-scraper",
     demo: "#"
   },
   {

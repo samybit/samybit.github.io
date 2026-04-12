@@ -101,7 +101,7 @@ export default function AboutPage() {
 
               {/* CS50x CERTIFICATE */}
               <a 
-                href="#" 
+                href="https://cs50.harvard.edu/certificates/09d4b4ad-f9dd-4cf3-a1dc-7385742119f9" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="group block border-l-8 border-black pl-4 hover:bg-black hover:text-white transition-colors cursor-pointer"
@@ -124,8 +124,8 @@ export default function AboutPage() {
               >
                 <div className="flex justify-between items-center">
                   <div>
-                    <h3 className="text-2xl font-black uppercase leading-tight">Database Fundamentals</h3>
-                    <p className="text-lg font-bold text-zinc-500 group-hover:text-zinc-300 uppercase">egFWD</p>
+                    <h3 className="text-2xl font-black uppercase leading-tight">Data Analysis Nanodegree</h3>
+                    <p className="text-lg font-bold text-zinc-500 group-hover:text-zinc-300 uppercase">Egypt FWD Initiative (MCIT)</p>
                   </div>
                   <ExternalLink size={24} className="opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-300 mr-4 shrink-0" />
                 </div>
