@@ -103,7 +103,7 @@ const ProjectCard = ({ project, animate = false }: { project: any, animate?: boo
 
 export default function Projects() {
   const [page, setPage] = useState(0);
-  const [showAllMobile, setShowAllMobile] = useState(false); // NEW: State for mobile view toggle
+  const [showAllMobile, setShowAllMobile] = useState(false);
 
   const itemsPerPage = 4;
   const totalPages = Math.ceil(projects.length / itemsPerPage);
@@ -128,20 +128,21 @@ export default function Projects() {
             [ PAGE 0{page + 1} / 0{totalPages} ]
           </p>
 
-          {/* Mobile Subtitle & Toggle Bar */}
-          <div className="flex lg:hidden items-center justify-between mt-6 border-4 border-black p-2 brutalist-shadow">
+          {/* FLATTENED Mobile Subtitle & Toggle Bar */}
+          <div className="flex lg:hidden items-center justify-between mt-6 border-2 border-black p-2">
             <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-zinc-500 pl-2">
               {showAllMobile ? "[ Scroll ↓ ]" : "[ Swipe → ]"}
             </span>
             <button
               onClick={() => setShowAllMobile(!showAllMobile)}
-              className="bg-black text-white px-3 py-2 text-xs sm:text-sm font-black uppercase border-2 border-black hover:bg-white hover:text-black transition-colors"
+              className="bg-black text-white px-3 py-2 text-xs sm:text-sm font-black uppercase"
             >
               {showAllMobile ? "Swipe View" : "View All"}
             </button>
           </div>
 
         </div>
+
         {/* Hidden on mobile so it doesn't clutter the header */}
         <a
           href="https://github.com/samybit"
@@ -175,19 +176,16 @@ export default function Projects() {
 
       {/* --- MOBILE VIEW --- */}
       {showAllMobile ? (
-        // Stacked List View
         <div className="flex lg:hidden flex-col gap-8 pb-8">
           {projects.map((project, index) => (
             <div key={`mobile-list-${index}`} className="w-full">
-              {/* Passing animate=true gives them a nice staggered slide-in when toggled */}
               <ProjectCard project={project} animate={true} />
             </div>
           ))}
         </div>
       ) : (
-        // Horizontal Native CSS Swipe View
         <div
-          className="flex lg:hidden overflow-x-auto gap-4 pb-8 snap-x snap-mandatory -mx-6 px-6"
+          className="flex lg:hidden overflow-x-auto gap-4 pb-6 snap-x snap-mandatory -mx-6 px-6"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
         >
           <style dangerouslySetInnerHTML={{ __html: `div::-webkit-scrollbar { display: none; }` }} />
