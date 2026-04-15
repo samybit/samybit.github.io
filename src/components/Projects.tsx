@@ -142,11 +142,12 @@ export default function Projects() {
           </div>
 
         </div>
+        {/* Hidden on mobile so it doesn't clutter the header */}
         <a
           href="https://github.com/samybit"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-2xl font-bold uppercase border-b-4 border-black pb-1 hover:bg-black hover:text-white transition-colors"
+          className="hidden md:block text-2xl font-bold uppercase border-b-4 border-black pb-1 hover:bg-black hover:text-white transition-colors"
         >
           View full GitHub →
         </a>
@@ -198,6 +199,18 @@ export default function Projects() {
           <div className="w-[1px] shrink-0"></div>
         </div>
       )}
+
+      {/* --- MOBILE GITHUB LINK (Bottom CTA) --- */}
+      <div className="flex md:hidden mt-4 w-full">
+        <a
+          href="https://github.com/samybit"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full bg-white border-4 border-black p-5 text-xl font-black uppercase text-center brutalist-shadow hover:translate-y-1 hover:translate-x-1 hover:shadow-none hover:bg-black hover:text-white transition-all"
+        >
+          View Full GitHub →
+        </a>
+      </div>
 
     </section >
   );
