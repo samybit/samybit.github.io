@@ -1,10 +1,9 @@
 "use client";
 
-import { ArrowLeft, GraduationCap, Award, LayoutTemplate, Database, Server, Wrench, ExternalLink } from "lucide-react";
+import { ArrowLeft, GraduationCap, Award, LayoutTemplate, Database, Server, Wrench, ExternalLink, Workflow, Terminal } from "lucide-react";
 import Link from "next/link";
 import { useEffect } from "react";
 import AudioPlayer from "@/components/AudioPlayer";
-
 
 export default function AboutPage() {
   // Enforce the tab title on mount and fix the refresh scroll-creep
@@ -15,30 +14,39 @@ export default function AboutPage() {
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
-
   }, []);
 
   const stack = [
     {
-      category: "Frontend & UI",
+      category: "Frontend & Design",
       icon: <LayoutTemplate size={32} />,
-      tech: ["React.js", "Next.js", "Angular", "Tailwind CSS", "JavaScript (ES6+)", "Bootstrap 5", "Figma"]
+      tech: ["Next.js", "React", "Angular", "TypeScript", "Tailwind CSS", "Figma"]
     },
     {
-      category: "Backend & DB",
+      category: "Backend & Database",
       icon: <Database size={32} />,
-      tech: ["Node.js", "NestJS", "Express.js", "Python", "Flask", "MongoDB", "WTForms"]
+      tech: ["NestJS", "Node.js", "Express.js", "Python", "Flask", "Postgres", "MongoDB"]
     },
     {
-      category: "DevOps & Tools",
+      category: "Architecture & DevOps",
       icon: <Server size={32} />,
-      tech: ["Docker", "Kubernetes", "Git / GitHub", "Linux OS", "Nexus Repo Manager"]
+      tech: ["Docker", "Kubernetes", "Jenkins", "Prometheus", "Grafana", "Linux OS", "Nexus Repo"]
     },
     {
-      category: "Automation",
+      category: "API & Testing",
       icon: <Wrench size={32} />,
-      tech: ["Selenium", "BeautifulSoup", "Tkinter (GUI)", "REST APIs"]
-    }
+      tech: ["Postman", "Swagger", "Jest", "Cypress", "Selenium", "BeautifulSoup", "REST APIs"]
+    },
+    {
+      category: "Agile & Collab",
+      icon: <Workflow size={32} />,
+      tech: ["Git", "Jira", "Trello", "Notion", "Slack"]
+    },
+    // {
+    //   category: "Systems & Low-Level",
+    //   icon: <Terminal size={32} />,
+    //   tech: ["C", "Rust", "WSL Environment", "CLI Tooling"]
+    // }
   ];
 
   return (
@@ -57,7 +65,6 @@ export default function AboutPage() {
         </div>
 
         {/* RIGHT SIDE: The Music Player */}
-        {/* On mobile, it fills the width. On desktop, it hugs the right side. */}
         <div className="w-full md:w-auto shrink-0">
           <AudioPlayer />
         </div>
@@ -88,9 +95,7 @@ export default function AboutPage() {
               <h2 className="text-4xl font-black uppercase">Clearances</h2>
             </div>
 
-            {/* Returned to gap-6 for the original tight spacing */}
             <div className="flex flex-col gap-6">
-
               {/* ITI CERTIFICATE */}
               <a
                 href="#"
@@ -103,7 +108,6 @@ export default function AboutPage() {
                     <h3 className="text-2xl font-black uppercase leading-tight">MERN Stack & AI</h3>
                     <p className="text-lg font-bold text-zinc-500 group-hover:text-zinc-300 uppercase">ITI (MCIT)</p>
                   </div>
-                  {/* Adjusted icon animation to strictly horizontal so it doesn't warp the box height */}
                   <ExternalLink size={24} className="opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-300 mr-4 shrink-0" />
                 </div>
               </a>
@@ -139,7 +143,6 @@ export default function AboutPage() {
                   <ExternalLink size={24} className="opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-300 mr-4 shrink-0" />
                 </div>
               </a>
-
             </div>
           </section>
 
@@ -151,11 +154,11 @@ export default function AboutPage() {
             <h2 className="text-4xl font-black uppercase tracking-widest">Technical Arsenal</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
             {stack.map((category, index) => (
               <div
                 key={index}
-                className="brutalist-container group hover:!bg-black hover:!text-white transition-colors duration-300"
+                className="brutalist-container group hover:!bg-black hover:!text-white transition-colors duration-300 flex flex-col"
               >
                 <div className="flex flex-col items-start gap-4 border-b-4 border-black group-hover:border-white pb-4 mb-6 transition-colors duration-300">
                   <div className="p-3 border-4 border-black text-black group-hover:border-white group-hover:bg-white group-hover:!text-black transition-colors duration-300">
@@ -164,10 +167,11 @@ export default function AboutPage() {
                   <h3 className="text-2xl font-black uppercase leading-none">{category.category}</h3>
                 </div>
 
+                {/* Removed mt-auto here! The list will now sit perfectly beneath the header line */}
                 <ul className="flex flex-col gap-3">
                   {category.tech.map((item, i) => (
                     <li key={i} className="text-lg font-bold uppercase flex items-center gap-2">
-                      <span className="w-2 h-2 bg-black group-hover:bg-white inline-block transition-colors duration-300"></span>
+                      <span className="w-2 h-2 bg-black group-hover:bg-white inline-block transition-colors duration-300 shrink-0"></span>
                       {item}
                     </li>
                   ))}
