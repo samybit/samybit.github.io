@@ -23,11 +23,11 @@ const GithubIcon = ({ size = 24 }: { size?: number }) => (
 
 const projects = [
   {
-    title: "Vanilla JS E-Commerce",
-    description: "Full-scale store engine with role-based access control (Admin/User), product management, and persistent data.",
-    tech: ["JavaScript", "HTML", "CSS", "LocalStorage"],
-    github: "https://github.com/samybit/vanilla-js-ecommerce",
-    demo: "https://samybit.github.io/vanilla-js-ecommerce/"
+    title: "Bento Game Tracker",
+    description: "A sleek, Bento-grid game completion tracker powered by Next.js 16 and Gemini 2.5 Flash Lite. Features real-time AI achievement roadmaps and local SQLite persistence.",
+    tech: ["Next.js 16", "TypeScript", "SQLite", "Gemini AI"],
+    github: "https://github.com/samybit/bento-game-tracker",
+    demo: "https://bento-game-tracker.vercel.app"
   },
   {
     title: "Movie Intelligence App",
@@ -35,6 +35,20 @@ const projects = [
     tech: ["React", "Shadcn UI", "Firebase", "i18n"],
     github: "https://github.com/samybit/iti-movie-app",
     demo: "https://iti-movie-app.pages.dev/"
+  },
+  {
+    title: "Lead Scraper",
+    description: "Automated freelance lead generation and scraping pipeline built for efficiency.",
+    tech: ["n8n", "Python", "Automation", "gemini-ai"],
+    github: "https://github.com/samybit/freelance-lead-scraper",
+    demo: "#"
+  },
+  {
+    title: "Vanilla JS E-Commerce",
+    description: "Full-scale store engine with role-based access control (Admin/User), product management, and persistent data.",
+    tech: ["JavaScript", "HTML", "CSS", "LocalStorage"],
+    github: "https://github.com/samybit/vanilla-js-ecommerce",
+    demo: "https://samybit.github.io/vanilla-js-ecommerce/"
   },
   {
     title: "BearBuzz",
@@ -48,13 +62,6 @@ const projects = [
     description: "Full-stack progression engine tracking video game milestones and visual completion percentages via a dynamic dashboard.",
     tech: ["Full-Stack", "Data Vis", "Tracking"],
     github: "https://github.com/samybit/game-completion-board",
-    demo: "#"
-  },
-  {
-    title: "Lead Scraper",
-    description: "Automated freelance lead generation and scraping pipeline built for efficiency.",
-    tech: ["n8n", "Python", "Automation", "gemini-ai"],
-    github: "https://github.com/samybit/freelance-lead-scraper",
     demo: "#"
   },
   {
