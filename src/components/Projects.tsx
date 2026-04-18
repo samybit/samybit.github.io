@@ -24,8 +24,8 @@ const GithubIcon = ({ size = 24 }: { size?: number }) => (
 const projects = [
   {
     title: "Bento Game Tracker",
-    description: "A sleek, Bento-grid game completion tracker powered by Next.js 16 and Gemini 2.5 Flash Lite. Features real-time AI achievement roadmaps and local SQLite persistence.",
-    tech: ["Next.js 16", "TypeScript", "SQLite", "Gemini AI"],
+    description: "Bento-grid progression engine powered by Next.js 16 and Gemini 2.5 Flash Lite. Features real-time AI achievement roadmaps and PostgreSQL via Prisma 7 persistence.",
+    tech: ["Next.js", "Prisma", "PostgreSQL", "Gemini AI"],
     github: "https://github.com/samybit/bento-game-tracker",
     demo: "https://bento-game-tracker.vercel.app"
   },
