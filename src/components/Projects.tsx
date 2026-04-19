@@ -73,8 +73,9 @@ const projects = [
   }
 ];
 
+// Added bg-white and border-black explicitly here so the theme interceptor catches the cards
 const ProjectCard = ({ project, animate = false }: { project: any, animate?: boolean }) => (
-  <div className={`brutalist-container flex flex-col justify-between min-h-[380px] h-full ${animate ? 'animate-slide-up' : ''}`}>
+  <div className={`brutalist-container bg-white border-black flex flex-col justify-between min-h-[380px] h-full ${animate ? 'animate-slide-up' : ''}`}>
     <div>
       <h3 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase mb-3 md:mb-4 tracking-tight leading-none md:leading-tight">
         {project.title}
@@ -136,13 +137,14 @@ export default function Projects() {
           </p>
 
           {/* FLATTENED Mobile Subtitle & Toggle Bar */}
-          <div className="flex lg:hidden items-center justify-between mt-6 border-2 border-black p-2">
+          {/* Added explicitly bg-white here so the toggle bar doesn't vanish into the charcoal background */}
+          <div className="flex lg:hidden items-center justify-between mt-6 border-2 border-black bg-white p-2">
             <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-zinc-500 pl-2">
               {showAllMobile ? "[ Scroll ↓ ]" : "[ Swipe → ]"}
             </span>
             <button
               onClick={() => setShowAllMobile(!showAllMobile)}
-              className="bg-black text-white px-3 py-2 text-xs sm:text-sm font-black uppercase"
+              className="bg-black text-white px-3 py-2 text-xs sm:text-sm font-black uppercase border-2 border-transparent hover:border-black transition-colors"
             >
               {showAllMobile ? "Swipe View" : "View All"}
             </button>

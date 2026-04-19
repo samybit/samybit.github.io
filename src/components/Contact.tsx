@@ -85,7 +85,8 @@ export default function Contact() {
 
           {/* Social Links Block */}
           <div className="flex flex-col gap-4">
-            <h3 className="text-xl font-black uppercase tracking-widest text-zinc-600 mb-2 border-b-4 border-zinc-800 pb-2 inline-block self-start">
+            {/* Swapped border-zinc-800 to border-white so the interceptor catches the underline */}
+            <h3 className="text-xl font-black uppercase tracking-widest text-zinc-400 mb-2 border-b-4 border-white pb-2 inline-block self-start">
               Verified Networks
             </h3>
 
@@ -134,7 +135,8 @@ export default function Contact() {
         </div>
 
         <div className="flex-1 w-full">
-          <form action={clientAction} noValidate className="brutalist-container text-black flex flex-col gap-6">
+          {/* Injected explicit bg-white and border-black so the interceptor catches the form container */}
+          <form action={clientAction} noValidate className="brutalist-container bg-white text-black border-4 border-black flex flex-col gap-6">
 
             {status === "success" ? (
               <div className="p-8 border-4 border-black bg-green-400 text-black text-2xl font-black uppercase text-center flex flex-col items-center gap-4">
@@ -146,7 +148,6 @@ export default function Contact() {
                 <div className="flex flex-col gap-2">
                   <label htmlFor="name" className="text-xl font-black uppercase tracking-wide flex justify-between">
                     Name
-                    {/* {isNameValid && <span className="text-green-600 text-sm">✓ VALID</span>} */}
                   </label>
                   <input
                     type="text"
@@ -167,7 +168,6 @@ export default function Contact() {
                 <div className="flex flex-col gap-2">
                   <label htmlFor="email" className="text-xl font-black uppercase tracking-wide flex justify-between">
                     Email
-                    {/* {isEmailValid && <span className="text-green-600 text-sm">✓ VALID</span>} */}
                   </label>
                   <input
                     type="email"
@@ -188,7 +188,6 @@ export default function Contact() {
                 <div className="flex flex-col gap-2">
                   <label htmlFor="message" className="text-xl font-black uppercase tracking-wide flex justify-between">
                     Message
-                    {/* {isMessageValid && <span className="text-green-600 text-sm">✓ VALID</span>} */}
                   </label>
                   <textarea
                     id="message"
@@ -209,7 +208,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="mt-4 flex items-center justify-center gap-3 bg-black text-white p-5 text-2xl font-black uppercase border-4 border-black hover:bg-zinc-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed group"
+                  className="mt-4 flex items-center justify-center gap-3 bg-black text-white p-5 text-2xl font-black uppercase border-4 border-black hover:bg-white hover:text-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed group"
                 >
                   {status === "loading" ? "Sending..." : "Send Message"}
                   <Send className="w-6 h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />

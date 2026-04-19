@@ -21,7 +21,7 @@ function SystemLeak() {
       offsetX: (Math.random() - 0.5) * 1.5,
       offsetY: (Math.random() - 0.5) * 1.5,
       speed: Math.random() * 0.04 + 0.01,
-      scale: Math.random() * 0.15 + 0.05, // Slightly scaled down for liquid drops
+      scale: Math.random() * 0.15 + 0.05,
       rotSpeedX: Math.random() * 0.05,
       rotSpeedY: Math.random() * 0.05,
     }));
@@ -55,7 +55,7 @@ function SystemLeak() {
 
     dropsGroup.children.forEach((drop, index) => {
       const data = dropsData[index];
-      
+
       drop.position.y -= data.speed;
       drop.rotation.x += data.rotSpeedX;
       drop.rotation.y += data.rotSpeedY;
@@ -83,9 +83,8 @@ function SystemLeak() {
       {/* The Leaking Data Drops */}
       <group ref={dropsGroupRef}>
         {dropsData.map((data, i) => (
-          // Initialize them way off-screen so they spawn naturally
+          // Initialize way off-screen so they spawn naturally
           <mesh key={i} position={[0, -10, 0]} scale={data.scale}>
-            {/* Boxy, brutalist drops instead of round water */}
             <boxGeometry args={[1.5, 1.5, 1.5]} />
             <meshBasicMaterial color="#ffffff" />
           </mesh>
@@ -128,7 +127,8 @@ export default function CTA() {
         viewport={{ once: true }}
         className="relative z-10 w-full max-w-2xl px-6 pointer-events-none"
       >
-        <div className="brutalist-container !bg-white !text-black p-8 md:p-12 text-center flex flex-col items-center gap-6 shadow-[16px_16px_0px_0px_#000000] pointer-events-auto">
+        {/* Removed ! modifiers and injected bg-white, text-black, border-black, and brutalist-shadow */}
+        <div className="brutalist-container bg-white text-black border-4 border-black p-8 md:p-12 text-center flex flex-col items-center gap-6 brutalist-shadow pointer-events-auto">
           <h2 className="text-5xl md:text-6xl font-black uppercase tracking-tighter leading-none">
             Ready to build?
           </h2>
@@ -150,7 +150,6 @@ export default function CTA() {
       <div className="absolute inset-0 z-20 mix-blend-difference pointer-events-none">
         <Canvas style={{ pointerEvents: "none" }} camera={{ position: [0, 0, 8], fov: 50 }}>
 
-          {/* THE FIX: Lights restored so the MeshDistortMaterial is visible */}
           <ambientLight intensity={2} />
           <directionalLight position={[10, 10, 5]} intensity={3} />
 
