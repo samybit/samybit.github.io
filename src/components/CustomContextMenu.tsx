@@ -113,7 +113,7 @@ export default function CustomContextMenu() {
       </div>
 
       {/* Windows 11 Style Action Bar */}
-      <div className="flex border-b-4 border-black bg-zinc-100">
+      <div className="flex border-b-4 border-black bg-white">
         <button
           onClick={handleCopy}
           className="flex-1 flex flex-col items-center justify-center py-3 border-r-4 border-black hover:bg-black hover:text-white transition-colors group"
