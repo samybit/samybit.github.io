@@ -12,15 +12,23 @@ export default function Navbar() {
     const html = document.documentElement;
 
     if (html.classList.contains("invert-theme")) {
-      // Move from Dark to Yellow
+      // Move from Dark to Ember
       html.classList.remove("invert-theme");
       html.classList.add("theme-color");
     } else if (html.classList.contains("theme-color")) {
-      // Move from Yellow back to Standard Light
+      // Move from Ember back to Standard Light
       html.classList.remove("theme-color");
     } else {
       // Move from Standard Light to Dark
       html.classList.add("invert-theme");
+    }
+  };
+
+  // Intercept logo click to scroll to top if already on the homepage
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (window.location.pathname === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -32,6 +40,7 @@ export default function Navbar() {
         <div className="pointer-events-auto flex brutalist-shadow hover:translate-y-1 hover:translate-x-1 hover:shadow-none transition-all">
           <Link
             href="/"
+            onClick={handleLogoClick}
             className="bg-white border-4 border-black p-3 flex items-center gap-3"
           >
             <TerminalSquare size={32} className="text-black" />
@@ -50,25 +59,28 @@ export default function Navbar() {
         </div>
 
         {/* --- Desktop Nav Links Block --- */}
-        <div className="pointer-events-auto hidden md:flex items-center gap-4 bg-white border-4 border-black p-3 brutalist-shadow">
-          <Link href="/about" className="text-lg font-bold uppercase hover:bg-black hover:text-white px-3 py-1 transition-colors">
+        <div className="pointer-events-auto hidden md:flex items-center gap-2 bg-white border-4 border-black p-2 brutalist-shadow">
+          {/* Enhanced UX: Added border-transparent, hover:border-black, and hover:-translate-y-1 */}
+          <Link href="/about" className="text-lg font-bold uppercase px-4 py-1 border-2 border-transparent hover:border-black hover:bg-black hover:text-white hover:-translate-y-1 transition-all">
             About
           </Link>
 
-          <Link href="/#projects" className="text-lg font-bold uppercase hover:bg-black hover:text-white px-3 py-1 transition-colors">
+          <Link href="/#projects" className="text-lg font-bold uppercase px-4 py-1 border-2 border-transparent hover:border-black hover:bg-black hover:text-white hover:-translate-y-1 transition-all">
             Work
           </Link>
+
           <a
             href="https://github.com/samybit"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 text-lg font-bold uppercase hover:bg-black hover:text-white px-3 py-1 transition-colors"
+            className="flex items-center gap-1 text-lg font-bold uppercase px-4 py-1 border-2 border-transparent hover:border-black hover:bg-black hover:text-white hover:-translate-y-1 transition-all"
           >
             GitHub <ArrowUpRight size={20} />
           </a>
+
           <Link
             href="/#contact"
-            className="bg-black text-white px-5 py-2 text-lg font-bold uppercase border-4 border-black hover:bg-white hover:text-black transition-colors ml-2"
+            className="bg-black text-white px-5 py-2 text-lg font-bold uppercase border-4 border-black hover:bg-white hover:text-black hover:-translate-y-1 hover:translate-x-1 transition-all ml-2"
           >
             Contact
           </Link>

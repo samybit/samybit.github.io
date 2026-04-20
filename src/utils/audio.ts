@@ -1,5 +1,3 @@
-// src/utils/audio.ts
-
 // We keep a single instance of the AudioContext to prevent memory leaks
 let audioCtx: AudioContext | null = null;
 
