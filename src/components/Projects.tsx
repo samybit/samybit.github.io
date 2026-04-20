@@ -2,6 +2,7 @@
 
 import { ExternalLink, ArrowUp, ArrowDown } from "lucide-react";
 import { useState } from "react";
+import { playTick } from "@/utils/audio";
 
 // Custom inline SVG for Github
 const GithubIcon = ({ size = 24 }: { size?: number }) => (
@@ -116,8 +117,15 @@ export default function Projects() {
   const itemsPerPage = 4;
   const totalPages = Math.ceil(projects.length / itemsPerPage);
 
-  const nextSlide = () => setPage((p) => (p + 1) % totalPages);
-  const prevSlide = () => setPage((p) => (p - 1 + totalPages) % totalPages);
+  const nextSlide = () => {
+    playTick();
+    setPage((p) => (p + 1) % totalPages);
+  };
+
+  const prevSlide = () => {
+    playTick();
+    setPage((p) => (p - 1 + totalPages) % totalPages);
+  };
 
   const currentProjects = projects.slice(page * itemsPerPage, (page + 1) * itemsPerPage);
 

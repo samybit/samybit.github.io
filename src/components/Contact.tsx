@@ -3,6 +3,7 @@
 import { Send, Check, ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import { sendEmail } from "@/actions/send-email";
+import { playPowerUp } from "@/utils/audio";
 
 export default function Contact() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -207,6 +208,7 @@ export default function Contact() {
 
                 <button
                   type="submit"
+                  onClick={() => playPowerUp()}
                   disabled={status === "loading"}
                   className="mt-4 flex items-center justify-center gap-3 bg-black text-white p-5 text-2xl font-black uppercase border-4 border-black hover:bg-white hover:text-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed group"
                 >

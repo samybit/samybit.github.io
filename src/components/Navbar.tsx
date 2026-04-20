@@ -1,5 +1,7 @@
 "use client";
 
+import { playClack, playTick } from "@/utils/audio";
+
 import { TerminalSquare, ArrowUpRight, Menu, X, Palette } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
@@ -9,19 +11,23 @@ export default function Navbar() {
 
   // 3-Way Theme Cycle Engine
   const cycleTheme = () => {
+    playClack(); // TRIGGER HEAVY CLACK
     const html = document.documentElement;
 
     if (html.classList.contains("invert-theme")) {
-      // Move from Dark to Ember
       html.classList.remove("invert-theme");
       html.classList.add("theme-color");
     } else if (html.classList.contains("theme-color")) {
-      // Move from Ember back to Standard Light
       html.classList.remove("theme-color");
     } else {
-      // Move from Standard Light to Dark
       html.classList.add("invert-theme");
     }
+  };
+
+  // Custom toggle for mobile menu
+  const toggleMobileMenu = () => {
+    playTick(); // TRIGGER SHARP TICK
+    setIsOpen(!isOpen);
   };
 
   // Intercept logo click to scroll to top if already on the homepage
@@ -88,7 +94,7 @@ export default function Navbar() {
 
         {/* --- Mobile Menu Toggle Button --- */}
         <button
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={toggleMobileMenu}
           className="pointer-events-auto md:hidden bg-white border-4 border-black p-3 brutalist-shadow hover:translate-y-1 hover:translate-x-1 hover:shadow-none transition-all"
           aria-label="Toggle menu"
         >
