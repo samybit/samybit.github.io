@@ -2,28 +2,61 @@
 
 import { playClack, playTick } from "@/utils/audio";
 import { TerminalSquare, ArrowUpRight, Menu, X, Palette } from "lucide-react";
-import { useState, useEffect } from "react"; // Added useEffect
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-
-  // New state to track the #hash in the URL
   const [activeHash, setActiveHash] = useState("");
 
-  // Listen for changes to the URL hash without reloading the page
+  // --- NATIVE SCROLL-SPY ENGINE ---
   useEffect(() => {
-    setActiveHash(window.location.hash);
+    // Only run the observer if we are on the homepage
+    if (pathname !== '/') {
+      setActiveHash("");
+      return;
+    }
 
-    const handleHashChange = () => {
-      setActiveHash(window.location.hash);
-    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
 
-    window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
-  }, []);
+            // If the user scrolled back to the top (Hero), clear everything
+            if (id === 'hero') {
+              setActiveHash("");
+              window.history.replaceState(null, '', '/');
+            }
+            // If Projects or Contact is on screen, update the state and URL silently
+            else if (id === 'projects' || id === 'contact') {
+              setActiveHash(`#${id}`);
+              window.history.replaceState(null, '', `/#${id}`);
+            }
+          }
+        });
+      },
+      {
+        // This creates an invisible detection box in the middle of the screen.
+        // When a section enters this box, it becomes "active".
+        rootMargin: "-20% 0px -40% 0px"
+      }
+    );
+
+    // Find the sections in the DOM and start spying on them
+    const hero = document.getElementById("hero");
+    const projects = document.getElementById("projects");
+    const contact = document.getElementById("contact");
+
+    if (hero) observer.observe(hero);
+    if (projects) observer.observe(projects);
+    if (contact) observer.observe(contact);
+
+    // Cleanup observer when component unmounts
+    return () => observer.disconnect();
+  }, [pathname]);
 
   // 3-Way Theme Cycle Engine
   const cycleTheme = () => {
@@ -49,8 +82,8 @@ export default function Navbar() {
   const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (pathname === '/') {
       e.preventDefault();
-      window.history.pushState(null, '', '/'); // Strip the #hash from the URL
-      setActiveHash(""); // Instantly remove the highlight from Work/Contact
+      window.history.pushState(null, '', '/');
+      setActiveHash("");
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -93,7 +126,7 @@ export default function Navbar() {
             About
           </Link>
 
-          {/* Work link now requires BOTH pathname === '/' AND activeHash === '#projects' */}
+          {/* Work link highlights if we are on '/' AND scrolled to #projects */}
           <Link
             href="/#projects"
             onClick={() => setActiveHash('#projects')}
@@ -147,7 +180,7 @@ export default function Navbar() {
             About
           </Link>
 
-          {/* Mobile Work link now checks the active hash */}
+          {/* Mobile Work link */}
           <Link
             href="/#projects"
             onClick={() => {
