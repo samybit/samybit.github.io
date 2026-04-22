@@ -1,17 +1,33 @@
 "use client";
 
 import { playClack, playTick } from "@/utils/audio";
-
 import { TerminalSquare, ArrowUpRight, Menu, X, Palette } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react"; // Added useEffect
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  // New state to track the #hash in the URL
+  const [activeHash, setActiveHash] = useState("");
+
+  // Listen for changes to the URL hash without reloading the page
+  useEffect(() => {
+    setActiveHash(window.location.hash);
+
+    const handleHashChange = () => {
+      setActiveHash(window.location.hash);
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
 
   // 3-Way Theme Cycle Engine
   const cycleTheme = () => {
-    playClack(); // TRIGGER HEAVY CLACK
+    playClack();
     const html = document.documentElement;
 
     if (html.classList.contains("invert-theme")) {
@@ -24,16 +40,17 @@ export default function Navbar() {
     }
   };
 
-  // Custom toggle for mobile menu
   const toggleMobileMenu = () => {
-    playTick(); // TRIGGER SHARP TICK
+    playTick();
     setIsOpen(!isOpen);
   };
 
-  // Intercept logo click to scroll to top if already on the homepage
+  // Intercept logo click to scroll to top AND clear the active hash
   const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (window.location.pathname === '/') {
+    if (pathname === '/') {
       e.preventDefault();
+      window.history.pushState(null, '', '/'); // Strip the #hash from the URL
+      setActiveHash(""); // Instantly remove the highlight from Work/Contact
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -53,7 +70,6 @@ export default function Navbar() {
             <span className="text-2xl font-black uppercase tracking-tighter">SB.</span>
           </Link>
 
-          {/* Upgraded 3-Way Theme Button */}
           <button
             onClick={cycleTheme}
             aria-label="Cycle System Theme"
@@ -66,12 +82,26 @@ export default function Navbar() {
 
         {/* --- Desktop Nav Links Block --- */}
         <div className="pointer-events-auto hidden md:flex items-center gap-2 bg-white border-4 border-black p-2 brutalist-shadow">
-          {/* Enhanced UX: Added border-transparent, hover:border-black, and hover:-translate-y-1 */}
-          <Link href="/about" className="text-lg font-bold uppercase px-4 py-1 border-2 border-transparent hover:border-black hover:bg-black hover:text-white  transition-all">
+
+          <Link
+            href="/about"
+            className={`text-lg font-bold uppercase px-4 py-1 border-2 transition-all ${pathname === '/about'
+                ? 'bg-black text-white border-black'
+                : 'border-transparent hover:border-black hover:bg-black hover:text-white'
+              }`}
+          >
             About
           </Link>
 
-          <Link href="/#projects" className="text-lg font-bold uppercase px-4 py-1 border-2 border-transparent hover:border-black hover:bg-black hover:text-white  transition-all">
+          {/* Work link now requires BOTH pathname === '/' AND activeHash === '#projects' */}
+          <Link
+            href="/#projects"
+            onClick={() => setActiveHash('#projects')}
+            className={`text-lg font-bold uppercase px-4 py-1 border-2 transition-all ${pathname === '/' && activeHash === '#projects'
+                ? 'bg-black text-white border-black'
+                : 'border-transparent hover:border-black hover:bg-black hover:text-white'
+              }`}
+          >
             Work
           </Link>
 
@@ -79,14 +109,15 @@ export default function Navbar() {
             href="https://github.com/samybit"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 text-lg font-bold uppercase px-4 py-1 border-2 border-transparent hover:border-black hover:bg-black hover:text-white  transition-all"
+            className="flex items-center gap-1 text-lg font-bold uppercase px-4 py-1 border-2 border-transparent hover:border-black hover:bg-black hover:text-white transition-all"
           >
             GitHub <ArrowUpRight size={20} />
           </a>
 
           <Link
             href="/#contact"
-            className="bg-black text-white px-5 py-2 text-lg font-bold uppercase border-4 border-black hover:bg-white hover:text-black  transition-all ml-2"
+            onClick={() => setActiveHash('#contact')}
+            className="bg-black text-white px-5 py-2 text-lg font-bold uppercase border-4 border-black hover:bg-white hover:text-black transition-all ml-2"
           >
             Contact
           </Link>
@@ -108,14 +139,25 @@ export default function Navbar() {
           <Link
             href="/about"
             onClick={() => setIsOpen(false)}
-            className="text-3xl font-black uppercase p-4 border-b-4 border-black hover:bg-black hover:text-white transition-colors"
+            className={`text-3xl font-black uppercase p-4 border-b-4 border-black transition-colors ${pathname === '/about'
+                ? 'bg-black text-white'
+                : 'hover:bg-black hover:text-white'
+              }`}
           >
             About
           </Link>
+
+          {/* Mobile Work link now checks the active hash */}
           <Link
             href="/#projects"
-            onClick={() => setIsOpen(false)}
-            className="text-3xl font-black uppercase p-4 border-b-4 border-black hover:bg-black hover:text-white transition-colors"
+            onClick={() => {
+              setIsOpen(false);
+              setActiveHash('#projects');
+            }}
+            className={`text-3xl font-black uppercase p-4 border-b-4 border-black transition-colors ${pathname === '/' && activeHash === '#projects'
+                ? 'bg-black text-white'
+                : 'hover:bg-black hover:text-white'
+              }`}
           >
             Work
           </Link>
@@ -129,7 +171,10 @@ export default function Navbar() {
           </a>
           <Link
             href="/#contact"
-            onClick={() => setIsOpen(false)}
+            onClick={() => {
+              setIsOpen(false);
+              setActiveHash('#contact');
+            }}
             className="mt-4 bg-black text-white text-center p-5 text-3xl font-black uppercase border-4 border-black hover:bg-white hover:text-black transition-colors"
           >
             Contact
