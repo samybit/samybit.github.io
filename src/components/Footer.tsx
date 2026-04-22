@@ -1,18 +1,59 @@
+"use client";
+
+import { Canvas, useFrame } from "@react-three/fiber";
+import { MeshDistortMaterial } from "@react-three/drei";
+import { useRef } from "react";
+import * as THREE from "three";
+
+// --- 3D INTERACTIVE OBJECT: MASSIVE BACKGROUND KNOT ---
+function BackgroundKnot() {
+  const meshRef = useRef<THREE.Mesh>(null);
+
+  useFrame((state) => {
+    if (!meshRef.current) return;
+    const t = state.clock.getElapsedTime();
+    // Slow, elegant continuous rotation on all axes
+    meshRef.current.rotation.x = t * 0.05;
+    meshRef.current.rotation.y = t * 0.075;
+    meshRef.current.rotation.z = t * 0.05;
+  });
+
+  return (
+    <mesh ref={meshRef} position={[0, 0, -8]}>
+      <torusKnotGeometry args={[5, 1.2, 256, 32, 3, 4]} />
+      {/* Switched color to black for the white footer background */}
+      <MeshDistortMaterial color="#000000" wireframe={true} transparent={true} opacity={0.15} distort={0.25} speed={1.5} />
+    </mesh>
+  );
+}
+
 export default function Footer() {
   return (
-    <footer className="bg-white border-t-8 border-black p-6 md:p-12 text-center flex flex-col items-center justify-center gap-4">
-      <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter">
-        Samy Barsoum
-      </h2>
-      <p className="text-xl font-bold uppercase text-zinc-500">
-        © {new Date().getFullYear()} / Built with Next.js & Brutalism.
-      </p>
-      <a
-        href="#"
-        className="mt-4 text-lg font-bold uppercase border-b-4 border-black pb-1 hover:bg-black hover:text-white transition-colors"
-      >
-        ↑ Back to top
-      </a>
+    <footer className="relative overflow-hidden bg-white border-t-8 border-black p-6 md:p-12">
+      {/* --- LAYER 1: 3D KNOT BACKGROUND (z-0) --- */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
+          <ambientLight intensity={2} />
+          <directionalLight position={[10, 10, 5]} intensity={3} />
+          <BackgroundKnot />
+        </Canvas>
+      </div>
+
+      {/* --- LAYER 2: FOOTER CONTENT (z-10) --- */}
+      <div className="relative z-10 text-center flex flex-col items-center justify-center gap-4 pointer-events-none">
+        <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter">
+          Samy Barsoum
+        </h2>
+        <p className="text-xl font-bold uppercase text-zinc-500">
+          © {new Date().getFullYear()} / Built with Next.js & Brutalism.
+        </p>
+        <a
+          href="#"
+          className="mt-4 text-lg font-bold uppercase border-b-4 border-black pb-1 hover:bg-black hover:text-white transition-colors pointer-events-auto"
+        >
+          ↑ Back to top
+        </a>
+      </div>
     </footer>
   );
 }
