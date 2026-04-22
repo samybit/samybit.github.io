@@ -44,8 +44,8 @@ export default function Footer() {
         <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter">
           Samy Barsoum
         </h2>
-        <p className="text-xl font-bold uppercase text-zinc-500">
-          © {new Date().getFullYear()} / Built with Next.js & Brutalism.
+        <p className="text-xl font-bold uppercase text-black bg-white px-3 py-1">
+          © {new Date().getFullYear()} SAMY BARSOUM // ENGINEERED WITH NEXT.JS & RAW BRUTALISM.
         </p>
         <a
           href="#"
