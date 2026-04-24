@@ -14,7 +14,6 @@ function SystemLeak() {
   const dropsGroupRef = useRef<THREE.Group>(null);
   const mouse = useRef({ x: 0, y: 0 });
 
-  // Generate 25 "drops" with random speeds, sizes, and initial offsets
   const dropsData = useMemo(() => {
     return Array.from({ length: 25 }, () => ({
       offsetX: (Math.random() - 0.5) * 1.5,
@@ -65,18 +64,16 @@ function SystemLeak() {
 
   return (
     <>
-      {/* The Liquid Core */}
       <mesh ref={coreRef}>
         <sphereGeometry args={[2.1, 64, 64]} />
         <MeshDistortMaterial
-          color="#E0F0F4"
+          color="#ffffff"
           distort={0.3}
           speed={1}
           roughness={1}
         />
       </mesh>
 
-      {/* The Leaking Data Drops */}
       <group ref={dropsGroupRef}>
         {dropsData.map((data, i) => (
           <mesh key={i} position={[0, -10, 0]} scale={data.scale}>
@@ -100,16 +97,16 @@ export default function CTA() {
   };
 
   return (
-    // Changed to min-h-screen and removed my-24 so it spans the entire viewport seamlessly
-    <section className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden border-t-8 border-b-8 border-black group bg-black">
+    <section className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden border-t-8 border-b-8 border-black bg-white text-black">
 
       {/* --- LAYER 1: MECHANICAL ARROW BACKGROUND (z-0) --- */}
-      <div
-        className="absolute inset-0 z-0 opacity-40 group-hover:opacity-100 transition-opacity duration-700"
+      <div 
+        className="absolute inset-0 z-0 pointer-events-none"
         style={{
-          // Pure CSS SVG Data URI: Creates the 45-degree arrow hitting a perpendicular barrier
-          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg stroke='%23333333' stroke-width='3' fill='none' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cline x1='20' y1='60' x2='60' y2='20' /%3E%3Cpolyline points='46,20 60,20 60,34' /%3E%3Cline x1='52' y1='12' x2='68' y2='28' /%3E%3C/g%3E%3C/svg%3E")`,
-          backgroundSize: "80px 80px"
+          // Fixed Geometry: The main line's end coordinates (x2='72' y2='28') are pulled back 
+          // so it tucks perfectly under the arrowhead without blunting the tip.
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg stroke='%23000000' stroke-width='6' fill='none' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cline x1='25' y1='75' x2='72' y2='28' /%3E%3Cpolyline points='50,25 75,25 75,50' /%3E%3Cline x1='65' y1='5' x2='95' y2='35' /%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundSize: "100px 100px"
         }}
       ></div>
 
@@ -120,7 +117,7 @@ export default function CTA() {
         viewport={{ once: true }}
         className="relative z-10 w-full max-w-2xl px-6 pointer-events-none"
       >
-        <div className="brutalist-container bg-white text-black border-4 border-black p-8 md:p-12 text-center flex flex-col items-center gap-6 brutalist-shadow pointer-events-auto">
+        <div className="brutalist-container bg-white text-black border-4 md:border-8 border-black p-8 md:p-12 text-center flex flex-col items-center gap-6 brutalist-shadow pointer-events-auto">
           <h2 className="text-5xl md:text-6xl font-black uppercase tracking-tighter leading-none">
             Ready to build?
           </h2>
