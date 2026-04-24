@@ -71,7 +71,7 @@ function SystemLeak() {
     <>
       {/* The Liquid Core */}
       <mesh ref={coreRef}>
-        <sphereGeometry args={[2.8, 64, 64]} />
+        <sphereGeometry args={[2.1, 64, 64]} />
         <MeshDistortMaterial
           color="#E0F0F4"
           distort={0.3}
