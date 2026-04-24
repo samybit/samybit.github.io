@@ -5,13 +5,13 @@ import { TerminalSquare, ArrowUpRight, Menu, X, Palette } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Smoke from "@/components/Smoke"; // Import the new engine
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const [activeHash, setActiveHash] = useState("");
 
-  // --- NATIVE SCROLL-SPY ENGINE ---
   useEffect(() => {
     if (pathname !== '/') {
       setActiveHash("");
@@ -106,43 +106,47 @@ export default function Navbar() {
 
           <Link
             href="/about"
-            className={`hover-smoke text-lg font-bold uppercase px-4 py-1 border-2 transition-all ${pathname === '/about'
-              ? 'bg-black text-white border-black active-smoke'
-              : 'border-transparent hover:border-black hover:bg-black hover:text-white'
+            className={`relative group overflow-hidden isolate text-lg font-bold uppercase px-4 py-1 border-2 transition-all ${pathname === '/about'
+                ? 'bg-black text-white border-black'
+                : 'border-transparent hover:border-black hover:bg-black hover:text-white'
               }`}
           >
-            About
+            <Smoke isActive={pathname === '/about'} />
+            <span className="relative z-10">About</span>
           </Link>
 
           <Link
             href="/#projects"
             onClick={() => setActiveHash('#projects')}
-            className={`hover-smoke text-lg font-bold uppercase px-4 py-1 border-2 transition-all ${pathname === '/' && activeHash === '#projects'
-              ? 'bg-black text-white border-black active-smoke'
-              : 'border-transparent hover:border-black hover:bg-black hover:text-white'
+            className={`relative group overflow-hidden isolate text-lg font-bold uppercase px-4 py-1 border-2 transition-all ${pathname === '/' && activeHash === '#projects'
+                ? 'bg-black text-white border-black'
+                : 'border-transparent hover:border-black hover:bg-black hover:text-white'
               }`}
           >
-            Work
+            <Smoke isActive={pathname === '/' && activeHash === '#projects'} />
+            <span className="relative z-10">Work</span>
           </Link>
 
           <a
             href="https://github.com/samybit"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover-smoke flex items-center gap-1 text-lg font-bold uppercase px-4 py-1 border-2 border-transparent hover:border-black hover:bg-black hover:text-white transition-all"
+            className="relative group overflow-hidden isolate flex items-center gap-1 text-lg font-bold uppercase px-4 py-1 border-2 border-transparent hover:border-black hover:bg-black hover:text-white transition-all"
           >
-            GitHub <ArrowUpRight size={20} />
+            <Smoke />
+            <span className="relative z-10 flex items-center gap-1">GitHub <ArrowUpRight size={20} /></span>
           </a>
 
           <Link
             href="/#contact"
             onClick={() => setActiveHash('#contact')}
-            className={`hover-smoke-inverse px-5 py-2 text-lg font-bold uppercase border-4 border-black transition-all ml-2 ${pathname === '/' && activeHash === '#contact'
-              ? 'bg-white text-black active-smoke'
-              : 'bg-black text-white hover:bg-white hover:text-black'
+            className={`relative group overflow-hidden isolate px-5 py-2 text-lg font-bold uppercase border-4 border-black transition-all ml-2 ${pathname === '/' && activeHash === '#contact'
+                ? 'bg-white text-black'
+                : 'bg-black text-white hover:bg-white hover:text-black'
               }`}
           >
-            Contact
+            <Smoke inverse={true} isActive={pathname === '/' && activeHash === '#contact'} />
+            <span className="relative z-10">Contact</span>
           </Link>
         </div>
 
@@ -161,12 +165,13 @@ export default function Navbar() {
           <Link
             href="/about"
             onClick={() => setIsOpen(false)}
-            className={`hover-smoke text-3xl font-black uppercase p-4 border-b-4 border-black transition-colors ${pathname === '/about'
-              ? 'bg-black text-white active-smoke'
-              : 'hover:bg-black hover:text-white'
+            className={`relative group overflow-hidden isolate text-3xl font-black uppercase p-4 border-b-4 border-black transition-colors ${pathname === '/about'
+                ? 'bg-black text-white'
+                : 'hover:bg-black hover:text-white'
               }`}
           >
-            About
+            <Smoke isActive={pathname === '/about'} />
+            <span className="relative z-10">About</span>
           </Link>
 
           <Link
@@ -175,33 +180,38 @@ export default function Navbar() {
               setIsOpen(false);
               setActiveHash('#projects');
             }}
-            className={`hover-smoke text-3xl font-black uppercase p-4 border-b-4 border-black transition-colors ${pathname === '/' && activeHash === '#projects'
-              ? 'bg-black text-white active-smoke'
-              : 'hover:bg-black hover:text-white'
+            className={`relative group overflow-hidden isolate text-3xl font-black uppercase p-4 border-b-4 border-black transition-colors ${pathname === '/' && activeHash === '#projects'
+                ? 'bg-black text-white'
+                : 'hover:bg-black hover:text-white'
               }`}
           >
-            Work
+            <Smoke isActive={pathname === '/' && activeHash === '#projects'} />
+            <span className="relative z-10">Work</span>
           </Link>
+
           <a
             href="https://github.com/samybit"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover-smoke flex justify-between items-center text-3xl font-black uppercase p-4 border-b-4 border-black hover:bg-black hover:text-white transition-colors"
+            className="relative group overflow-hidden isolate flex justify-between items-center text-3xl font-black uppercase p-4 border-b-4 border-black hover:bg-black hover:text-white transition-colors"
           >
-            GitHub <ArrowUpRight size={32} />
+            <Smoke />
+            <span className="relative z-10 flex justify-between items-center w-full">GitHub <ArrowUpRight size={32} /></span>
           </a>
+
           <Link
             href="/#contact"
             onClick={() => {
               setIsOpen(false);
               setActiveHash('#contact');
             }}
-            className={`hover-smoke-inverse mt-4 text-center p-5 text-3xl font-black uppercase border-4 border-black transition-colors ${pathname === '/' && activeHash === '#contact'
-                ? 'bg-white text-black active-smoke'
+            className={`relative group overflow-hidden isolate mt-4 text-center p-5 text-3xl font-black uppercase border-4 border-black transition-colors ${pathname === '/' && activeHash === '#contact'
+                ? 'bg-white text-black'
                 : 'bg-black text-white hover:bg-white hover:text-black'
               }`}
           >
-            Contact
+            <Smoke inverse={true} isActive={pathname === '/' && activeHash === '#contact'} />
+            <span className="relative z-10">Contact</span>
           </Link>
         </div>
       )}
