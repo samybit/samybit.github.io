@@ -2,8 +2,13 @@
 
 import { ArrowDownRight, Download } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
+import SproutingFlowers from "@/components/SproutingFlowers";
+import GlitchText from "@/components/GlitchText";
 
 export default function Hero() {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <section id="hero" className="min-h-[90vh] flex flex-col justify-center items-start px-6 md:px-12 lg:px-24 border-b-8 border-black pt-30 md:pt-34 pb-16 overflow-hidden">
       <div className="w-full max-w-[90rem] mx-auto flex flex-col lg:flex-row lg:items-center justify-between gap-12 lg:gap-16">
@@ -17,9 +22,23 @@ export default function Hero() {
           </div>
 
           <h1 className="text-[18vw] sm:text-7xl md:text-9xl lg:text-[8rem] xl:text-[10rem] font-black uppercase tracking-tighter leading-[0.85] mb-8">
-            Samy <br />
-            <span className="bg-black text-white px-2 sm:px-4 inline-block mt-2 transform -skew-x-6">
-              Barsoum
+            {/* --- WRAP 'SAMY' IN A TRIGGER SPAN --- */}
+            <span
+              className="relative inline-block cursor-crosshair z-10"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              onClick={() => setIsHovered(!isHovered)} // Tap-to-bloom for mobile users
+            >
+              Samy
+              <SproutingFlowers isHovered={isHovered} />
+            </span>
+
+            <br />
+
+            {/* Added cursor-crosshair to match the 'Samy' interaction */}
+            <span className="bg-black text-white px-2 sm:px-4 inline-block mt-4 md:mt-8 transform -skew-x-6 z-20 relative cursor-crosshair">
+              {/* Wrapped the text in the new engine */}
+              <GlitchText text="Barsoum" />
             </span>
           </h1>
 
