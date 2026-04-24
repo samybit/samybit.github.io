@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { MeshDistortMaterial } from "@react-three/drei";
 import { useRef, useEffect, useMemo } from "react";
@@ -37,17 +36,14 @@ function SystemLeak() {
   }, []);
 
   useFrame(() => {
-    // 1. Assign to local variables so TypeScript locks in their type
     const core = coreRef.current;
     const dropsGroup = dropsGroupRef.current;
 
-    // 2. If either is null (like on the very first frame), skip the math
     if (!core || !dropsGroup) return;
 
     const targetX = mouse.current.x * 4;
     const targetY = mouse.current.y * 4;
 
-    // 3. Use the local, TypeScript-approved variables
     core.position.x += (targetX - core.position.x) * 0.05;
     core.position.y += (targetY - core.position.y) * 0.05;
     core.rotation.x += 0.01;
@@ -83,7 +79,6 @@ function SystemLeak() {
       {/* The Leaking Data Drops */}
       <group ref={dropsGroupRef}>
         {dropsData.map((data, i) => (
-          // Initialize way off-screen so they spawn naturally
           <mesh key={i} position={[0, -10, 0]} scale={data.scale}>
             <boxGeometry args={[1.5, 1.5, 1.5]} />
             <meshBasicMaterial color="#ffffff" />
@@ -95,7 +90,6 @@ function SystemLeak() {
 }
 
 export default function CTA() {
-
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault();
     const contactSection = document.getElementById("contact");
@@ -106,19 +100,18 @@ export default function CTA() {
   };
 
   return (
-    <section className="relative w-full min-h-[80vh] flex flex-col items-center justify-center overflow-hidden border-t-8 border-b-8 border-black group my-24 bg-black">
+    // Changed to min-h-screen and removed my-24 so it spans the entire viewport seamlessly
+    <section className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden border-t-8 border-b-8 border-black group bg-black">
 
-      {/* --- LAYER 1: BACKGROUND (z-0) --- */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/11.jpg"
-          alt="Classical Art Background"
-          fill
-          priority
-          className="object-cover grayscale contrast-[1.2] brightness-[0.5] group-hover:grayscale-0 group-hover:brightness-[0.65] transition-all duration-700 ease-in-out"
-        />
-        <div className="absolute inset-0 bg-[radial-gradient(#000_3px,transparent_0)] bg-[size:16px_16px] opacity-50 mix-blend-overlay pointer-events-none"></div>
-      </div>
+      {/* --- LAYER 1: MECHANICAL ARROW BACKGROUND (z-0) --- */}
+      <div
+        className="absolute inset-0 z-0 opacity-40 group-hover:opacity-100 transition-opacity duration-700"
+        style={{
+          // Pure CSS SVG Data URI: Creates the 45-degree arrow hitting a perpendicular barrier
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg stroke='%23333333' stroke-width='3' fill='none' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cline x1='20' y1='60' x2='60' y2='20' /%3E%3Cpolyline points='46,20 60,20 60,34' /%3E%3Cline x1='52' y1='12' x2='68' y2='28' /%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundSize: "80px 80px"
+        }}
+      ></div>
 
       {/* --- LAYER 2: CONTENT BOX (z-10) --- */}
       <motion.div
@@ -127,7 +120,6 @@ export default function CTA() {
         viewport={{ once: true }}
         className="relative z-10 w-full max-w-2xl px-6 pointer-events-none"
       >
-        {/* Removed ! modifiers and injected bg-white, text-black, border-black, and brutalist-shadow */}
         <div className="brutalist-container bg-white text-black border-4 border-black p-8 md:p-12 text-center flex flex-col items-center gap-6 brutalist-shadow pointer-events-auto">
           <h2 className="text-5xl md:text-6xl font-black uppercase tracking-tighter leading-none">
             Ready to build?
@@ -149,10 +141,8 @@ export default function CTA() {
       {/* --- LAYER 3: 3D SCANNER (z-20) --- */}
       <div className="absolute inset-0 z-20 mix-blend-difference pointer-events-none">
         <Canvas style={{ pointerEvents: "none" }} camera={{ position: [0, 0, 8], fov: 50 }}>
-
           <ambientLight intensity={2} />
           <directionalLight position={[10, 10, 5]} intensity={3} />
-
           <SystemLeak />
         </Canvas>
       </div>
