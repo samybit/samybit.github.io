@@ -29,9 +29,8 @@ export default function Hero() {
               onMouseLeave={() => setIsHovered(false)}
               onClick={() => setIsHovered(!isHovered)} // Tap-to-bloom for mobile users
             >
-              <span className={`relative z-20 inline-block transition-colors duration-300 ${
-                isHovered ? "text-white" : "text-black"
-              }`}>
+              <span className={`relative z-20 inline-block transition-colors duration-300 ${isHovered ? "text-white" : "text-black"
+                }`}>
                 Samy
               </span>
               <SproutingFlowers isHovered={isHovered} />
@@ -69,7 +68,7 @@ export default function Hero() {
 
           {/* CV Button */}
           <a
-            href="/cv.pdf"
+            href="/Samy_Barsoum_CV.pdf"
             download="Samy_Barsoum_CV.pdf"
             className="brutalist-shadow bg-white text-black border-4 border-black p-8 hover:bg-black hover:text-white flex justify-between items-center w-full text-3xl font-black uppercase transition-all group"
           >
