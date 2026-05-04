@@ -27,7 +27,7 @@ export default function Hero() {
               className="relative inline-block cursor-crosshair z-10"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
-              onClick={() => setIsHovered(!isHovered)} // Tap-to-bloom for mobile users
+              onClick={() => setIsHovered(!isHovered)}
             >
               <span className={`relative z-20 inline-block transition-colors duration-300 ${isHovered ? "text-white" : "text-black"
                 }`}>
