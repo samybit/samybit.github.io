@@ -1,13 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useState, useId } from "react";
+import { useEffect, useState, useId, useRef } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 
 export default function SproutingFlowers({ isHovered }: { isHovered: boolean }) {
   const [init, setInit] = useState(false);
   const id = useId().replace(/:/g, "");
+  const particlesContainer = useRef<any>(null);
 
   useEffect(() => {
     initParticlesEngine(async (engine) => {
@@ -16,6 +17,28 @@ export default function SproutingFlowers({ isHovered }: { isHovered: boolean }) 
       setInit(true);
     });
   }, []);
+
+  // Hard-pause particles when not hovered to save 100% of CPU/GPU overhead
+  useEffect(() => {
+    if (particlesContainer.current) {
+      if (isHovered) {
+        particlesContainer.current.play();
+      } else {
+        // Delay pausing slightly to allow the fade-out animation to complete smoothly
+        const timeout = setTimeout(() => {
+          particlesContainer.current?.pause();
+        }, 500);
+        return () => clearTimeout(timeout);
+      }
+    }
+  }, [isHovered]);
+
+  const particlesLoaded = async (container: any) => {
+    particlesContainer.current = container;
+    if (!isHovered) {
+      container.pause();
+    }
+  };
 
   return (
     <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center">
@@ -28,51 +51,57 @@ export default function SproutingFlowers({ isHovered }: { isHovered: boolean }) 
         style={{ originY: 0.5 }}
       >
         {init && (
-          <div
-            className={`absolute inset-[-50%] transition-opacity duration-500 blur-[1px] ${
-              isHovered ? "opacity-100 delay-150" : "opacity-0"
-            }`}
+          <motion.div
+            className="absolute inset-[-50%] blur-[1px]"
+            initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+            animate={{ 
+              opacity: isHovered ? 1 : 0,
+              scale: isHovered ? 1 : 0.8,
+              rotate: isHovered ? 0 : -5
+            }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
           >
             <Particles
               id={`void-network-${id}`}
+              particlesLoaded={particlesLoaded}
               options={{
                 fullScreen: { enable: false },
-                fpsLimit: 60,
+                fpsLimit: 120,
                 particles: {
                   number: {
-                    value: 30,
+                    value: 80,
                     density: { enable: true, width: 400, height: 400 },
                   },
-                  color: { value: ["#9333ea", "#e11d48", "#4c1d95"] },
+                  color: { value: ["#9333ea", "#e11d48", "#4c1d95", "#f43f5e"] },
                   shape: { type: "circle" },
                   opacity: {
-                    value: { min: 0.1, max: 0.8 },
+                    value: { min: 0.3, max: 0.9 },
                     animation: { enable: true, speed: 1.5, sync: false },
                   },
                   size: {
-                    value: { min: 1, max: 4 },
-                    animation: { enable: true, speed: 2, sync: false },
+                    value: { min: 1.5, max: 5 },
+                    animation: { enable: true, speed: 3, sync: false },
                   },
                   links: {
                     enable: true,
-                    distance: 50,
+                    distance: 120,
                     color: "#e11d48",
-                    opacity: 0.4,
-                    width: 1,
+                    opacity: 0.6,
+                    width: 1.5,
                   },
                   move: {
                     enable: true,
-                    speed: { min: 0.5, max: 1.5 },
+                    speed: { min: 1, max: 3.5 },
                     direction: "none",
                     random: true,
                     straight: false,
-                    outModes: "bounce",
+                    outModes: "out",
                   },
                 },
               }}
               className="w-full h-full mix-blend-screen"
             />
-          </div>
+          </motion.div>
         )}
       </motion.div>
 
