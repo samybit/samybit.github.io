@@ -39,6 +39,13 @@ const projects = [
     demo: "https://iti-movie-app.pages.dev/"
   },
   {
+    title: "3D Web",
+    description: "Showcase of 3D web rendering. It integrates Framer Motion, Three.js, Spline, Globe.gl, Atropos, and Pure CSS.",
+    tech: ["react", "nextjs", "webgl"],
+    github: "https://github.com/samybit/3d-showcase",
+    demo: "https://3d-showcase-pi.vercel.app"
+  },
+  {
     title: "Lead Scraper",
     description: "Automated freelance lead generation and scraping pipeline built for efficiency.",
     tech: ["n8n", "Python", "Automation", "gemini-ai"],
