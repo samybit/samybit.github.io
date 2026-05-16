@@ -9,11 +9,13 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 export default function Contact() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
+  // Removed 'name' from the error state tracker
+  const [errors, setErrors] = useState<{ email?: string; message?: string }>({});
 
   const [values, setValues] = useState({ name: "", email: "", message: "" });
 
-  const isNameValid = values.name.trim().length > 0;
+  // Name is no longer 'valid/invalid', it just tracks if it has content for the UI effect
+  const isNameFilled = values.name.trim().length > 0;
   const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email);
   const isMessageValid = values.message.trim().length > 0;
 
@@ -21,16 +23,13 @@ export default function Contact() {
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
 
-  // Heavy, mechanical spring settings
   const springConfig = { damping: 25, stiffness: 150, mass: 0.5 };
   const springX = useSpring(mouseX, springConfig);
   const springY = useSpring(mouseY, springConfig);
 
-  // Subtle rotation to keep the form usable (Max 6 degrees)
   const rotateX = useTransform(springY, [0, 1], [6, -6]);
   const rotateY = useTransform(springX, [0, 1], [-6, 6]);
 
-  // Brutalist light sheen that sweeps across the form
   const glareX = useTransform(springX, [0, 1], ["-100%", "100%"]);
   const glareY = useTransform(springY, [0, 1], ["-100%", "100%"]);
 
@@ -43,7 +42,6 @@ export default function Contact() {
   }
 
   function handleMouseLeave() {
-    // Snap back to center when the mouse leaves
     mouseX.set(0.5);
     mouseY.set(0.5);
   }
@@ -53,9 +51,9 @@ export default function Contact() {
     const { name, value } = e.target;
     setValues(prev => ({ ...prev, [name]: value }));
 
+    // Only clear the error if the new keystroke actually makes the field valid.
     if (errors[name as keyof typeof errors]) {
       let isValid = false;
-      if (name === "name") isValid = value.trim().length > 0;
       if (name === "email") isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
       if (name === "message") isValid = value.trim().length > 0;
 
@@ -66,8 +64,9 @@ export default function Contact() {
   };
 
   async function clientAction(formData: FormData) {
-    const newErrors: { name?: string; email?: string; message?: string } = {};
-    if (!isNameValid) newErrors.name = "NAME IS REQUIRED.";
+    const newErrors: { email?: string; message?: string } = {};
+
+    // Name is optional, so it is removed from the validation blockade
     if (!isEmailValid) newErrors.email = "VALID EMAIL IS REQUIRED.";
     if (!isMessageValid) newErrors.message = "MESSAGE IS REQUIRED.";
 
@@ -144,10 +143,8 @@ export default function Contact() {
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
         >
-          {/* Static Brutalist Drop Shadow (Stays in place while the form tilts) */}
           <div className="absolute inset-0 bg-zinc-800 border-4 border-white translate-x-4 translate-y-4 z-0 pointer-events-none" />
 
-          {/* The Physical 3D Form */}
           <motion.form
             action={clientAction}
             noValidate
@@ -155,12 +152,10 @@ export default function Contact() {
               rotateX,
               rotateY,
               transformStyle: "preserve-3d",
-              // Pops the form off the background so the tilt feels physical
               translateZ: 30
             }}
             className="relative z-10 bg-white text-black border-4 border-black flex flex-col gap-6 p-8 overflow-hidden shadow-2xl"
           >
-            {/* Hard-edged Glare Effect (Moves opposite to the mouse) */}
             <motion.div
               style={{ x: glareX, y: glareY }}
               className="absolute inset-0 z-0 pointer-events-none opacity-20"
@@ -176,10 +171,9 @@ export default function Contact() {
               </div>
             ) : (
               <>
-                {/* Wrapped inputs in relative z-20 so they sit above the glare and remain highly clickable */}
                 <div className="flex flex-col gap-2 relative z-20">
-                  <label htmlFor="name" className="text-xl font-black uppercase tracking-wide flex justify-between">
-                    Name
+                  <label htmlFor="name" className="text-xl font-black uppercase tracking-wide flex items-center gap-3">
+                    Name <span className="text-sm text-zinc-500 tracking-widest">[OPTIONAL]</span>
                   </label>
                   <input
                     type="text"
@@ -187,19 +181,14 @@ export default function Contact() {
                     name="name"
                     value={values.name}
                     onChange={handleChange}
-                    className={getInputStyle(isNameValid, !!errors.name)}
-                    placeholder="Ada Lovelace"
+                    className={getInputStyle(isNameFilled, false)} // Name never has an error state now
+                    placeholder=""
                   />
-                  {errors.name && (
-                    <span className="text-red-600 font-black uppercase tracking-wide border-l-4 border-red-600 pl-2 mt-1">
-                      {errors.name}
-                    </span>
-                  )}
                 </div>
 
                 <div className="flex flex-col gap-2 relative z-20">
-                  <label htmlFor="email" className="text-xl font-black uppercase tracking-wide flex justify-between">
-                    Email
+                  <label htmlFor="email" className="text-xl font-black uppercase tracking-wide flex items-center gap-3">
+                    Email <span className="text-sm text-red-600 tracking-widest">[REQUIRED]</span>
                   </label>
                   <input
                     type="email"
@@ -208,7 +197,7 @@ export default function Contact() {
                     value={values.email}
                     onChange={handleChange}
                     className={getInputStyle(isEmailValid, !!errors.email)}
-                    placeholder="ada@example.com"
+                    placeholder="...@example.com"
                   />
                   {errors.email && (
                     <span className="text-red-600 font-black uppercase tracking-wide border-l-4 border-red-600 pl-2 mt-1">
@@ -218,8 +207,8 @@ export default function Contact() {
                 </div>
 
                 <div className="flex flex-col gap-2 relative z-20">
-                  <label htmlFor="message" className="text-xl font-black uppercase tracking-wide flex justify-between">
-                    Message
+                  <label htmlFor="message" className="text-xl font-black uppercase tracking-wide flex items-center gap-3">
+                    Message <span className="text-sm text-red-600 tracking-widest">[REQUIRED]</span>
                   </label>
                   <textarea
                     id="message"
@@ -228,7 +217,7 @@ export default function Contact() {
                     value={values.message}
                     onChange={handleChange}
                     className={getInputStyle(isMessageValid, !!errors.message)}
-                    placeholder="Tell me about your project..."
+                    placeholder="Describe your project, an open role, or how we can collaborate..."
                   />
                   {errors.message && (
                     <span className="text-red-600 font-black uppercase tracking-wide border-l-4 border-red-600 pl-2 mt-1">
@@ -241,7 +230,6 @@ export default function Contact() {
                   type="submit"
                   onClick={() => playPowerUp()}
                   disabled={status === "loading"}
-                  // Transform-Z on the button creates a parallax pop-out effect when tilted
                   style={{ transform: "translateZ(15px)" }}
                   className="mt-4 flex items-center justify-center gap-3 bg-black text-white p-5 text-2xl font-black uppercase border-4 border-black hover:bg-white hover:text-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed group relative z-20 shadow-[8px_8px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:translate-x-1 hover:translate-y-1 active:shadow-none active:translate-x-2 active:translate-y-2"
                 >
