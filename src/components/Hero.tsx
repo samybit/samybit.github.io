@@ -2,81 +2,68 @@
 
 import { ArrowDownRight, Download } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
-import SproutingFlowers from "@/components/SproutingFlowers";
+import Spline from '@splinetool/react-spline';
 import GlitchText from "@/components/GlitchText";
 
 export default function Hero() {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
-    <section id="hero" className="min-h-[90vh] flex flex-col justify-center items-start px-6 md:px-12 lg:px-24 border-b-8 border-black pt-30 md:pt-34 pb-16 overflow-hidden">
-      <div className="w-full max-w-[90rem] mx-auto flex flex-col lg:flex-row lg:items-center justify-between gap-12 lg:gap-16">
+    <section id="hero" className="relative w-full min-h-[90vh] flex flex-col justify-between overflow-hidden border-b-8 border-black pt-32 pb-8 px-6 md:px-12 lg:px-24 bg-white">
 
-        {/* --- LEFT COLUMN: TYPOGRAPHY --- */}
-        <div className="flex-1 animate-slide-up">
-          <div className="flex items-center gap-4 mb-6">
-            <span className="text-xl font-bold uppercase tracking-widest border-b-4 border-black pb-1">
-              Available for Freelance & Roles
-            </span>
-          </div>
+      {/* --- LAYER 1: SPLINE 3D SCENE --- */}
+      <div className="absolute inset-0 z-0">
+        <Spline
+          scene="https://prod.spline.design/7ztL0oWOFnobjnom/scene.splinecode"
+          className="w-full h-full"
+        />
+      </div>
 
-          <h1 className="text-[18vw] sm:text-7xl md:text-9xl lg:text-[8rem] xl:text-[10rem] font-black uppercase tracking-tighter leading-[0.85] mb-8">
-            {/* --- WRAP 'SAMY' IN A TRIGGER SPAN --- */}
-            <span
-              className="relative inline-block cursor-crosshair z-10"
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-              onClick={() => setIsHovered(!isHovered)}
-            >
-              <span className={`relative z-20 inline-block transition-colors duration-300 ${isHovered ? "text-white" : "text-black"
-                }`}>
-                Samy
-              </span>
-              <SproutingFlowers isHovered={isHovered} />
-            </span>
+      {/* --- LAYER 2: FLOATING TYPOGRAPHY (Top Left) --- */}
+      <div className="relative z-10 pointer-events-none animate-slide-up flex flex-col items-start w-full">
 
-            <br />
-
-            {/* Added cursor-crosshair to match the 'Samy' interaction */}
-            <span className="bg-black text-white px-2 sm:px-4 inline-block mt-4 md:mt-8 transform -skew-x-6 z-20 relative cursor-crosshair">
-              {/* Wrapped the text in the new engine */}
-              <GlitchText text="Barsoum" />
-            </span>
-          </h1>
-
-          <p className="text-2xl md:text-4xl font-bold max-w-2xl uppercase leading-snug text-zinc-800">
-            Full-Stack Developer. <br />
-            MERN Stack Specialist. <br />
-            Based in Egypt. <br />
-            Building fast, and effective apps.
-          </p>
+        {/* FIX 1: Mobile Badge Overflow */}
+        <div className="mb-6 pointer-events-auto inline-flex max-w-full">
+          {/* Shrunk text to text-sm on mobile, allowed it to wrap safely on tiny screens, but keep the hard brutalist padding */}
+          <span className="bg-white text-black text-sm sm:text-base md:text-xl font-bold uppercase tracking-widest border-4 border-black px-3 py-1.5 md:px-4 md:py-2 brutalist-shadow whitespace-normal sm:whitespace-nowrap text-left">
+            Available for Freelance & Roles
+          </span>
         </div>
 
-        {/* --- RIGHT COLUMN: ACTIONS --- */}
-        <div className="flex flex-col w-full lg:w-[400px] xl:w-[450px] gap-6 border-black border-l-0 lg:border-l-8 lg:pl-12 lg:py-8 shrink-0 animate-slide-up-delay-1">
+        {/* FIX 2: Mobile Name Overflow */}
+        {/* Changed base mobile text to 16vw so it dynamically shrinks and perfectly matches the phone width */}
+        <h1 className="text-[16vw] sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter leading-none pointer-events-auto inline-block max-w-full">
+          <span className="bg-white text-black px-2 md:px-4 py-1 md:py-2 border-4 border-black brutalist-shadow inline-block">
+            Samy
+          </span>
+          <br />
+          <span className="bg-black text-white px-2 md:px-4 py-1 md:py-2 inline-block mt-3 md:mt-4 transform -skew-x-6 cursor-crosshair brutalist-shadow border-4 border-white max-w-full overflow-hidden">
+            <GlitchText text="Barsoum" />
+          </span>
+        </h1>
+      </div>
 
-          <Link href="#projects" className="brutalist-shadow bg-black text-white border-4 border-black p-8 hover:bg-white hover:text-black flex justify-between items-center w-full text-3xl font-black uppercase transition-all group">
-            <span>Work</span>
-            <ArrowDownRight size={40} className="group-hover:translate-x-2 group-hover:translate-y-2 transition-transform" />
-          </Link>
+      {/* --- LAYER 3: FLOATING ACTIONS (Bottom Right) --- */}
+      {/* FIX 3: Nudge right on desktop using lg:translate-x-8 and xl:translate-x-12 */}
+      <div className="relative z-10 pointer-events-none flex flex-col sm:flex-row justify-end items-end gap-4 mt-auto animate-slide-up-delay-1 lg:translate-x-8 xl:translate-x-16">
 
-          <Link href="#contact" className="brutalist-shadow bg-white text-black border-4 border-black p-8 hover:bg-black hover:text-white flex justify-between items-center w-full text-3xl font-black uppercase transition-all group">
-            <span>Contact</span>
-            <ArrowDownRight size={40} className="group-hover:translate-x-2 group-hover:translate-y-2 transition-transform" />
-          </Link>
+        <Link href="#projects" className="pointer-events-auto brutalist-shadow bg-black text-white border-4 border-black px-4 py-3 md:px-6 md:py-4 hover:bg-white hover:text-black flex justify-between items-center gap-3 md:gap-4 text-lg md:text-2xl font-black uppercase transition-all group w-full sm:w-auto">
+          <span>Work</span>
+          <ArrowDownRight className="group-hover:translate-x-1 group-hover:translate-y-1 transition-transform w-6 h-6 md:w-8 md:h-8" />
+        </Link>
 
-          {/* CV Button */}
-          <a
-            href="/Samy_Barsoum_CV.pdf"
-            download="Samy_Barsoum_CV.pdf"
-            className="brutalist-shadow bg-white text-black border-4 border-black p-8 hover:bg-black hover:text-white flex justify-between items-center w-full text-3xl font-black uppercase transition-all group"
-          >
-            <span>Get CV</span>
-            <Download size={40} className="group-hover:translate-y-2 transition-transform" />
-          </a>
+        <Link href="#contact" className="pointer-events-auto brutalist-shadow bg-white text-black border-4 border-black px-4 py-3 md:px-6 md:py-4 hover:bg-black hover:text-white flex justify-between items-center gap-3 md:gap-4 text-lg md:text-2xl font-black uppercase transition-all group w-full sm:w-auto">
+          <span>Contact</span>
+          <ArrowDownRight className="group-hover:translate-x-1 group-hover:translate-y-1 transition-transform w-6 h-6 md:w-8 md:h-8" />
+        </Link>
 
-        </div>
+        <a
+          href="/Samy_Barsoum_CV.pdf"
+          download="Samy_Barsoum_CV.pdf"
+          className="pointer-events-auto brutalist-shadow bg-white text-black border-4 border-black px-4 py-3 md:px-6 md:py-4 hover:bg-black hover:text-white flex justify-between items-center gap-3 md:gap-4 text-lg md:text-2xl font-black uppercase transition-all group w-full sm:w-auto"
+        >
+          <span>Get CV</span>
+          <Download className="group-hover:translate-y-1 transition-transform w-6 h-6 md:w-8 md:h-8" />
+        </a>
+
       </div>
     </section>
   );
