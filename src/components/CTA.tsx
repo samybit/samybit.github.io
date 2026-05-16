@@ -97,14 +97,13 @@ export default function CTA() {
   };
 
   return (
-    <section className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden border-t-8 border-b-8 border-black bg-white text-black">
+    // Swapped min-h-screen for min-h-[100dvh] and added py-16 so it never touches the screen edges
+    <section className="relative w-full min-h-[100dvh] flex flex-col items-center justify-center py-16 overflow-hidden border-t-8 border-b-8 border-black bg-white text-black">
 
       {/* --- LAYER 1: MECHANICAL ARROW BACKGROUND (z-0) --- */}
-      <div 
+      <div
         className="absolute inset-0 z-0 pointer-events-none"
         style={{
-          // Fixed Geometry: The main line's end coordinates (x2='72' y2='28') are pulled back 
-          // so it tucks perfectly under the arrowhead without blunting the tip.
           backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg stroke='%23000000' stroke-width='6' fill='none' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cline x1='25' y1='75' x2='72' y2='28' /%3E%3Cpolyline points='50,25 75,25 75,50' /%3E%3Cline x1='65' y1='5' x2='95' y2='35' /%3E%3C/g%3E%3C/svg%3E")`,
           backgroundSize: "100px 100px"
         }}
