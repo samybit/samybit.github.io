@@ -9,12 +9,10 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 export default function Contact() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  // Removed 'name' from the error state tracker
   const [errors, setErrors] = useState<{ email?: string; message?: string }>({});
 
   const [values, setValues] = useState({ name: "", email: "", message: "" });
 
-  // Name is no longer 'valid/invalid', it just tracks if it has content for the UI effect
   const isNameFilled = values.name.trim().length > 0;
   const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email);
   const isMessageValid = values.message.trim().length > 0;
@@ -51,7 +49,6 @@ export default function Contact() {
     const { name, value } = e.target;
     setValues(prev => ({ ...prev, [name]: value }));
 
-    // Only clear the error if the new keystroke actually makes the field valid.
     if (errors[name as keyof typeof errors]) {
       let isValid = false;
       if (name === "email") isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -66,7 +63,6 @@ export default function Contact() {
   async function clientAction(formData: FormData) {
     const newErrors: { email?: string; message?: string } = {};
 
-    // Name is optional, so it is removed from the validation blockade
     if (!isEmailValid) newErrors.email = "VALID EMAIL IS REQUIRED.";
     if (!isMessageValid) newErrors.message = "MESSAGE IS REQUIRED.";
 
@@ -87,7 +83,8 @@ export default function Contact() {
     }
   }
 
-  const inputBaseStyle = "p-4 border-4 text-xl resize-none focus:outline-none transition-colors duration-150 relative z-20";
+  // Tightened padding from p-4 to p-3 md:p-4 to save vertical pixels
+  const inputBaseStyle = "p-3 md:p-4 border-4 text-lg md:text-xl resize-none focus:outline-none transition-colors duration-150 relative z-20";
 
   const getInputStyle = (isValid: boolean, isError: boolean) => {
     if (isError) return `${inputBaseStyle} border-red-600 bg-red-50 text-black`;
@@ -96,8 +93,10 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 px-6 md:px-12 lg:px-24 bg-black text-white">
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-start">
+    // Replaced py-24 with min-h-[100dvh], flex centering, and an explicit pt-32 to clear the fixed navbar
+    <section id="contact" className="min-h-[100dvh] flex flex-col justify-center pt-30 pb-16 px-6 md:px-12 lg:px-24 bg-black text-white overflow-hidden">
+      {/* Tightened gap-16 to gap-8 lg:gap-12 to keep columns closer together */}
+      <div className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 lg:gap-12 items-center lg:items-start">
 
         {/* --- LEFT COLUMN: TEXT & SOCIALS --- */}
         <div className="flex-1 w-full relative z-30">
@@ -138,7 +137,7 @@ export default function Contact() {
 
         {/* --- RIGHT COLUMN: 3D FORM ENGINE --- */}
         <div
-          className="flex-1 w-full relative"
+          className="flex-1 w-full relative max-w-xl mx-auto lg:mx-0"
           style={{ perspective: 1200 }}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
@@ -154,7 +153,8 @@ export default function Contact() {
               transformStyle: "preserve-3d",
               translateZ: 30
             }}
-            className="relative z-10 bg-white text-black border-4 border-black flex flex-col gap-6 p-8 overflow-hidden shadow-2xl"
+            // Tightened form padding and internal gaps to compress height
+            className="relative z-10 bg-white text-black border-4 border-black flex flex-col gap-4 md:gap-5 p-6 lg:p-8 overflow-hidden shadow-2xl"
           >
             <motion.div
               style={{ x: glareX, y: glareY }}
@@ -171,9 +171,9 @@ export default function Contact() {
               </div>
             ) : (
               <>
-                <div className="flex flex-col gap-2 relative z-20">
-                  <label htmlFor="name" className="text-xl font-black uppercase tracking-wide flex items-center gap-3">
-                    Name <span className="text-sm text-zinc-500 tracking-widest">[OPTIONAL]</span>
+                <div className="flex flex-col gap-1.5 relative z-20">
+                  <label htmlFor="name" className="text-lg md:text-xl font-black uppercase tracking-wide flex items-center justify-between">
+                    Name <span className="text-xs md:text-sm text-zinc-500 tracking-widest">[OPTIONAL]</span>
                   </label>
                   <input
                     type="text"
@@ -181,14 +181,14 @@ export default function Contact() {
                     name="name"
                     value={values.name}
                     onChange={handleChange}
-                    className={getInputStyle(isNameFilled, false)} // Name never has an error state now
+                    className={getInputStyle(isNameFilled, false)}
                     placeholder=""
                   />
                 </div>
 
-                <div className="flex flex-col gap-2 relative z-20">
-                  <label htmlFor="email" className="text-xl font-black uppercase tracking-wide flex items-center gap-3">
-                    Email <span className="text-sm text-red-600 tracking-widest">[REQUIRED]</span>
+                <div className="flex flex-col gap-1.5 relative z-20">
+                  <label htmlFor="email" className="text-lg md:text-xl font-black uppercase tracking-wide flex items-center justify-between">
+                    Email <span className="text-xs md:text-sm text-red-600 tracking-widest">[REQUIRED]</span>
                   </label>
                   <input
                     type="email"
@@ -200,27 +200,27 @@ export default function Contact() {
                     placeholder="...@example.com"
                   />
                   {errors.email && (
-                    <span className="text-red-600 font-black uppercase tracking-wide border-l-4 border-red-600 pl-2 mt-1">
+                    <span className="text-red-600 text-sm md:text-base font-black uppercase tracking-wide border-l-4 border-red-600 pl-2 mt-1">
                       {errors.email}
                     </span>
                   )}
                 </div>
 
-                <div className="flex flex-col gap-2 relative z-20">
-                  <label htmlFor="message" className="text-xl font-black uppercase tracking-wide flex items-center gap-3">
-                    Message <span className="text-sm text-red-600 tracking-widest">[REQUIRED]</span>
+                <div className="flex flex-col gap-1.5 relative z-20">
+                  <label htmlFor="message" className="text-lg md:text-xl font-black uppercase tracking-wide flex items-center justify-between">
+                    Message <span className="text-xs md:text-sm text-red-600 tracking-widest">[REQUIRED]</span>
                   </label>
                   <textarea
                     id="message"
                     name="message"
-                    rows={5}
+                    rows={4} // Reduced from 5 to 4 to save vertical space
                     value={values.message}
                     onChange={handleChange}
                     className={getInputStyle(isMessageValid, !!errors.message)}
                     placeholder="Describe your project, an open role, or how we can collaborate..."
                   />
                   {errors.message && (
-                    <span className="text-red-600 font-black uppercase tracking-wide border-l-4 border-red-600 pl-2 mt-1">
+                    <span className="text-red-600 text-sm md:text-base font-black uppercase tracking-wide border-l-4 border-red-600 pl-2 mt-1">
                       {errors.message}
                     </span>
                   )}
@@ -231,10 +231,11 @@ export default function Contact() {
                   onClick={() => playPowerUp()}
                   disabled={status === "loading"}
                   style={{ transform: "translateZ(15px)" }}
-                  className="mt-4 flex items-center justify-center gap-3 bg-black text-white p-5 text-2xl font-black uppercase border-4 border-black hover:bg-white hover:text-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed group relative z-20 shadow-[8px_8px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:translate-x-1 hover:translate-y-1 active:shadow-none active:translate-x-2 active:translate-y-2"
+                  // Adjusted padding from p-5 to py-3 px-5
+                  className="mt-2 flex items-center justify-center gap-3 bg-black text-white py-3 px-5 text-xl md:text-2xl font-black uppercase border-4 border-black hover:bg-white hover:text-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed group relative z-20 shadow-[8px_8px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:translate-x-1 hover:translate-y-1 active:shadow-none active:translate-x-2 active:translate-y-2"
                 >
                   {status === "loading" ? "Sending..." : "Send Message"}
-                  <Send className="w-6 h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  <Send className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </button>
 
                 {status === "error" && (
