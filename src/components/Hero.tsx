@@ -7,7 +7,8 @@ import GlitchText from "@/components/GlitchText";
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative w-full min-h-[90vh] flex flex-col justify-between overflow-hidden border-b-8 border-black pt-32 pb-8 px-6 md:px-12 lg:px-24 bg-white">
+    // --- UPDATED HEIGHT: min-h-[100dvh] locks it perfectly to the available screen space ---
+    <section id="hero" className="relative w-full min-h-[100dvh] flex flex-col justify-between overflow-hidden border-b-8 border-black pt-32 pb-8 px-6 md:px-12 lg:px-24 bg-white">
 
       {/* --- LAYER 1: SPLINE 3D SCENE --- */}
       <div className="absolute inset-0 z-0">
@@ -19,17 +20,13 @@ export default function Hero() {
 
       {/* --- LAYER 2: FLOATING TYPOGRAPHY (Top Left) --- */}
       <div className="relative z-10 pointer-events-none animate-slide-up flex flex-col items-start w-full">
-
-        {/* FIX 1: Mobile Badge Overflow */}
+        
         <div className="mb-6 pointer-events-auto inline-flex max-w-full">
-          {/* Shrunk text to text-sm on mobile, allowed it to wrap safely on tiny screens, but keep the hard brutalist padding */}
           <span className="bg-white text-black text-sm sm:text-base md:text-xl font-bold uppercase tracking-widest border-4 border-black px-3 py-1.5 md:px-4 md:py-2 brutalist-shadow whitespace-normal sm:whitespace-nowrap text-left">
             Available for Freelance & Roles
           </span>
         </div>
 
-        {/* FIX 2: Mobile Name Overflow */}
-        {/* Changed base mobile text to 16vw so it dynamically shrinks and perfectly matches the phone width */}
         <h1 className="text-[16vw] sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter leading-none pointer-events-auto inline-block max-w-full">
           <span className="bg-white text-black px-2 md:px-4 py-1 md:py-2 border-4 border-black brutalist-shadow inline-block">
             Samy
