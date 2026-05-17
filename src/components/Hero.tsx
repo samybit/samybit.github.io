@@ -8,9 +8,9 @@ import { useRef, useState, useEffect } from "react";
 import { useInView } from "framer-motion";
 
 export default function Hero() {
-  // 1. Hardware Observer: Tracks when the Hero section is on screen
+  // 1. Hardware Observer: 0px margin means it strictly kills the engine the exact pixel it leaves the screen
   const heroRef = useRef<HTMLElement>(null);
-  const isInView = useInView(heroRef, { margin: "0px 0px 200px 0px" });
+  const isInView = useInView(heroRef, { margin: "0px" });
 
   // 2. Spline Runtime State
   const [splineApp, setSplineApp] = useState<any>(null);
