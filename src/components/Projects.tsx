@@ -6,7 +6,7 @@ import { playTick } from "@/utils/audio";
 import DecryptText from "@/components/DecryptText";
 
 // Custom inline SVG for Github
-const GithubIcon = ({ size = 24 }: { size?: number }) => (
+const GithubIcon = ({ size = 20 }: { size?: number }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -26,7 +26,7 @@ const GithubIcon = ({ size = 24 }: { size?: number }) => (
 const projects = [
   {
     title: "Bento Game Tracker",
-    description: "Bento-grid progression engine powered by Next.js 16 and Gemini 2.5 Flash Lite. Features real-time AI achievement roadmaps and PostgreSQL via Prisma 7 persistence.",
+    description: "Bento-grid progression engine powered by Next.js 16 and Gemini 2.5 Flash Lite. Features real-time AI achievement assistant.",
     tech: ["Next.js", "Prisma", "PostgreSQL", "Gemini AI"],
     github: "https://github.com/samybit/bento-game-tracker",
     demo: "https://bento-game-tracker.vercel.app"
@@ -82,36 +82,40 @@ const projects = [
   }
 ];
 
-// Added bg-white and border-black explicitly here so the theme interceptor catches the cards
 const ProjectCard = ({ project, animate = false }: { project: any, animate?: boolean }) => (
-  <div className={`brutalist-container bg-white border-black flex flex-col justify-between min-h-[380px] h-full ${animate ? 'animate-slide-up' : ''}`}>
+  <div className={`brutalist-container bg-white border-black flex flex-col h-full w-full ${animate ? 'animate-slide-up' : ''}`}>
+
+    {/* Top Text Block - Reduced text sizes and margins */}
     <div>
-      <h3 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase mb-3 md:mb-4 tracking-tight leading-none md:leading-tight">
+      <h3 className="text-xl sm:text-2xl md:text-3xl font-black uppercase mb-2 md:mb-3 tracking-tight leading-none md:leading-tight">
         {project.title}
       </h3>
-      <p className="text-base sm:text-lg md:text-xl font-medium mb-6 md:mb-8 text-zinc-800 leading-snug">
+      <p className="text-sm sm:text-base md:text-lg font-medium text-zinc-800 leading-snug">
         {project.description}
       </p>
-      <div className="flex flex-wrap gap-2 md:gap-3 mb-6 md:mb-8">
-        {project.tech.map((tech: string, i: number) => (
-          <span key={i} className="px-2 py-1 md:px-3 bg-black text-white text-xs md:text-sm font-bold uppercase tracking-wider">
-            {tech}
-          </span>
-        ))}
-      </div>
     </div>
 
-    <div className="flex flex-wrap gap-4 md:gap-6 border-t-4 border-black pt-4 md:pt-6 mt-auto">
-      <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-base md:text-lg font-bold uppercase hover:underline">
-        <GithubIcon size={24} /> Repo
+    {/* Badges Block - Reduced top padding, gaps, and margins */}
+    <div className="flex flex-wrap gap-2 mt-auto mb-4 md:mb-5 pt-4">
+      {project.tech.map((tech: string, i: number) => (
+        <span key={i} className="px-2 py-1 md:px-2.5 bg-black text-white text-[10px] md:text-xs font-bold uppercase tracking-wider">
+          {tech}
+        </span>
+      ))}
+    </div>
+
+    {/* Bottom Links Block - Reduced padding and text sizes */}
+    <div className="flex flex-wrap gap-4 border-t-4 border-black pt-3 md:pt-4">
+      <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-sm md:text-base font-bold uppercase hover:underline">
+        <GithubIcon size={20} /> Repo
       </a>
       {project.demo !== "#" && (
-        <a href={project.demo} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-2 text-base md:text-lg font-bold uppercase hover:bg-white hover:text-black px-2 transition-colors border-2 border-transparent hover:border-black shrink-0">
-          <span className="relative flex h-3 w-3 mr-1">
+        <a href={project.demo} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-1.5 text-sm md:text-base font-bold uppercase hover:bg-white hover:text-black px-2 transition-colors border-2 border-transparent hover:border-black shrink-0">
+          <span className="relative flex h-2.5 w-2.5 mr-1">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-black opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-black"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-black"></span>
           </span>
-          Live Demo <ExternalLink size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          Live Demo <ExternalLink size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
         </a>
       )}
     </div>
@@ -138,25 +142,20 @@ export default function Projects() {
   const currentProjects = projects.slice(page * itemsPerPage, (page + 1) * itemsPerPage);
 
   return (
-    <section id="projects" className="py-24 px-6 md:px-12 lg:px-24 border-b-8 border-black overflow-hidden">
-
+    <section id="projects" className="snap-start relative w-full min-h-[80vh] flex flex-col pt-24 pb-8 px-6 md:px-12 lg:px-24 border-b-8 border-black overflow-hidden bg-white">
       {/* --- HEADER --- */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 lg:mb-12 gap-6 flex-none">
         <div className="w-full md:w-auto">
-          <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-none">
-            {/* Selected <br /> Works */}
+          <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
             <DecryptText text="Selected" />
             <br />
             <DecryptText text="Works" />
           </h2>
 
-          {/* Desktop Subtitle */}
-          <p className="hidden lg:block text-xl font-bold uppercase text-zinc-500 mt-4 tracking-widest">
+          <p className="hidden lg:block text-lg font-bold uppercase text-zinc-500 mt-4 tracking-widest">
             [ PAGE 0{page + 1} / 0{totalPages} ]
           </p>
 
-          {/* FLATTENED Mobile Subtitle & Toggle Bar */}
-          {/* Added explicitly bg-white here so the toggle bar doesn't vanish into the charcoal background */}
           <div className="flex lg:hidden items-center justify-between mt-6 border-2 border-black bg-white p-2">
             <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-zinc-500 pl-2">
               {showAllMobile ? "[ Scroll ↓ ]" : "[ Swipe → ]"}
@@ -168,36 +167,40 @@ export default function Projects() {
               {showAllMobile ? "Swipe View" : "View All"}
             </button>
           </div>
-
         </div>
 
-        {/* Hidden on mobile so it doesn't clutter the header */}
         <a
           href="https://github.com/samybit"
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden md:block text-2xl font-bold uppercase border-b-4 border-black pb-1 hover:bg-black hover:text-white transition-colors"
+          className="hidden md:block text-xl font-bold uppercase border-b-4 border-black pb-1 hover:bg-black hover:text-white transition-colors"
         >
           View full GitHub →
         </a>
       </div>
 
       {/* --- DESKTOP VIEW: Paginated Grid & Controls --- */}
-      <div className="hidden lg:flex gap-12">
-        <div className="flex-1 grid grid-cols-2 gap-12 min-h-[820px] content-start">
+      {/* Reduced sidebar width from 6rem to 5rem, and gaps from gap-8/12 to gap-6/8 */}
+      <div className="hidden lg:grid grid-cols-[1fr_5rem] gap-6 xl:gap-8 flex-1 min-h-0">
+
+        {/* The 2x2 Grid container */}
+        <div className="grid grid-cols-2 grid-rows-2 gap-6 xl:gap-8 h-full w-full">
           {currentProjects.map((project, index) => (
             <ProjectCard key={`desktop-${page}-${index}`} project={project} animate={true} />
           ))}
         </div>
 
-        <div className="flex flex-col w-24 shrink-0 border-4 border-black brutalist-shadow bg-white">
+        {/* The Sidebar Controls */}
+        <div className="flex flex-col border-4 border-black brutalist-shadow bg-white h-full w-full">
           <button onClick={prevSlide} className="flex-1 flex flex-col items-center justify-center gap-2 border-b-4 border-black hover:bg-black hover:text-white transition-colors group">
-            <ArrowUp size={40} className="group-hover:-translate-y-2 transition-transform" />
+            {/* Reduced icon size from 40 to 32 */}
+            <ArrowUp size={32} className="group-hover:-translate-y-2 transition-transform" />
             <span className="font-black uppercase tracking-widest text-xs rotate-180" style={{ writingMode: 'vertical-rl' }}>Prev</span>
           </button>
           <button onClick={nextSlide} className="flex-1 flex flex-col items-center justify-center gap-2 hover:bg-black hover:text-white transition-colors group">
             <span className="font-black uppercase tracking-widest text-xs" style={{ writingMode: 'vertical-rl' }}>Next</span>
-            <ArrowDown size={40} className="group-hover:translate-y-2 transition-transform" />
+            {/* Reduced icon size from 40 to 32 */}
+            <ArrowDown size={32} className="group-hover:translate-y-2 transition-transform" />
           </button>
         </div>
       </div>
