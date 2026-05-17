@@ -4,17 +4,43 @@ import { ArrowDownRight, Download } from "lucide-react";
 import Link from "next/link";
 import Spline from '@splinetool/react-spline';
 import GlitchText from "@/components/GlitchText";
+import { useRef, useState, useEffect } from "react";
+import { useInView } from "framer-motion";
 
 export default function Hero() {
+  // 1. Hardware Observer: Tracks when the Hero section is on screen
+  const heroRef = useRef<HTMLElement>(null);
+  const isInView = useInView(heroRef, { margin: "0px 0px 200px 0px" });
+
+  // 2. Spline Runtime State
+  const [splineApp, setSplineApp] = useState<any>(null);
+
+  // 3. The Optimization Engine: Pauses WebGL rendering when scrolled away
+  useEffect(() => {
+    if (splineApp) {
+      if (isInView) {
+        splineApp.play(); // Resume animation when visible
+      } else {
+        splineApp.stop(); // Kill rendering loop to save CPU/Battery
+      }
+    }
+  }, [isInView, splineApp]);
+
   return (
-    // --- UPDATED HEIGHT: min-h-[100dvh] locks it perfectly to the available screen space ---
-    <section id="hero" className="snap-start relative w-full min-h-[100dvh] flex flex-col justify-between overflow-hidden border-b-8 border-black pt-32 pb-8 px-6 md:px-12 lg:px-24 bg-white">
+    // REMOVED 'bg-white' from this section so the dots on the body show through!
+    <section
+      id="hero"
+      ref={heroRef}
+      className="relative w-full min-h-[100dvh] flex flex-col justify-between overflow-hidden border-b-8 border-black pt-32 pb-8 px-6 md:px-12 lg:px-24"
+    >
 
       {/* --- LAYER 1: SPLINE 3D SCENE --- */}
       <div className="absolute inset-0 z-0">
         <Spline
           scene="https://prod.spline.design/7ztL0oWOFnobjnom/scene.splinecode"
           className="w-full h-full"
+          // Grab the internal application instance when it loads
+          onLoad={(spline) => setSplineApp(spline)}
         />
       </div>
 
@@ -39,8 +65,7 @@ export default function Hero() {
       </div>
 
       {/* --- LAYER 3: FLOATING ACTIONS (Bottom Right) --- */}
-      {/* FIX 3: Nudge right on desktop using lg:translate-x-8 and xl:translate-x-12 */}
-      <div className="relative z-10 pointer-events-none flex flex-col sm:flex-row justify-end items-end gap-4 mt-auto animate-slide-up-delay-1 lg:translate-x-8 xl:translate-x-16">
+      <div className="relative z-10 pointer-events-none flex flex-col sm:flex-row justify-end items-end gap-4 mt-auto animate-slide-up-delay-1 lg:translate-x-8 xl:translate-x-12">
 
         <Link href="#projects" className="pointer-events-auto brutalist-shadow bg-black text-white border-4 border-black px-4 py-3 md:px-6 md:py-4 hover:bg-white hover:text-black flex justify-between items-center gap-3 md:gap-4 text-lg md:text-2xl font-black uppercase transition-all group w-full sm:w-auto">
           <span>Work</span>
