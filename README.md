@@ -9,24 +9,25 @@ The source code for my personal web development portfolio. Designed with a stric
 - **Framework:** Next.js (App Router)
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS v4
+- **3D & WebGL:** React Three Fiber, Drei, & Spline
 - **Animations:** Framer Motion
 - **Icons:** Lucide React
 - **Email Service:** Resend (via Next.js Server Actions)
 
 ## Key Features
 
-- **Strict Brutalism:** Pure CSS variables, zero border-radius, and hard drop-shadows
-- **Custom Floating Nav:** Interactive, out-of-flow navigation with a heavy, snapping mobile menu
-- **Serverless Contact Form:** Uses Next.js Server Actions and the Resend API to handle form submissions without dedicated API routes
-- **Scroll Animations:** Viewport-triggered kinetic typography and staggered grid reveals using Framer Motion
+- **Strict Brutalism & Theming:** Pure CSS variables, zero border-radius, heavy drop-shadows, and a custom 3-way theme engine (Light, Hardware Invert, Ember).
+- **Optimized 3D Integration:** Interactive WebGL elements and Spline scenes with viewport-triggered rendering (0% GPU usage when scrolled out of view).
+- **Magnetic Scroll Physics:** Zero-JS, native CSS Scroll Snapping (`100dvh`) for perfectly aligned, full-screen section transitions.
+- **Serverless Contact Form:** Uses Next.js Server Actions and the Resend API to handle form submissions directly.
 
 ## Local Setup
 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/samybit/samybit.github.io
-cd samybit.github.io
+git clone https://github.com/samybit/portfolio
+cd portfolio
 ```
 
 ### 2. Install Dependencies

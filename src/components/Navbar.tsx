@@ -5,7 +5,7 @@ import { TerminalSquare, ArrowUpRight, Menu, X, Palette } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Smoke from "@/components/Smoke"; // Import the new engine
+import Smoke from "@/components/Smoke";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -103,7 +103,8 @@ export default function Navbar() {
     <nav ref={navRef} className="animate-slide-down fixed top-0 left-0 z-50 w-full px-6 md:px-12 py-6 pointer-events-none flex flex-col">
       <div className="flex justify-between items-start w-full">
 
-        <div className="pointer-events-auto flex brutalist-shadow hover:translate-y-1 hover:translate-x-1 hover:shadow-none transition-all">
+        {/* Removed dynamic hover classes and swapped brutalist-shadow for a static shadow */}
+        <div className="pointer-events-auto flex brutalist-shadow-static">
           <Link
             href="/"
             onClick={handleLogoClick}
@@ -124,13 +125,14 @@ export default function Navbar() {
         </div>
 
         {/* --- Desktop Nav Links Block --- */}
-        <div className="pointer-events-auto hidden md:flex items-center gap-2 bg-white border-4 border-black p-2 brutalist-shadow">
+        {/* Swapped brutalist-shadow for a static shadow */}
+        <div className="pointer-events-auto hidden md:flex items-center gap-2 bg-white border-4 border-black p-2 brutalist-shadow-static">
 
           <Link
             href="/about"
             className={`relative group overflow-hidden isolate text-lg font-bold uppercase px-4 py-1 border-2 transition-all ${pathname === '/about'
-                ? 'bg-black text-white border-black'
-                : 'border-transparent hover:border-black hover:bg-black hover:text-white'
+              ? 'bg-black text-white border-black'
+              : 'border-transparent hover:border-black hover:bg-black hover:text-white'
               }`}
           >
             <Smoke isActive={pathname === '/about'} />
@@ -141,8 +143,8 @@ export default function Navbar() {
             href="/#projects"
             onClick={() => setActiveHash('#projects')}
             className={`relative group overflow-hidden isolate text-lg font-bold uppercase px-4 py-1 border-2 transition-all ${pathname === '/' && activeHash === '#projects'
-                ? 'bg-black text-white border-black'
-                : 'border-transparent hover:border-black hover:bg-black hover:text-white'
+              ? 'bg-black text-white border-black'
+              : 'border-transparent hover:border-black hover:bg-black hover:text-white'
               }`}
           >
             <Smoke isActive={pathname === '/' && activeHash === '#projects'} />
@@ -163,8 +165,8 @@ export default function Navbar() {
             href="/#contact"
             onClick={() => setActiveHash('#contact')}
             className={`relative group overflow-hidden isolate px-5 py-2 text-lg font-bold uppercase border-4 border-black transition-all ml-2 ${pathname === '/' && activeHash === '#contact'
-                ? 'bg-white text-black'
-                : 'bg-black text-white hover:bg-white hover:text-black'
+              ? 'bg-white text-black'
+              : 'bg-black text-white hover:bg-white hover:text-black'
               }`}
           >
             <Smoke inverse={true} isActive={pathname === '/' && activeHash === '#contact'} />
@@ -172,9 +174,10 @@ export default function Navbar() {
           </Link>
         </div>
 
+        {/* Swapped brutalist-shadow for a static shadow and removed hover animation */}
         <button
           onClick={toggleMobileMenu}
-          className="pointer-events-auto md:hidden bg-white border-4 border-black p-3 brutalist-shadow hover:translate-y-1 hover:translate-x-1 hover:shadow-none transition-all"
+          className="pointer-events-auto md:hidden bg-white border-4 border-black p-3 brutalist-shadow-static"
           aria-label="Toggle menu"
         >
           {isOpen ? <X size={32} className="text-black" /> : <Menu size={32} className="text-black" />}
@@ -183,13 +186,13 @@ export default function Navbar() {
 
       {/* --- Mobile Menu Dropdown --- */}
       {isOpen && (
-        <div className="pointer-events-auto md:hidden w-full mt-4 bg-white border-4 border-black p-6 flex flex-col gap-2 brutalist-shadow">
+        <div className="pointer-events-auto md:hidden w-full mt-4 bg-white border-4 border-black p-6 flex flex-col gap-2 brutalist-shadow-static">
           <Link
             href="/about"
             onClick={() => setIsOpen(false)}
             className={`relative group overflow-hidden isolate text-3xl font-black uppercase p-4 border-b-4 border-black transition-colors ${pathname === '/about'
-                ? 'bg-black text-white'
-                : 'hover:bg-black hover:text-white'
+              ? 'bg-black text-white'
+              : 'hover:bg-black hover:text-white'
               }`}
           >
             <Smoke isActive={pathname === '/about'} />
@@ -203,8 +206,8 @@ export default function Navbar() {
               setActiveHash('#projects');
             }}
             className={`relative group overflow-hidden isolate text-3xl font-black uppercase p-4 border-b-4 border-black transition-colors ${pathname === '/' && activeHash === '#projects'
-                ? 'bg-black text-white'
-                : 'hover:bg-black hover:text-white'
+              ? 'bg-black text-white'
+              : 'hover:bg-black hover:text-white'
               }`}
           >
             <Smoke isActive={pathname === '/' && activeHash === '#projects'} />
@@ -228,8 +231,8 @@ export default function Navbar() {
               setActiveHash('#contact');
             }}
             className={`relative group overflow-hidden isolate mt-4 text-center p-5 text-3xl font-black uppercase border-4 border-black transition-colors ${pathname === '/' && activeHash === '#contact'
-                ? 'bg-white text-black'
-                : 'bg-black text-white hover:bg-white hover:text-black'
+              ? 'bg-white text-black'
+              : 'bg-black text-white hover:bg-white hover:text-black'
               }`}
           >
             <Smoke inverse={true} isActive={pathname === '/' && activeHash === '#contact'} />
