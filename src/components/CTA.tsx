@@ -98,7 +98,7 @@ export default function CTA() {
 
   return (
     // Swapped min-h-screen for min-h-[100dvh] and added py-16 so it never touches the screen edges
-    <section className="relative w-full min-h-[100dvh] flex flex-col items-center justify-center py-16 overflow-hidden border-t-8 border-b-8 border-black bg-white text-black">
+    <section className="snap-start relative w-full min-h-[100dvh] flex flex-col items-center justify-center py-16 overflow-hidden border-t-8 border-b-8 border-black bg-white text-black">
 
       {/* --- LAYER 1: MECHANICAL ARROW BACKGROUND (z-0) --- */}
       <div

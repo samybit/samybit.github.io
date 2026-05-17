@@ -8,7 +8,7 @@ import GlitchText from "@/components/GlitchText";
 export default function Hero() {
   return (
     // --- UPDATED HEIGHT: min-h-[100dvh] locks it perfectly to the available screen space ---
-    <section id="hero" className="relative w-full min-h-[100dvh] flex flex-col justify-between overflow-hidden border-b-8 border-black pt-32 pb-8 px-6 md:px-12 lg:px-24 bg-white">
+    <section id="hero" className="snap-start relative w-full min-h-[100dvh] flex flex-col justify-between overflow-hidden border-b-8 border-black pt-32 pb-8 px-6 md:px-12 lg:px-24 bg-white">
 
       {/* --- LAYER 1: SPLINE 3D SCENE --- */}
       <div className="absolute inset-0 z-0">
@@ -20,7 +20,7 @@ export default function Hero() {
 
       {/* --- LAYER 2: FLOATING TYPOGRAPHY (Top Left) --- */}
       <div className="relative z-10 pointer-events-none animate-slide-up flex flex-col items-start w-full">
-        
+
         <div className="mb-6 pointer-events-auto inline-flex max-w-full">
           <span className="bg-white text-black text-sm sm:text-base md:text-xl font-bold uppercase tracking-widest border-4 border-black px-3 py-1.5 md:px-4 md:py-2 brutalist-shadow whitespace-normal sm:whitespace-nowrap text-left">
             Available for Freelance & Roles

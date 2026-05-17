@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth">
+    <html lang="en" className="scroll-smooth snap-y snap-mandatory" data-scroll-behavior="smooth">
       <body className={`${spaceGrotesk.className} bg-white text-black antialiased selection:bg-black selection:text-white`}>
         <SystemOverride />
         <CustomContextMenu />

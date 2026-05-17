@@ -94,7 +94,7 @@ export default function Contact() {
 
   return (
     // Replaced py-24 with min-h-[100dvh], flex centering, and an explicit pt-32 to clear the fixed navbar
-    <section id="contact" className="min-h-[100dvh] flex flex-col justify-center pt-30 pb-16 px-6 md:px-12 lg:px-24 bg-black text-white overflow-hidden">
+    <section id="contact" className="snap-start min-h-[100dvh] flex flex-col justify-center pt-30 pb-16 px-6 md:px-12 lg:px-24 bg-black text-white overflow-hidden">
       {/* Tightened gap-16 to gap-8 lg:gap-12 to keep columns closer together */}
       <div className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 lg:gap-12 items-center lg:items-start">
 
