@@ -10,7 +10,7 @@ export default function Home() {
       <TabTitleUpdater />
       <Hero />
       <Projects />
-      <CTA />
+      {/* <CTA /> */}
       <Contact />
     </main>
   );

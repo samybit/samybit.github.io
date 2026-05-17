@@ -29,83 +29,115 @@ const projects = [
     description: "Bento-grid progression engine powered by Next.js 16 and Gemini 2.5 Flash Lite. Features real-time AI achievement assistant.",
     tech: ["Next.js", "Prisma", "PostgreSQL", "Gemini AI"],
     github: "https://github.com/samybit/bento-game-tracker",
-    demo: "https://bento-game-tracker.vercel.app"
+    demo: "https://bento-game-tracker.vercel.app",
+    image: "/bento.jpg"
   },
   {
     title: "Movie Intelligence App",
     description: "Cinematic platform featuring Firebase authentication, global state management, and localized filtering system.",
     tech: ["React", "Shadcn UI", "Firebase", "i18n"],
     github: "https://github.com/samybit/iti-movie-app",
-    demo: "https://iti-movie-app.pages.dev/"
+    demo: "https://iti-movie-app.pages.dev/",
+    image: "/movie.jpg"
   },
   {
     title: "3D Web",
     description: "Showcase of 3D web rendering. It integrates Framer Motion, Three.js, Spline, Globe.gl, Atropos, and Pure CSS.",
     tech: ["react", "nextjs", "webgl"],
     github: "https://github.com/samybit/3d-showcase",
-    demo: "https://3d-showcase-pi.vercel.app"
+    demo: "https://3d-showcase-pi.vercel.app",
+    image: "/3dweb.jpg"
   },
   {
     title: "Lead Scraper",
     description: "Automated freelance lead generation and scraping pipeline built for efficiency.",
     tech: ["n8n", "Python", "Automation", "gemini-ai"],
     github: "https://github.com/samybit/freelance-lead-scraper",
-    demo: "#"
+    demo: "#",
+    image: "/scraper.jpg"
   },
   {
     title: "Vanilla JS E-Commerce",
     description: "Full-scale store engine with role-based access control (Admin/User), product management, and persistent data.",
     tech: ["JavaScript", "HTML", "CSS", "LocalStorage"],
     github: "https://github.com/samybit/vanilla-js-ecommerce",
-    demo: "https://samybit.github.io/vanilla-js-ecommerce/"
+    demo: "https://samybit.github.io/vanilla-js-ecommerce/",
+    image: "/ecommerce.jpg"
   },
   {
     title: "BearBuzz",
     description: "Dual-interface (CLI & GUI) Python engine tracking stock volatility, dispatching automated Twilio SMS alerts with live financial headlines.",
     tech: ["Python", "Twilio API", "CI/CD", "Tkinter"],
     github: "https://github.com/samybit/bearbuzz",
-    demo: "#"
+    demo: "#",
+    image: "/bearbuzz.jpg"
   },
   {
     title: "Questlog",
     description: "Full-stack progression engine tracking video game milestones and visual completion percentages via a dynamic dashboard.",
     tech: ["Full-Stack", "Data Vis", "Tracking"],
     github: "https://github.com/samybit/game-completion-board",
-    demo: "#"
+    demo: "#",
+    image: "/questlog.jpg"
   },
   {
     title: "CLI Expense Tracker",
     description: "Memory-safe, blazingly fast command-line tool featuring dynamic allocation and file I/O.",
     tech: ["C", "CLI", "Data Structures"],
     github: "https://github.com/samybit",
-    demo: "#"
+    demo: "#",
+    image: "/cli.jpg"
   }
 ];
 
 const ProjectCard = ({ project, animate = false }: { project: any, animate?: boolean }) => (
-  <div className={`brutalist-container bg-white border-black flex flex-col h-full w-full ${animate ? 'animate-slide-up' : ''}`}>
+  // ADDED group/card to track hovering anywhere on the card
+  <div className={`group/card brutalist-container bg-white border-black flex flex-col h-full w-full ${animate ? 'animate-slide-up' : ''}`}>
 
-    {/* Top Text Block - Reduced text sizes and margins */}
-    <div>
-      <h3 className="text-xl sm:text-2xl md:text-3xl font-black uppercase mb-2 md:mb-3 tracking-tight leading-none md:leading-tight">
-        {project.title}
-      </h3>
-      <p className="text-sm sm:text-base md:text-lg font-medium text-zinc-800 leading-snug">
-        {project.description}
-      </p>
+    {/* TOP SECTION: Contains Text, Badges, and Hover Image Wrapper */}
+    {/* By moving the padding-bottom here, the absolute image will flawlessly snap to the top of the links line */}
+    <div className="relative flex-1 flex flex-col min-h-0 pb-4 md:pb-5">
+
+      {/* Default Content Block */}
+      <div className="flex flex-col h-full">
+        <div>
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-black uppercase mb-2 md:mb-3 tracking-tight leading-none md:leading-tight">
+            {project.title}
+          </h3>
+          <p className="text-sm sm:text-base md:text-lg font-medium text-zinc-800 leading-snug">
+            {project.description}
+          </p>
+        </div>
+
+        <div className="flex flex-wrap gap-2 mt-auto pt-4">
+          {project.tech.map((tech: string, i: number) => (
+            <span key={i} className="px-2 py-1 md:px-2.5 bg-black text-white text-[10px] md:text-xs font-bold uppercase tracking-wider">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* INSTANT HOVER IMAGE OVERLAY */}
+      {/* Hidden by default, instantly displays on group/card hover. bg-white prevents text bleeding through. */}
+      <div className="hidden group-hover/card:block absolute inset-0 z-10 bg-white">
+        {project.image ? (
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover border-4 border-black"
+          />
+        ) : (
+          <div className="w-full h-full border-4 border-black bg-zinc-100 flex items-center justify-center">
+            <span className="font-black text-zinc-400 uppercase tracking-widest text-sm text-center px-4">Screenshot Missing</span>
+          </div>
+        )}
+      </div>
+
     </div>
 
-    {/* Badges Block - Reduced top padding, gaps, and margins */}
-    <div className="flex flex-wrap gap-2 mt-auto mb-4 md:mb-5 pt-4">
-      {project.tech.map((tech: string, i: number) => (
-        <span key={i} className="px-2 py-1 md:px-2.5 bg-black text-white text-[10px] md:text-xs font-bold uppercase tracking-wider">
-          {tech}
-        </span>
-      ))}
-    </div>
-
-    {/* Bottom Links Block - Reduced padding and text sizes */}
-    <div className="flex flex-wrap gap-4 border-t-4 border-black pt-3 md:pt-4">
+    {/* BOTTOM LINKS BLOCK: Kept outside the hover container so it never gets covered */}
+    <div className="flex flex-wrap gap-4 border-t-4 border-black pt-3 md:pt-4 flex-none relative z-20">
       <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-sm md:text-base font-bold uppercase hover:underline">
         <GithubIcon size={20} /> Repo
       </a>
@@ -180,7 +212,6 @@ export default function Projects() {
       </div>
 
       {/* --- DESKTOP VIEW: Paginated Grid & Controls --- */}
-      {/* Reduced sidebar width from 6rem to 5rem, and gaps from gap-8/12 to gap-6/8 */}
       <div className="hidden lg:grid grid-cols-[1fr_5rem] gap-6 xl:gap-8 flex-1 min-h-0">
 
         {/* The 2x2 Grid container */}
@@ -193,13 +224,11 @@ export default function Projects() {
         {/* The Sidebar Controls */}
         <div className="flex flex-col border-4 border-black brutalist-shadow bg-white h-full w-full">
           <button onClick={prevSlide} className="flex-1 flex flex-col items-center justify-center gap-2 border-b-4 border-black hover:bg-black hover:text-white transition-colors group">
-            {/* Reduced icon size from 40 to 32 */}
             <ArrowUp size={32} className="group-hover:-translate-y-2 transition-transform" />
             <span className="font-black uppercase tracking-widest text-xs rotate-180" style={{ writingMode: 'vertical-rl' }}>Prev</span>
           </button>
           <button onClick={nextSlide} className="flex-1 flex flex-col items-center justify-center gap-2 hover:bg-black hover:text-white transition-colors group">
             <span className="font-black uppercase tracking-widest text-xs" style={{ writingMode: 'vertical-rl' }}>Next</span>
-            {/* Reduced icon size from 40 to 32 */}
             <ArrowDown size={32} className="group-hover:translate-y-2 transition-transform" />
           </button>
         </div>
@@ -207,7 +236,7 @@ export default function Projects() {
 
       {/* --- MOBILE VIEW --- */}
       {showAllMobile ? (
-        <div className="flex lg:hidden flex-col gap-8 pb-8">
+        <div className="flex lg:hidden flex-col gap-6 pb-8 flex-1">
           {projects.map((project, index) => (
             <div key={`mobile-list-${index}`} className="w-full">
               <ProjectCard project={project} animate={true} />
@@ -216,12 +245,12 @@ export default function Projects() {
         </div>
       ) : (
         <div
-          className="flex lg:hidden overflow-x-auto gap-4 pb-6 snap-x snap-mandatory -mx-6 px-6"
+          className="flex lg:hidden overflow-x-auto gap-4 pb-6 snap-x snap-mandatory -mx-6 px-6 flex-1 min-h-[350px]"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
         >
           <style dangerouslySetInnerHTML={{ __html: `div::-webkit-scrollbar { display: none; }` }} />
           {projects.map((project, index) => (
-            <div key={`mobile-swipe-${index}`} className="w-[85vw] sm:w-[60vw] shrink-0 snap-center">
+            <div key={`mobile-swipe-${index}`} className="w-[85vw] sm:w-[60vw] shrink-0 snap-center h-full">
               <ProjectCard project={project} animate={false} />
             </div>
           ))}
@@ -230,12 +259,12 @@ export default function Projects() {
       )}
 
       {/* --- MOBILE GITHUB LINK (Bottom CTA) --- */}
-      <div className="flex md:hidden mt-4 w-full">
+      <div className="flex md:hidden mt-4 w-full flex-none">
         <a
           href="https://github.com/samybit"
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full bg-white border-4 border-black p-5 text-xl font-black uppercase text-center brutalist-shadow hover:translate-y-1 hover:translate-x-1 hover:shadow-none hover:bg-black hover:text-white transition-all"
+          className="w-full bg-white border-4 border-black p-4 text-lg font-black uppercase text-center brutalist-shadow hover:translate-y-1 hover:translate-x-1 hover:shadow-none hover:bg-black hover:text-white transition-all"
         >
           View Full GitHub →
         </a>
