@@ -65,7 +65,7 @@ export default function Hero() {
       </div>
 
       {/* --- LAYER 3: FLOATING ACTIONS (Bottom Right) --- */}
-      <div className="relative z-10 pointer-events-none flex flex-col sm:flex-row justify-end items-end gap-4 mt-auto animate-slide-up-delay-1 lg:translate-x-8 xl:translate-x-12">
+      <div className="relative z-10 pointer-events-none flex flex-col sm:flex-row justify-end items-end gap-4 mt-auto animate-slide-up-delay-1 lg:translate-x-8 xl:translate-x-16">
 
         <Link href="#projects" className="pointer-events-auto brutalist-shadow bg-black text-white border-4 border-black px-4 py-3 md:px-6 md:py-4 hover:bg-white hover:text-black flex justify-between items-center gap-3 md:gap-4 text-lg md:text-2xl font-black uppercase transition-all group w-full sm:w-auto">
           <span>Work</span>
