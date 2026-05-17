@@ -129,16 +129,19 @@ const ProjectCard = ({ project, animate = false }: { project: any, animate?: boo
         </div>
 
         {/* INSTANT HOVER IMAGE OVERLAY */}
-        {project.image && (
-          <div className="hidden group-hover/card:block absolute inset-0 z-10 bg-white">
+        <div className="hidden group-hover/card:block absolute inset-0 z-10 bg-white">
+          {project.image ? (
             <img
               src={project.image}
               alt={project.title}
               className="w-full h-full object-cover border-4 border-black"
             />
-          </div>
-        )}
-
+          ) : (
+            <div className="w-full h-full border-4 border-black bg-zinc-100 flex items-center justify-center">
+              <span className="font-black text-zinc-400 uppercase tracking-widest text-sm text-center px-4">Screenshot Missing</span>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* BOTTOM LINKS BLOCK */}
