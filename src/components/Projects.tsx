@@ -98,69 +98,78 @@ const projects = [
   }
 ];
 
-const ProjectCard = ({ project, animate = false }: { project: any, animate?: boolean }) => (
-  // ADDED group/card to track hovering anywhere on the card
-  <div className={`group/card brutalist-container bg-white border-black flex flex-col h-full w-full ${animate ? 'animate-slide-up' : ''}`}>
+const ProjectCard = ({ project, animate = false }: { project: any, animate?: boolean }) => {
+  // Cleanly check if valid links exist (ignoring empty strings and "#" placeholders)
+  const hasGithub = project.github && project.github !== "" && project.github !== "#";
+  const hasDemo = project.demo && project.demo !== "" && project.demo !== "#";
 
-    {/* TOP SECTION: Contains Text, Badges, and Hover Image Wrapper */}
-    {/* By moving the padding-bottom here, the absolute image will flawlessly snap to the top of the links line */}
-    <div className="relative flex-1 flex flex-col min-h-0 pb-4 md:pb-5">
+  return (
+    <div className={`group/card brutalist-container bg-white border-black flex flex-col h-full w-full ${animate ? 'animate-slide-up' : ''}`}>
 
-      {/* Default Content Block */}
-      <div className="flex flex-col h-full">
-        <div>
-          <h3 className="text-xl sm:text-2xl md:text-3xl font-black uppercase mb-2 md:mb-3 tracking-tight leading-none md:leading-tight">
-            {project.title}
-          </h3>
-          <p className="text-sm sm:text-base md:text-lg font-medium text-zinc-800 leading-snug">
-            {project.description}
-          </p>
+      <div className="relative flex-1 flex flex-col min-h-0 pb-4 md:pb-5">
+
+        {/* Default Content Block */}
+        <div className="flex flex-col h-full">
+          <div>
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-black uppercase mb-2 md:mb-3 tracking-tight leading-none md:leading-tight">
+              {project.title}
+            </h3>
+            <p className="text-sm sm:text-base md:text-lg font-medium text-zinc-800 leading-snug">
+              {project.description}
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-2 mt-auto pt-4">
+            {project.tech.map((tech: string, i: number) => (
+              <span key={i} className="px-2 py-1 md:px-2.5 bg-black text-white text-[10px] md:text-xs font-bold uppercase tracking-wider">
+                {tech}
+              </span>
+            ))}
+          </div>
         </div>
 
-        <div className="flex flex-wrap gap-2 mt-auto pt-4">
-          {project.tech.map((tech: string, i: number) => (
-            <span key={i} className="px-2 py-1 md:px-2.5 bg-black text-white text-[10px] md:text-xs font-bold uppercase tracking-wider">
-              {tech}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* INSTANT HOVER IMAGE OVERLAY */}
-      {/* Hidden by default, instantly displays on group/card hover. bg-white prevents text bleeding through. */}
-      <div className="hidden group-hover/card:block absolute inset-0 z-10 bg-white">
-        {project.image ? (
-          <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover border-4 border-black"
-          />
-        ) : (
-          <div className="w-full h-full border-4 border-black bg-zinc-100 flex items-center justify-center">
-            <span className="font-black text-zinc-400 uppercase tracking-widest text-sm text-center px-4">Screenshot Missing</span>
+        {/* INSTANT HOVER IMAGE OVERLAY */}
+        {project.image && (
+          <div className="hidden group-hover/card:block absolute inset-0 z-10 bg-white">
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-full object-cover border-4 border-black"
+            />
           </div>
         )}
+
       </div>
 
-    </div>
+      {/* BOTTOM LINKS BLOCK */}
+      {/* Added min-h-[48px] md:min-h-[52px] to force the exact same physical footprint even if empty */}
+      <div className="flex flex-wrap gap-4 border-t-4 border-black pt-3 md:pt-4 flex-none relative z-20 min-h-[48px] md:min-h-[52px]">
+        {hasGithub && (
+          <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-sm md:text-base font-bold uppercase hover:underline">
+            <GithubIcon size={20} /> Repo
+          </a>
+        )}
 
-    {/* BOTTOM LINKS BLOCK: Kept outside the hover container so it never gets covered */}
-    <div className="flex flex-wrap gap-4 border-t-4 border-black pt-3 md:pt-4 flex-none relative z-20">
-      <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-sm md:text-base font-bold uppercase hover:underline">
-        <GithubIcon size={20} /> Repo
-      </a>
-      {project.demo !== "#" && (
-        <a href={project.demo} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-1.5 text-sm md:text-base font-bold uppercase hover:bg-white hover:text-black px-2 transition-colors border-2 border-transparent hover:border-black shrink-0">
-          <span className="relative flex h-2.5 w-2.5 mr-1">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-black opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-black"></span>
+        {hasDemo && (
+          <a href={project.demo} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-1.5 text-sm md:text-base font-bold uppercase hover:bg-white hover:text-black px-2 transition-colors border-2 border-transparent hover:border-black shrink-0">
+            <span className="relative flex h-2.5 w-2.5 mr-1">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-black opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-black"></span>
+            </span>
+            Live Demo <ExternalLink size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </a>
+        )}
+
+        {/* Fallback state when both links are missing */}
+        {!hasGithub && !hasDemo && (
+          <span className="text-sm md:text-base font-bold uppercase text-zinc-500 flex items-center cursor-not-allowed">
+            [ Offline / Local Build ]
           </span>
-          Live Demo <ExternalLink size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-        </a>
-      )}
+        )}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default function Projects() {
   const [page, setPage] = useState(0);
