@@ -30,7 +30,7 @@ const projects = [
     tech: ["Next.js", "Prisma", "PostgreSQL", "Gemini AI"],
     github: "https://github.com/samybit/bento-game-tracker",
     demo: "https://bento-game-tracker.vercel.app",
-    image: "/bento.jpg"
+    image: "/bento.png"
   },
   {
     title: "Movie Intelligence App",
@@ -38,7 +38,7 @@ const projects = [
     tech: ["React", "Shadcn UI", "Firebase", "i18n"],
     github: "https://github.com/samybit/iti-movie-app",
     demo: "https://iti-movie-app.pages.dev/",
-    image: "/movie.jpg"
+    image: "moviedb.png"
   },
   {
     title: "3D Web",
@@ -46,7 +46,15 @@ const projects = [
     tech: ["react", "nextjs", "webgl"],
     github: "https://github.com/samybit/3d-showcase",
     demo: "https://3d-showcase-pi.vercel.app",
-    image: "/3dweb.jpg"
+    image: "/3dweb.png"
+  },
+  {
+    title: "Verdant Plants Store",
+    description: "Fully functional e-commerce boutique powered by WordPress and WooCommerce. Features catalog management and Kadence UI blocks.",
+    tech: ["WordPress", "WooCommerce", "Kadence UI", "LocalWP"],
+    github: "",
+    demo: "#",
+    image: "/plantswp.png"
   },
   {
     title: "Lead Scraper",
@@ -54,7 +62,7 @@ const projects = [
     tech: ["n8n", "Python", "Automation", "gemini-ai"],
     github: "https://github.com/samybit/freelance-lead-scraper",
     demo: "#",
-    image: "/scraper.jpg"
+    image: ""
   },
   {
     title: "Vanilla JS E-Commerce",
@@ -62,7 +70,7 @@ const projects = [
     tech: ["JavaScript", "HTML", "CSS", "LocalStorage"],
     github: "https://github.com/samybit/vanilla-js-ecommerce",
     demo: "https://samybit.github.io/vanilla-js-ecommerce/",
-    image: "/ecommerce.jpg"
+    image: ""
   },
   {
     title: "BearBuzz",
@@ -70,23 +78,23 @@ const projects = [
     tech: ["Python", "Twilio API", "CI/CD", "Tkinter"],
     github: "https://github.com/samybit/bearbuzz",
     demo: "#",
-    image: "/bearbuzz.jpg"
+    image: "/bearbuzz.png"
   },
-  {
-    title: "Questlog",
-    description: "Full-stack progression engine tracking video game milestones and visual completion percentages via a dynamic dashboard.",
-    tech: ["Full-Stack", "Data Vis", "Tracking"],
-    github: "https://github.com/samybit/game-completion-board",
-    demo: "#",
-    image: "/questlog.jpg"
-  },
+  // {
+  //   title: "Questlog",
+  //   description: "Full-stack progression engine tracking video game milestones and visual completion percentages via a dynamic dashboard.",
+  //   tech: ["Full-Stack", "Data Vis", "Tracking"],
+  //   github: "https://github.com/samybit/game-completion-board",
+  //   demo: "",
+  //   image: ""
+  // },
   {
     title: "CLI Expense Tracker",
     description: "Memory-safe, blazingly fast command-line tool featuring dynamic allocation and file I/O.",
     tech: ["C", "CLI", "Data Structures"],
     github: "https://github.com/samybit",
     demo: "#",
-    image: "/cli.jpg"
+    image: "/cli.png"
   }
 ];
 
