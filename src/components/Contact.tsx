@@ -83,7 +83,6 @@ export default function Contact() {
     }
   }
 
-  // Tightened padding from p-4 to p-3 md:p-4 to save vertical pixels
   const inputBaseStyle = "p-3 md:p-4 border-4 text-lg md:text-xl resize-none focus:outline-none transition-colors duration-150 relative z-20";
 
   const getInputStyle = (isValid: boolean, isError: boolean) => {
@@ -93,9 +92,7 @@ export default function Contact() {
   };
 
   return (
-    // Replaced py-24 with min-h-[100dvh], flex centering, and an explicit pt-32 to clear the fixed navbar
     <section id="contact" className="snap-start min-h-[100dvh] flex flex-col justify-center pt-30 pb-16 px-6 md:px-12 lg:px-24 bg-black text-white overflow-hidden">
-      {/* Tightened gap-16 to gap-8 lg:gap-12 to keep columns closer together */}
       <div className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 lg:gap-12 items-center lg:items-start">
 
         {/* --- LEFT COLUMN: TEXT & SOCIALS --- */}
@@ -153,7 +150,6 @@ export default function Contact() {
               transformStyle: "preserve-3d",
               translateZ: 30
             }}
-            // Tightened form padding and internal gaps to compress height
             className="relative z-10 bg-white text-black border-4 border-black flex flex-col gap-4 md:gap-5 p-6 lg:p-8 overflow-hidden shadow-2xl"
           >
             <motion.div
@@ -172,8 +168,8 @@ export default function Contact() {
             ) : (
               <>
                 <div className="flex flex-col gap-1.5 relative z-20">
-                  <label htmlFor="name" className="text-lg md:text-xl font-black uppercase tracking-wide flex items-center justify-between">
-                    Name <span className="text-xs md:text-sm text-zinc-500 tracking-widest">[OPTIONAL]</span>
+                  <label htmlFor="name" className="text-lg md:text-xl font-black uppercase tracking-wide flex items-center select-none">
+                    Name
                   </label>
                   <input
                     type="text"
@@ -187,8 +183,8 @@ export default function Contact() {
                 </div>
 
                 <div className="flex flex-col gap-1.5 relative z-20">
-                  <label htmlFor="email" className="text-lg md:text-xl font-black uppercase tracking-wide flex items-center justify-between">
-                    Email <span className="text-xs md:text-sm text-red-600 tracking-widest">[REQUIRED]</span>
+                  <label htmlFor="email" className="text-lg md:text-xl font-black uppercase tracking-wide flex items-center select-none">
+                    Email<span className="text-red-600 ml-1 font-black">*</span>
                   </label>
                   <input
                     type="email"
@@ -207,13 +203,13 @@ export default function Contact() {
                 </div>
 
                 <div className="flex flex-col gap-1.5 relative z-20">
-                  <label htmlFor="message" className="text-lg md:text-xl font-black uppercase tracking-wide flex items-center justify-between">
-                    Message <span className="text-xs md:text-sm text-red-600 tracking-widest">[REQUIRED]</span>
+                  <label htmlFor="message" className="text-lg md:text-xl font-black uppercase tracking-wide flex items-center select-none">
+                    Message<span className="text-red-600 ml-1 font-black">*</span>
                   </label>
                   <textarea
                     id="message"
                     name="message"
-                    rows={4} // Reduced from 5 to 4 to save vertical space
+                    rows={4}
                     value={values.message}
                     onChange={handleChange}
                     className={getInputStyle(isMessageValid, !!errors.message)}
@@ -231,7 +227,6 @@ export default function Contact() {
                   onClick={() => playPowerUp()}
                   disabled={status === "loading"}
                   style={{ transform: "translateZ(15px)" }}
-                  // Adjusted padding from p-5 to py-3 px-5
                   className="mt-2 flex items-center justify-center gap-3 bg-black text-white py-3 px-5 text-xl md:text-2xl font-black uppercase border-4 border-black hover:bg-white hover:text-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed group relative z-20 shadow-[8px_8px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:translate-x-1 hover:translate-y-1 active:shadow-none active:translate-x-2 active:translate-y-2"
                 >
                   {status === "loading" ? "Sending..." : "Send Message"}
