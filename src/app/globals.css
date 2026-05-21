@@ -336,50 +336,69 @@ html.theme-color textarea {
 /* =========================================
     ---
 ========================================= */
-/* --- PURE CSS 3D ISOMETRIC PARALLAX --- */
-.bg-iso-wrapper {
+/* --- BRUTALIST BACKGROUND: PARAMETRIC 3D MATH --- */
+.bg-parametric-wrapper {
   position: absolute;
   inset: 0;
-  overflow: hidden;
   z-index: 0;
   pointer-events: none;
-  /* Fades out smoothly at the top and bottom edges */
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  perspective: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  /* Clean brutalist masking so the edges fade out perfectly */
+  -webkit-mask-image: radial-gradient(circle at center, black 20%, transparent 80%);
+  mask-image: radial-gradient(circle at center, black 20%, transparent 80%);
 }
 
-.bg-iso-plane {
+.bg-parametric-core {
+  position: relative;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  animation: core-spin 45s infinite linear;
+}
+
+.bg-parametric-shape {
   position: absolute;
-  /* Massive oversize to ensure it never clips when rotating */
-  top: -150%;
-  left: -150%;
-  width: 400%;
-  height: 400%;
-  background-image:
-    linear-gradient(to right, #000 2px, transparent 2px),
-    linear-gradient(to bottom, #000 2px, transparent 2px);
-  background-size: 100px 100px;
-  animation: isoScroll 4s linear infinite;
+  top: -15vmax;
+  left: -15vmax;
+  width: 30vmax;
+  height: 30vmax;
+  border: 2px solid currentColor;
+  opacity: 0.12; 
+  transform-style: preserve-3d;
+  
+  /* The mathematical foundation using React's injected --i */
+  --angle: calc(var(--i) * 10deg);
+  
+  /* Uses sin() to morph shapes from square to rounded continuously around the sphere */
+  border-radius: calc(25% + 25% * sin(var(--angle)));
+  
+  animation: shape-morph 8s infinite ease-in-out alternate;
+  /* Stagger the wave effect */
+  animation-delay: calc(var(--i) * -0.2s);
 }
 
-/* Deep background layer */
-.bg-iso-bottom {
-  transform: perspective(1200px) rotateX(60deg) rotateZ(45deg) translateZ(-400px);
-  opacity: 0.05; 
-}
-
-/* Foreground interaction layer */
-.bg-iso-top {
-  transform: perspective(1200px) rotateX(60deg) rotateZ(45deg) translateZ(0px);
-  opacity: 0.12;
-}
-
-@keyframes isoScroll {
+@keyframes shape-morph {
   0% {
-    background-position: 0px 0px;
+    transform: 
+      rotateZ(var(--angle)) 
+      rotateX(calc(sin(var(--angle)) * 70deg)) 
+      translateZ(calc(cos(var(--angle)) * 12vmax))
+      scale(calc(0.7 + 0.3 * sin(var(--angle))));
   }
   100% {
-    /* Moving diagonally by exact cell size guarantees a flawless infinite loop */
-    background-position: 100px 100px;
+    transform: 
+      rotateZ(var(--angle)) 
+      rotateX(calc(cos(var(--angle)) * -70deg)) 
+      translateZ(calc(sin(var(--angle)) * 12vmax))
+      scale(calc(0.7 + 0.3 * cos(var(--angle))));
   }
+}
+
+@keyframes core-spin {
+  0% { transform: rotateX(15deg) rotateY(0deg) rotateZ(0deg); }
+  100% { transform: rotateX(15deg) rotateY(360deg) rotateZ(180deg); }
 }
