@@ -20,6 +20,9 @@ export default function GhostInTheMachine() {
       // Ignore modifier keys to prevent weird buffer states
       if (e.ctrlKey || e.metaKey || e.altKey) return;
 
+      // Guard against undefined key, which can happen with some browser autofills/extensions
+      if (typeof e.key !== "string") return;
+
       setKeyBuffer((prev) => {
         // Keep only the last 5 characters (length of "exist")
         const newBuffer = (prev + e.key.toLowerCase()).slice(-SECRET_CODE.length);
