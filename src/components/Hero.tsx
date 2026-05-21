@@ -10,18 +10,26 @@ export default function Hero() {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <section id="hero" className="min-h-[90vh] flex flex-col justify-center items-start px-6 md:px-12 lg:px-24 border-b-8 border-black pt-30 md:pt-34 pb-16 overflow-hidden">
-      <div className="w-full max-w-[90rem] mx-auto flex flex-col lg:flex-row lg:items-center justify-between gap-12 lg:gap-16">
+    // Added 'relative' to contain the absolute background
+    <section id="hero" className="relative min-h-[90vh] flex flex-col justify-center items-start px-6 md:px-12 lg:px-24 border-b-8 border-black pt-30 md:pt-28 pb-11 overflow-hidden">
+
+      {/* --- PURE CSS 3D BACKGROUND LAYER --- */}
+      <div className="bg-grid-wrapper">
+        <div className="bg-grid-3d"></div>
+      </div>
+
+      {/* Added 'relative z-10' so the content sits above the 3D grid */}
+      <div className="relative z-10 w-full max-w-[90rem] mx-auto flex flex-col lg:flex-row lg:items-center justify-between gap-12 lg:gap-16">
 
         {/* --- LEFT COLUMN: TYPOGRAPHY --- */}
         <div className="flex-1 animate-slide-up">
           <div className="flex items-center gap-4 mb-6">
-            <span className="text-xl font-bold uppercase tracking-widest border-b-4 border-black pb-1">
+            <span className="text-xl font-bold uppercase tracking-widest border-b-4 border-black pb-1 bg-white">
               Available for Freelance & Roles
             </span>
           </div>
 
-          <h1 className="text-[18vw] sm:text-7xl md:text-9xl lg:text-[8rem] xl:text-[10rem] font-black uppercase tracking-tighter leading-[0.85] mb-8">
+          <h1 className="text-[18vw] sm:text-7xl md:text-9xl lg:text-[8rem] xl:text-[10rem] font-black uppercase tracking-tighter leading-[0.85] mb-6">
             {/* --- WRAP 'SAMY' IN A TRIGGER SPAN --- */}
             <span
               className="relative inline-block cursor-crosshair z-10"
@@ -39,13 +47,13 @@ export default function Hero() {
             <br />
 
             {/* Added cursor-crosshair to match the 'Samy' interaction */}
-            <span className="bg-black text-white px-2 sm:px-4 inline-block mt-4 md:mt-8 transform -skew-x-6 z-20 relative cursor-crosshair">
+            <span className="bg-black text-white px-2 sm:px-4 inline-block mt-4 md:mt-4 transform -skew-x-6 z-20 relative cursor-crosshair">
               {/* Wrapped the text in the new engine */}
               <GlitchText text="Barsoum" />
             </span>
           </h1>
 
-          <p className="text-2xl md:text-4xl font-bold max-w-2xl uppercase leading-snug text-zinc-800">
+          <p className="text-2xl md:text-4xl font-bold max-w-2xl uppercase leading-snug text-zinc-800 bg-white/50 backdrop-blur-sm -ml-2">
             Full-Stack Developer. <br />
             MERN Stack Specialist. <br />
             Based in Egypt. <br />

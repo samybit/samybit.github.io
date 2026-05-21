@@ -332,3 +332,47 @@ html.theme-color input[type="email"],
 html.theme-color textarea {
   cursor: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjMUExNzE2IiBzdHJva2U9IiNGRjRGMDAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciI+PHBhdGggZD0iTSA2IDIgTCAxOCAyIEwgMTggNiBMIDE0IDYgTCAxNCAxOCBMIDE4IDE4IEwgMTggMjIgTCA2IDIyIEwgNiAxOCBMIDEwIDE4IEwgMTAgNiBMIDYgNiBaIi8+PC9zdmc+') 12 12, text !important;
 }
+
+/* =========================================
+    ---
+========================================= */
+/* --- PURE CSS 3D HERO BACKGROUND --- */
+.bg-grid-wrapper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+  /* Fades the grid out at the top to seamlessly blend with the background */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 70%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 70%);
+}
+
+.bg-grid-3d {
+  position: absolute;
+  bottom: -40%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  /* High-contrast Brutalist Grid Lines */
+  background-image:
+    linear-gradient(to right, #000 2px, transparent 2px),
+    linear-gradient(to bottom, #000 2px, transparent 2px);
+  background-size: 60px 60px;
+  /* 3D tilt physics */
+  transform: perspective(600px) rotateX(75deg);
+  animation: gridScroll 3s linear infinite;
+  opacity: 0.15;
+  /* Keeps it subtle behind the heavy text */
+}
+
+@keyframes gridScroll {
+  0% {
+    transform: perspective(600px) rotateX(75deg) translateY(0);
+  }
+
+  100% {
+    /* Moves exactly one grid square (60px) to loop flawlessly */
+    transform: perspective(600px) rotateX(75deg) translateY(60px);
+  }
+}
