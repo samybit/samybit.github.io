@@ -5,7 +5,6 @@ import { useState } from "react";
 import { sendEmail } from "@/actions/send-email";
 import { playPowerUp } from "@/utils/audio";
 import DecryptText from "@/components/DecryptText";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 export default function Contact() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -16,34 +15,6 @@ export default function Contact() {
   const isNameFilled = values.name.trim().length > 0;
   const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email);
   const isMessageValid = values.message.trim().length > 0;
-
-  // --- 3D PHYSICS ENGINE SETUP ---
-  const mouseX = useMotionValue(0.5);
-  const mouseY = useMotionValue(0.5);
-
-  const springConfig = { damping: 25, stiffness: 150, mass: 0.5 };
-  const springX = useSpring(mouseX, springConfig);
-  const springY = useSpring(mouseY, springConfig);
-
-  const rotateX = useTransform(springY, [0, 1], [6, -6]);
-  const rotateY = useTransform(springX, [0, 1], [-6, 6]);
-
-  const glareX = useTransform(springX, [0, 1], ["-100%", "100%"]);
-  const glareY = useTransform(springY, [0, 1], ["-100%", "100%"]);
-
-  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const xPct = (e.clientX - rect.left) / rect.width;
-    const yPct = (e.clientY - rect.top) / rect.height;
-    mouseX.set(xPct);
-    mouseY.set(yPct);
-  }
-
-  function handleMouseLeave() {
-    mouseX.set(0.5);
-    mouseY.set(0.5);
-  }
-  // -------------------------------
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -132,34 +103,18 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* --- RIGHT COLUMN: 3D FORM ENGINE --- */}
-        <div
-          className="flex-1 w-full relative max-w-xl mx-auto lg:mx-0"
-          style={{ perspective: 1200 }}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
-        >
+        {/* --- RIGHT COLUMN: STATIC FORM ENGINE --- */}
+        <div className="flex-1 w-full relative max-w-xl mx-auto lg:mx-0">
+          
+          {/* Static Offset Shadow Block */}
           <div className="absolute inset-0 bg-zinc-800 border-4 border-white translate-x-4 translate-y-4 z-0 pointer-events-none" />
 
-          <motion.form
+          {/* Standard Form Element (No more motion, rotateX, or translateZ) */}
+          <form
             action={clientAction}
             noValidate
-            style={{
-              rotateX,
-              rotateY,
-              transformStyle: "preserve-3d",
-              translateZ: 30
-            }}
-            className="relative z-10 bg-white text-black border-4 border-black flex flex-col gap-4 md:gap-5 p-6 lg:p-8 overflow-hidden shadow-2xl"
+            className="relative z-10 bg-white text-black border-4 border-black flex flex-col gap-4 md:gap-5 p-6 lg:p-8 overflow-hidden"
           >
-            <motion.div
-              style={{ x: glareX, y: glareY }}
-              className="absolute inset-0 z-0 pointer-events-none opacity-20"
-              initial={false}
-            >
-              <div className="absolute top-[-100%] left-[-100%] w-[300%] h-[300%] bg-[linear-gradient(45deg,transparent_40%,white_50%,transparent_60%)] mix-blend-overlay" />
-            </motion.div>
-
             {status === "success" ? (
               <div className="p-8 border-4 border-black bg-green-400 text-black text-2xl font-black uppercase text-center flex flex-col items-center gap-4 relative z-20">
                 <Check size={48} className="text-black" />
@@ -222,11 +177,11 @@ export default function Contact() {
                   )}
                 </div>
 
+                {/* Submit button keeps its physical click animation for tactile feedback, but 3D popping is gone */}
                 <button
                   type="submit"
                   onClick={() => playPowerUp()}
                   disabled={status === "loading"}
-                  style={{ transform: "translateZ(15px)" }}
                   className="mt-2 flex items-center justify-center gap-3 bg-black text-white py-3 px-5 text-xl md:text-2xl font-black uppercase border-4 border-black hover:bg-white hover:text-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed group relative z-20 shadow-[8px_8px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:translate-x-1 hover:translate-y-1 active:shadow-none active:translate-x-2 active:translate-y-2"
                 >
                   {status === "loading" ? "Sending..." : "Send Message"}
@@ -240,7 +195,7 @@ export default function Contact() {
                 )}
               </>
             )}
-          </motion.form>
+          </form>
         </div>
       </div>
     </section>
