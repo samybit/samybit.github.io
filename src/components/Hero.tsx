@@ -13,9 +13,10 @@ export default function Hero() {
     // Added 'relative' to contain the absolute background
     <section id="hero" className="relative min-h-[90vh] flex flex-col justify-center items-start px-6 md:px-12 lg:px-24 border-b-8 border-black pt-30 md:pt-28 pb-11 overflow-hidden">
 
-      {/* --- PURE CSS 3D BACKGROUND LAYER --- */}
-      <div className="bg-grid-wrapper">
-        <div className="bg-grid-3d"></div>
+      {/* --- PURE CSS 3D ISOMETRIC BACKGROUND LAYER --- */}
+      <div className="bg-iso-wrapper">
+        <div className="bg-iso-plane bg-iso-bottom"></div>
+        <div className="bg-iso-plane bg-iso-top"></div>
       </div>
 
       {/* Added 'relative z-10' so the content sits above the 3D grid */}

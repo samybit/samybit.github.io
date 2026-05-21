@@ -336,43 +336,50 @@ html.theme-color textarea {
 /* =========================================
     ---
 ========================================= */
-/* --- PURE CSS 3D HERO BACKGROUND --- */
-.bg-grid-wrapper {
+/* --- PURE CSS 3D ISOMETRIC PARALLAX --- */
+.bg-iso-wrapper {
   position: absolute;
   inset: 0;
   overflow: hidden;
   z-index: 0;
   pointer-events: none;
-  /* Fades the grid out at the top to seamlessly blend with the background */
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 70%);
-  mask-image: linear-gradient(to bottom, transparent 0%, black 70%);
+  /* Fades out smoothly at the top and bottom edges */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
 }
 
-.bg-grid-3d {
+.bg-iso-plane {
   position: absolute;
-  bottom: -40%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  /* High-contrast Brutalist Grid Lines */
+  /* Massive oversize to ensure it never clips when rotating */
+  top: -150%;
+  left: -150%;
+  width: 400%;
+  height: 400%;
   background-image:
     linear-gradient(to right, #000 2px, transparent 2px),
     linear-gradient(to bottom, #000 2px, transparent 2px);
-  background-size: 60px 60px;
-  /* 3D tilt physics */
-  transform: perspective(600px) rotateX(75deg);
-  animation: gridScroll 3s linear infinite;
-  opacity: 0.15;
-  /* Keeps it subtle behind the heavy text */
+  background-size: 100px 100px;
+  animation: isoScroll 4s linear infinite;
 }
 
-@keyframes gridScroll {
-  0% {
-    transform: perspective(600px) rotateX(75deg) translateY(0);
-  }
+/* Deep background layer */
+.bg-iso-bottom {
+  transform: perspective(1200px) rotateX(60deg) rotateZ(45deg) translateZ(-400px);
+  opacity: 0.05; 
+}
 
+/* Foreground interaction layer */
+.bg-iso-top {
+  transform: perspective(1200px) rotateX(60deg) rotateZ(45deg) translateZ(0px);
+  opacity: 0.12;
+}
+
+@keyframes isoScroll {
+  0% {
+    background-position: 0px 0px;
+  }
   100% {
-    /* Moves exactly one grid square (60px) to loop flawlessly */
-    transform: perspective(600px) rotateX(75deg) translateY(60px);
+    /* Moving diagonally by exact cell size guarantees a flawless infinite loop */
+    background-position: 100px 100px;
   }
 }
