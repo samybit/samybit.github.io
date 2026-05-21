@@ -106,14 +106,11 @@ export default function Contact() {
         {/* --- RIGHT COLUMN: STATIC FORM ENGINE --- */}
         <div className="flex-1 w-full relative max-w-xl mx-auto lg:mx-0">
           
-          {/* Static Offset Shadow Block */}
-          <div className="absolute inset-0 bg-zinc-800 border-4 border-white translate-x-4 translate-y-4 z-0 pointer-events-none" />
-
           {/* Standard Form Element (No more motion, rotateX, or translateZ) */}
           <form
             action={clientAction}
             noValidate
-            className="relative z-10 bg-white text-black border-4 border-black flex flex-col gap-4 md:gap-5 p-6 lg:p-8 overflow-hidden"
+            className="relative z-10 bg-white text-black border-4 border-black flex flex-col gap-4 md:gap-5 p-6 lg:p-8 overflow-hidden shadow-[8px_8px_0px_#fff]"
           >
             {status === "success" ? (
               <div className="p-8 border-4 border-black bg-green-400 text-black text-2xl font-black uppercase text-center flex flex-col items-center gap-4 relative z-20">
@@ -182,7 +179,7 @@ export default function Contact() {
                   type="submit"
                   onClick={() => playPowerUp()}
                   disabled={status === "loading"}
-                  className="mt-2 flex items-center justify-center gap-3 bg-black text-white py-3 px-5 text-xl md:text-2xl font-black uppercase border-4 border-black hover:bg-white hover:text-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed group relative z-20 shadow-[8px_8px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:translate-x-1 hover:translate-y-1 active:shadow-none active:translate-x-2 active:translate-y-2"
+                  className="mt-2 flex items-center justify-center gap-3 bg-black text-white py-3 px-5 text-xl md:text-2xl font-black uppercase border-4 border-black hover:bg-white hover:text-black transition-all duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed group relative z-20 shadow-[8px_8px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:translate-x-1 hover:translate-y-1 active:shadow-none active:translate-x-2 active:translate-y-2"
                 >
                   {status === "loading" ? "Sending..." : "Send Message"}
                   <Send className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
