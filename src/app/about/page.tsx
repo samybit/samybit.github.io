@@ -199,7 +199,7 @@ export default function AboutPage() {
         </section>
 
         {/* --- ARCHIVES / OLD PORTFOLIOS --- */}
-        <section className="animate-slide-up-delay-2 brutalist-container !p-6 md:!p-10 flex flex-col md:flex-row items-center justify-between gap-8">
+        <section className="animate-slide-up-delay-2 bg-white border-4 border-black p-6 md:p-10 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="flex flex-col text-center md:text-left">
             <h2 className="text-3xl md:text-4xl font-black uppercase leading-tight">Legacy Systems</h2>
             <p className="text-lg md:text-xl font-bold text-zinc-500 uppercase mt-1">Explore previous portfolio iterations</p>
