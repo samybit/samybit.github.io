@@ -53,7 +53,7 @@ export default function Footer() {
         <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter">
           Samy Barsoum
         </h2>
-        <p className="text-xl font-bold uppercase text-black bg-white px-3 py-1">
+        <p className="text-xl font-bold uppercase text-black bg-white px-3 py-1" suppressHydrationWarning>
           © {new Date().getFullYear()} SAMYBIT // WITH NEXT.JS & BRUTALISM.
         </p>
         <a

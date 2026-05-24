@@ -105,12 +105,12 @@ export default function Contact() {
 
         {/* --- RIGHT COLUMN: STATIC FORM ENGINE --- */}
         <div className="flex-1 w-full relative max-w-xl mx-auto lg:mx-0">
-          
+
           {/* Standard Form Element (No more motion, rotateX, or translateZ) */}
           <form
             action={clientAction}
             noValidate
-            className="relative z-10 bg-white text-black border-4 border-black flex flex-col gap-4 md:gap-5 p-6 lg:p-8 overflow-hidden shadow-[8px_8px_0px_#fff]"
+            className="relative z-10 bg-white text-black border-4 border-black flex flex-col gap-2 md:gap-3 p-6 lg:p-8 overflow-hidden shadow-[8px_8px_0px_#fff]"
           >
             {status === "success" ? (
               <div className="p-8 border-4 border-black bg-green-400 text-black text-2xl font-black uppercase text-center flex flex-col items-center gap-4 relative z-20">
@@ -119,7 +119,7 @@ export default function Contact() {
               </div>
             ) : (
               <>
-                <div className="flex flex-col gap-1.5 relative z-20">
+                <div className="flex flex-col gap-1.5 relative z-20 pb-5 md:pb-6">
                   <label htmlFor="name" className="text-lg md:text-xl font-black uppercase tracking-wide flex items-center select-none">
                     Name
                   </label>
@@ -134,7 +134,7 @@ export default function Contact() {
                   />
                 </div>
 
-                <div className="flex flex-col gap-1.5 relative z-20">
+                <div className="flex flex-col gap-1.5 relative z-20 pb-5 md:pb-6">
                   <label htmlFor="email" className="text-lg md:text-xl font-black uppercase tracking-wide flex items-center select-none">
                     Email<span className="text-red-600 ml-1 font-black">*</span>
                   </label>
@@ -147,14 +147,15 @@ export default function Contact() {
                     className={getInputStyle(isEmailValid, !!errors.email)}
                     placeholder="...@example.com"
                   />
-                  {errors.email && (
-                    <span className="text-red-600 text-sm md:text-base font-black uppercase tracking-wide border-l-4 border-red-600 pl-2 mt-1">
-                      {errors.email}
-                    </span>
-                  )}
+                  <span
+                    className={`absolute bottom-0 left-0 text-red-600 text-sm md:text-base font-black uppercase tracking-wide border-l-4 border-red-600 pl-2 transition-all duration-300 ease-out ${errors.email ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"
+                      }`}
+                  >
+                    {errors.email}
+                  </span>
                 </div>
 
-                <div className="flex flex-col gap-1.5 relative z-20">
+                <div className="flex flex-col gap-1.5 relative z-20 pb-5 md:pb-6">
                   <label htmlFor="message" className="text-lg md:text-xl font-black uppercase tracking-wide flex items-center select-none">
                     Message<span className="text-red-600 ml-1 font-black">*</span>
                   </label>
@@ -167,11 +168,12 @@ export default function Contact() {
                     className={getInputStyle(isMessageValid, !!errors.message)}
                     placeholder="Describe your project, an open role, or how we can collaborate..."
                   />
-                  {errors.message && (
-                    <span className="text-red-600 text-sm md:text-base font-black uppercase tracking-wide border-l-4 border-red-600 pl-2 mt-1">
-                      {errors.message}
-                    </span>
-                  )}
+                  <span
+                    className={`absolute bottom-0 left-0 text-red-600 text-sm md:text-base font-black uppercase tracking-wide border-l-4 border-red-600 pl-2 transition-all duration-300 ease-out ${errors.message ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"
+                      }`}
+                  >
+                    {errors.message}
+                  </span>
                 </div>
 
                 {/* Submit button keeps its physical click animation for tactile feedback, but 3D popping is gone */}
