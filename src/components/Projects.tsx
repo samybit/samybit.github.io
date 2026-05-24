@@ -206,7 +206,7 @@ export default function Projects() {
   useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: "-41% 0px -41% 0px", // Triggers only in the middle 18% of the viewport
+      rootMargin: "-60% 0px -20% 0px", // Zone shifted lower: starts at 60% depth, ends at 80% depth
       threshold: 0
     };
 
