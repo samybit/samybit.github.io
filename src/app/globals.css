@@ -76,8 +76,9 @@
     }
   }
 
-  /* 5. Mobile Scroll Hover Effects */
-  .project-card.mobile-active .project-image-overlay {
+  /* 5. Mobile Scroll Hover & Tap Effects */
+  .project-card.mobile-active .project-image-overlay,
+  .mobile-force-hover .project-image-overlay {
     display: block !important;
   }
 }

@@ -98,15 +98,24 @@ const projects = [
   }
 ];
 
-const ProjectCard = ({ project, animate = false }: { project: any, animate?: boolean }) => {
+const ProjectCard = ({ project, animate = false, disableObserver = false }: { project: any, animate?: boolean, disableObserver?: boolean }) => {
+  const [isToggled, setIsToggled] = useState(false);
+
   // Cleanly check if valid links exist (ignoring empty strings and "#" placeholders)
   const hasGithub = project.github && project.github !== "" && project.github !== "#";
   const hasDemo = project.demo && project.demo !== "" && project.demo !== "#";
 
   return (
-    <div className={`project-card group/card brutalist-container bg-white border-black flex flex-col h-full w-full min-h-[320px] lg:min-h-0 ${animate ? 'animate-slide-up' : ''}`}>
+    <div className={`group/card brutalist-container bg-white border-black flex flex-col h-full w-full min-h-[320px] lg:min-h-0 ${animate ? 'animate-slide-up' : ''} ${!disableObserver ? 'project-card' : ''} ${isToggled ? 'mobile-force-hover' : ''}`}>
 
-      <div className="relative flex-1 flex flex-col min-h-0 pb-4 md:pb-5">
+      <div 
+        className="relative flex-1 flex flex-col min-h-0 pb-4 md:pb-5 cursor-pointer lg:cursor-auto"
+        onClick={() => {
+          if (window.innerWidth < 1024 && disableObserver) {
+            setIsToggled(!isToggled);
+          }
+        }}
+      >
 
         {/* Default Content Block */}
         <div className="flex flex-col flex-1">
@@ -129,7 +138,7 @@ const ProjectCard = ({ project, animate = false }: { project: any, animate?: boo
         </div>
 
         {/* INSTANT HOVER IMAGE OVERLAY */}
-        <div className="project-image-overlay hidden group-hover/card:block absolute inset-0 z-10 bg-white">
+        <div className="project-image-overlay hidden lg:group-hover/card:block absolute inset-0 z-10 bg-white">
           {project.image ? (
             <img
               src={project.image}
@@ -244,7 +253,7 @@ export default function Projects() {
 
           <div className="flex lg:hidden items-center justify-between mt-6 border-2 border-black bg-white p-2">
             <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-zinc-500 pl-2">
-              {showAllMobile ? "[ Scroll ↓ ]" : "[ Swipe → ]"}
+              {showAllMobile ? "[ Scroll ↓ ]" : "[ Swipe & Tap ]"}
             </span>
             <button
               onClick={() => setShowAllMobile(!showAllMobile)}
@@ -305,7 +314,7 @@ export default function Projects() {
           <style dangerouslySetInnerHTML={{ __html: `div::-webkit-scrollbar { display: none; }` }} />
           {projects.map((project, index) => (
             <div key={`mobile-swipe-${index}`} className="w-[85vw] sm:w-[60vw] shrink-0 snap-center h-full">
-              <ProjectCard project={project} animate={false} />
+              <ProjectCard project={project} animate={false} disableObserver={true} />
             </div>
           ))}
           <div className="w-[1px] shrink-0"></div>
