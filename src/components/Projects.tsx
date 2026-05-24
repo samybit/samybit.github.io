@@ -194,7 +194,7 @@ export default function Projects() {
   const currentProjects = projects.slice(page * itemsPerPage, (page + 1) * itemsPerPage);
 
   return (
-    <section id="projects" className="snap-start relative w-full min-h-[80vh] flex flex-col pt-24 pb-8 px-6 md:px-12 lg:px-24 border-b-8 border-black overflow-hidden bg-white">
+    <section id="projects" className="snap-start relative w-full min-h-[80vh] flex flex-col pt-24 pb-8 px-6 md:px-12 lg:px-24 border-b-8 border-black overflow-hidden">
       {/* --- HEADER --- */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 lg:mb-12 gap-6 flex-none">
         <div className="w-full md:w-auto">
