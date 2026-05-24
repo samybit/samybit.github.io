@@ -198,6 +198,22 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* --- ARCHIVES / OLD PORTFOLIOS --- */}
+        <section className="animate-slide-up-delay-2 brutalist-container !p-6 md:!p-10 flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="flex flex-col text-center md:text-left">
+            <h2 className="text-3xl md:text-4xl font-black uppercase leading-tight">Legacy Systems</h2>
+            <p className="text-lg md:text-xl font-bold text-zinc-500 uppercase mt-1">Explore previous portfolio iterations</p>
+          </div>
+          <div className="flex flex-col sm:flex-row w-full md:w-auto gap-6 shrink-0">
+            <a href="https://my-portfolio-seven-beta-98.vercel.app/" target="_blank" rel="noopener noreferrer" className="brutalist-shadow bg-white text-black border-4 border-black px-6 py-4 hover:bg-black hover:text-white flex items-center justify-center gap-3 text-xl font-black uppercase transition-all group">
+              Version 1.0 <ExternalLink size={24} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            </a>
+            <a href="samybit.github.io/brutalist-portfolio/" target="_blank" rel="noopener noreferrer" className="brutalist-shadow bg-black text-white border-4 border-black px-6 py-4 hover:bg-white hover:text-black flex items-center justify-center gap-3 text-xl font-black uppercase transition-all group">
+              Version 2.0 <ExternalLink size={24} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            </a>
+          </div>
+        </section>
+
       </div>
     </main>
   );
