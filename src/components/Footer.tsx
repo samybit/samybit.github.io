@@ -54,7 +54,7 @@ export default function Footer() {
           Samy Barsoum
         </h2>
         <p className="text-xl font-bold uppercase text-black bg-white px-3 py-1">
-          © {new Date().getFullYear()} SAMYBIT // ENGINEERED WITH NEXT.JS & RAW BRUTALISM.
+          © {new Date().getFullYear()} SAMYBIT // WITH NEXT.JS & BRUTALISM.
         </p>
         <a
           href="#"
