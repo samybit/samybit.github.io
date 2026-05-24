@@ -104,12 +104,12 @@ const ProjectCard = ({ project, animate = false }: { project: any, animate?: boo
   const hasDemo = project.demo && project.demo !== "" && project.demo !== "#";
 
   return (
-    <div className={`group/card brutalist-container bg-white border-black flex flex-col h-full w-full ${animate ? 'animate-slide-up' : ''}`}>
+    <div className={`group/card brutalist-container bg-white border-black flex flex-col h-full w-full min-h-[320px] lg:min-h-0 ${animate ? 'animate-slide-up' : ''}`}>
 
       <div className="relative flex-1 flex flex-col min-h-0 pb-4 md:pb-5">
 
         {/* Default Content Block */}
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col flex-1">
           <div>
             <h3 className="text-xl sm:text-2xl md:text-3xl font-black uppercase mb-2 md:mb-3 tracking-tight leading-none md:leading-tight">
               {project.title}
@@ -265,7 +265,7 @@ export default function Projects() {
         </div>
       ) : (
         <div
-          className="flex lg:hidden overflow-x-auto gap-4 pb-6 snap-x snap-mandatory -mx-6 px-6 flex-1 min-h-[350px]"
+          className="flex lg:hidden overflow-x-auto gap-4 pb-6 snap-x snap-mandatory -mx-6 px-6 flex-1 min-h-[320px]"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
         >
           <style dangerouslySetInnerHTML={{ __html: `div::-webkit-scrollbar { display: none; }` }} />
