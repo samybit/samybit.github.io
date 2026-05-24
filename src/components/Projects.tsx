@@ -1,7 +1,7 @@
 "use client";
 
 import { ExternalLink, ArrowUp, ArrowDown } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { playTick } from "@/utils/audio";
 import DecryptText from "@/components/DecryptText";
 
@@ -104,7 +104,7 @@ const ProjectCard = ({ project, animate = false }: { project: any, animate?: boo
   const hasDemo = project.demo && project.demo !== "" && project.demo !== "#";
 
   return (
-    <div className={`group/card brutalist-container bg-white border-black flex flex-col h-full w-full min-h-[320px] lg:min-h-0 ${animate ? 'animate-slide-up' : ''}`}>
+    <div className={`project-card group/card brutalist-container bg-white border-black flex flex-col h-full w-full min-h-[320px] lg:min-h-0 ${animate ? 'animate-slide-up' : ''}`}>
 
       <div className="relative flex-1 flex flex-col min-h-0 pb-4 md:pb-5">
 
@@ -129,7 +129,7 @@ const ProjectCard = ({ project, animate = false }: { project: any, animate?: boo
         </div>
 
         {/* INSTANT HOVER IMAGE OVERLAY */}
-        <div className="hidden group-hover/card:block absolute inset-0 z-10 bg-white">
+        <div className="project-image-overlay hidden group-hover/card:block absolute inset-0 z-10 bg-white">
           {project.image ? (
             <img
               src={project.image}
@@ -192,6 +192,40 @@ export default function Projects() {
   };
 
   const currentProjects = projects.slice(page * itemsPerPage, (page + 1) * itemsPerPage);
+
+  // --- MOBILE SCROLL HOVER EFFECTS ---
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "-41% 0px -41% 0px", // Triggers only in the middle 18% of the viewport
+      threshold: 0
+    };
+
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const card = entry.target;
+
+        // DYNAMIC CHECK: lg breakpoint in Tailwind is 1024px.
+        // Only apply this auto-hover logic on mobile/tablet screens.
+        if (window.innerWidth < 1024) {
+          if (entry.isIntersecting) {
+            card.classList.add('mobile-active');
+          } else {
+            card.classList.remove('mobile-active');
+          }
+        } else {
+          card.classList.remove('mobile-active');
+        }
+      });
+    }, observerOptions);
+
+    // Find all project cards and begin observing
+    const cards = document.querySelectorAll('.project-card');
+    cards.forEach(card => scrollObserver.observe(card));
+
+    // Clean up on unmount or when dependencies change (like pagination)
+    return () => scrollObserver.disconnect();
+  }, [page, showAllMobile]);
 
   return (
     <section id="projects" className="snap-start relative w-full min-h-[80vh] flex flex-col pt-24 pb-8 px-6 md:px-12 lg:px-24 border-b-8 border-black overflow-hidden">
