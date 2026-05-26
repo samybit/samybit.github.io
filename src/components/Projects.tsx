@@ -2,6 +2,7 @@
 
 import { ExternalLink, ArrowUp, ArrowDown } from "lucide-react";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { playTick } from "@/utils/audio";
 import DecryptText from "@/components/DecryptText";
 
@@ -23,7 +24,16 @@ const GithubIcon = ({ size = 20 }: { size?: number }) => (
   </svg>
 );
 
-const projects = [
+interface Project {
+  title: string;
+  description: string;
+  tech: string[];
+  github: string;
+  demo: string;
+  image: string;
+}
+
+const projects: Project[] = [
   {
     title: "Bento Game Tracker",
     description: "Bento-grid progression engine powered by Next.js 16 and Gemini 2.5 Flash Lite. Features real-time AI achievement assistant.",
@@ -38,7 +48,7 @@ const projects = [
     tech: ["React", "Shadcn UI", "Firebase", "i18n"],
     github: "https://github.com/samybit/iti-movie-app",
     demo: "https://iti-movie-app.pages.dev/",
-    image: "moviedb.png"
+    image: "/moviedb.png"
   },
   {
     title: "3D Web",
@@ -98,7 +108,13 @@ const projects = [
   }
 ];
 
-const ProjectCard = ({ project, animate = false, disableObserver = false }: { project: any, animate?: boolean, disableObserver?: boolean }) => {
+interface ProjectCardProps {
+  project: Project;
+  animate?: boolean;
+  disableObserver?: boolean;
+}
+
+const ProjectCard = ({ project, animate = false, disableObserver = false }: ProjectCardProps) => {
   const [isToggled, setIsToggled] = useState(false);
 
   // Cleanly check if valid links exist (ignoring empty strings and "#" placeholders)
@@ -106,7 +122,9 @@ const ProjectCard = ({ project, animate = false, disableObserver = false }: { pr
   const hasDemo = project.demo && project.demo !== "" && project.demo !== "#";
 
   return (
-    <div className={`group/card brutalist-container bg-white border-black flex flex-col h-full w-full min-h-[320px] lg:min-h-0 ${animate ? 'animate-slide-up' : ''} ${!disableObserver ? 'project-card' : ''} ${isToggled ? 'mobile-force-hover' : ''}`}>
+    <div 
+      className={`group/card brutalist-container bg-white border-black flex flex-col h-full w-full min-h-[320px] lg:min-h-0 ${animate ? 'animate-slide-up' : ''} ${!disableObserver ? 'project-card' : ''} ${isToggled ? 'mobile-force-hover' : ''}`}
+    >
 
       <div 
         className="relative flex-1 flex flex-col min-h-0 pb-4 md:pb-5 cursor-pointer lg:cursor-auto"
@@ -140,10 +158,12 @@ const ProjectCard = ({ project, animate = false, disableObserver = false }: { pr
         {/* INSTANT HOVER IMAGE OVERLAY */}
         <div className="project-image-overlay hidden lg:group-hover/card:block absolute inset-0 z-10 bg-white">
           {project.image ? (
-            <img
+            <Image
               src={project.image}
               alt={project.title}
+              fill
               className="w-full h-full object-cover border-4 border-black"
+              unoptimized
             />
           ) : (
             <div className="w-full h-full border-4 border-black bg-zinc-100 flex items-center justify-center">
