@@ -5,17 +5,18 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendEmail(formData: FormData) {
-  const name = formData.get("name") as string;
+  // 1. Provide a fallback if the optional name is left blank
+  const name = (formData.get("name") as string) || "Anonymous";
   const email = formData.get("email") as string;
   const message = formData.get("message") as string;
 
-  if (!name || !email || !message) {
-    return { error: "All fields are required." };
+  // 2. Only strictly require email and message
+  if (!email || !message) {
+    return { error: "Email and message are required." };
   }
 
   try {
     await resend.emails.send({
-      // "onboarding@resend.dev" allows to send testing emails without verifying a domain
       from: "Portfolio Contact <onboarding@resend.dev>",
       to: "samyb.samir@gmail.com",
       subject: `New Freelance Lead from ${name}`,
