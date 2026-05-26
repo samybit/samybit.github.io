@@ -208,7 +208,7 @@ export default function AboutPage() {
             <a href="https://my-portfolio-seven-beta-98.vercel.app/" target="_blank" rel="noopener noreferrer" className="brutalist-shadow bg-white text-black border-4 border-black px-6 py-4 hover:bg-black hover:text-white flex items-center justify-center gap-3 text-xl font-black uppercase transition-all group">
               Version 1.0 <ExternalLink size={24} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
             </a>
-            <a href="samybit.github.io/brutalist-portfolio/" target="_blank" rel="noopener noreferrer" className="brutalist-shadow bg-black text-white border-4 border-black px-6 py-4 hover:bg-white hover:text-black flex items-center justify-center gap-3 text-xl font-black uppercase transition-all group">
+            <a href="https://samybit.github.io/brutalist-portfolio/" target="_blank" rel="noopener noreferrer" className="brutalist-shadow bg-black text-white border-4 border-black px-6 py-4 hover:bg-white hover:text-black flex items-center justify-center gap-3 text-xl font-black uppercase transition-all group">
               Version 2.0 <ExternalLink size={24} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
             </a>
           </div>

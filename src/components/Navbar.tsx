@@ -103,7 +103,7 @@ export default function Navbar() {
     <nav ref={navRef} className="animate-slide-down fixed top-0 left-0 z-50 w-full px-6 md:px-12 py-6 pointer-events-none flex flex-col">
       <div className="flex justify-between items-start w-full">
 
-        {/* Removed dynamic hover classes and swapped brutalist-shadow for a static shadow */}
+        {/* --- Left Column: Logo & Theme (Total height ~ 64px) --- */}
         <div className="pointer-events-auto flex brutalist-shadow-static">
           <Link
             href="/"
@@ -124,13 +124,12 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* --- Desktop Nav Links Block --- */}
-        {/* Swapped brutalist-shadow for a static shadow */}
-        <div className="pointer-events-auto hidden md:flex items-center gap-2 bg-white border-4 border-black p-2 brutalist-shadow-static">
+        {/* --- Desktop Nav Links Block (Tuned to exactly match 64px height) --- */}
+        <div className="pointer-events-auto hidden md:flex items-center gap-1.5 bg-white border-4 border-black p-1.5 brutalist-shadow-static">
 
           <Link
             href="/about"
-            className={`relative group overflow-hidden isolate text-lg font-bold uppercase px-4 py-1 border-2 transition-all ${pathname === '/about'
+            className={`relative group overflow-hidden isolate text-lg font-bold uppercase px-4 py-1.5 border-2 transition-all ${pathname === '/about'
               ? 'bg-black text-white border-black'
               : 'border-transparent hover:border-black hover:bg-black hover:text-white'
               }`}
@@ -142,7 +141,7 @@ export default function Navbar() {
           <Link
             href="/#projects"
             onClick={() => setActiveHash('#projects')}
-            className={`relative group overflow-hidden isolate text-lg font-bold uppercase px-4 py-1 border-2 transition-all ${pathname === '/' && activeHash === '#projects'
+            className={`relative group overflow-hidden isolate text-lg font-bold uppercase px-4 py-1.5 border-2 transition-all ${pathname === '/' && activeHash === '#projects'
               ? 'bg-black text-white border-black'
               : 'border-transparent hover:border-black hover:bg-black hover:text-white'
               }`}
@@ -155,7 +154,7 @@ export default function Navbar() {
             href="https://github.com/samybit"
             target="_blank"
             rel="noopener noreferrer"
-            className="relative group overflow-hidden isolate flex items-center gap-1 text-lg font-bold uppercase px-4 py-1 border-2 border-transparent hover:border-black hover:bg-black hover:text-white transition-all"
+            className="relative group overflow-hidden isolate flex items-center gap-1 text-lg font-bold uppercase px-4 py-1.5 border-2 border-transparent hover:border-black hover:bg-black hover:text-white transition-all"
           >
             <Smoke />
             <span className="relative z-10 flex items-center gap-1">GitHub <ArrowUpRight size={20} /></span>
@@ -164,9 +163,9 @@ export default function Navbar() {
           <Link
             href="/#contact"
             onClick={() => setActiveHash('#contact')}
-            className={`relative group overflow-hidden isolate px-5 py-2 text-lg font-bold uppercase border-4 border-black transition-all ml-2 ${pathname === '/' && activeHash === '#contact'
-              ? 'bg-white text-black'
-              : 'bg-black text-white hover:bg-white hover:text-black'
+            className={`relative group overflow-hidden isolate px-5 py-1.5 text-lg font-bold uppercase border-2 transition-all ml-1 ${pathname === '/' && activeHash === '#contact'
+              ? 'bg-white text-black border-black'
+              : 'bg-black text-white border-black hover:bg-white hover:text-black'
               }`}
           >
             <Smoke inverse={true} isActive={pathname === '/' && activeHash === '#contact'} />
@@ -174,7 +173,7 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Swapped brutalist-shadow for a static shadow and removed hover animation */}
+        {/* Mobile Toggle Button */}
         <button
           onClick={toggleMobileMenu}
           className="pointer-events-auto md:hidden bg-white border-4 border-black p-3 brutalist-shadow-static"
