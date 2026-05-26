@@ -63,7 +63,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="snap-start min-h-[100dvh] flex flex-col justify-center pt-30 pb-16 px-6 md:px-12 lg:px-24 bg-black text-white overflow-hidden">
+    <section id="contact" className="snap-start min-h-[100dvh] flex flex-col justify-center pt-24 pb-16 px-6 md:px-12 lg:px-24 bg-black text-white overflow-hidden">
       <div className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 lg:gap-12 items-center lg:items-start">
 
         {/* --- LEFT COLUMN: TEXT & SOCIALS --- */}
@@ -106,7 +106,6 @@ export default function Contact() {
         {/* --- RIGHT COLUMN: STATIC FORM ENGINE --- */}
         <div className="flex-1 w-full relative max-w-xl mx-auto lg:mx-0">
 
-          {/* Standard Form Element (No more motion, rotateX, or translateZ) */}
           <form
             action={clientAction}
             noValidate
@@ -176,7 +175,6 @@ export default function Contact() {
                   </span>
                 </div>
 
-                {/* Submit button keeps its physical click animation for tactile feedback, but 3D popping is gone */}
                 <button
                   type="submit"
                   onClick={() => playPowerUp()}
