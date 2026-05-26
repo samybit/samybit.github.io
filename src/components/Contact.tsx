@@ -1,7 +1,7 @@
 "use client";
 
-import { Send, Check, ArrowUpRight } from "lucide-react";
-import { useState } from "react";
+import { Send, Check, ArrowUpRight, Loader2 } from "lucide-react";
+import { useState, useRef } from "react";
 import { sendEmail } from "@/actions/send-email";
 import { playPowerUp } from "@/utils/audio";
 import DecryptText from "@/components/DecryptText";
@@ -9,8 +9,9 @@ import DecryptText from "@/components/DecryptText";
 export default function Contact() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errors, setErrors] = useState<{ email?: string; message?: string }>({});
-
   const [values, setValues] = useState({ name: "", email: "", message: "" });
+
+  const isSubmitting = useRef(false);
 
   const isNameFilled = values.name.trim().length > 0;
   const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email);
@@ -31,7 +32,14 @@ export default function Contact() {
     }
   };
 
-  async function clientAction(formData: FormData) {
+  // Replaced clientAction with a synchronous DOM event handler
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault(); // 1. Instantly stop the browser
+
+    if (isSubmitting.current) return; // 2. Check the gate
+    isSubmitting.current = true;      // 3. LOCK THE GATE IMMEDIATELY
+
+    const formData = new FormData(e.currentTarget);
     const newErrors: { email?: string; message?: string } = {};
 
     if (!isEmailValid) newErrors.email = "VALID EMAIL IS REQUIRED.";
@@ -39,6 +47,7 @@ export default function Contact() {
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
+      isSubmitting.current = false; // Unlock the gate so they can fix their errors
       return;
     }
 
@@ -49,6 +58,7 @@ export default function Contact() {
 
     if (result?.error) {
       setStatus("error");
+      isSubmitting.current = false; // Unlock the gate so they can try sending again
     } else {
       setStatus("success");
     }
@@ -107,7 +117,7 @@ export default function Contact() {
         <div className="flex-1 w-full relative max-w-xl mx-auto lg:mx-0">
 
           <form
-            action={clientAction}
+            onSubmit={handleSubmit}
             noValidate
             className="relative z-10 bg-white text-black border-4 border-black flex flex-col gap-2 md:gap-3 p-6 lg:p-8 overflow-hidden shadow-[8px_8px_0px_#fff]"
           >
@@ -177,17 +187,30 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  onClick={() => playPowerUp()}
+                  onClick={() => {
+                    // Added gate to prevent audio from spamming on multiple clicks
+                    if (status !== "loading" && !isSubmitting.current) playPowerUp();
+                  }}
                   disabled={status === "loading"}
-                  className="mt-2 flex items-center justify-center bg-black text-white py-3 px-5 text-xl md:text-2xl font-black uppercase border-4 border-black hover:bg-white hover:text-black transition-all duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed group relative z-20 shadow-[8px_8px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:translate-x-1 hover:translate-y-1 active:shadow-none active:translate-x-2 active:translate-y-2"
+                  className={`mt-2 flex items-center justify-center bg-black text-white py-3 px-5 text-xl md:text-2xl font-black uppercase border-4 border-black transition-all duration-200 ease-in-out group relative z-20 
+                  ${status === "loading"
+                      ? "opacity-80 cursor-wait translate-x-1 translate-y-1 shadow-[4px_4px_0px_#000]"
+                      : "shadow-[8px_8px_0px_#000] hover:bg-white hover:text-black hover:shadow-[4px_4px_0px_#000] hover:translate-x-1 hover:translate-y-1 active:shadow-none active:translate-x-2 active:translate-y-2"
+                    }`}
                 >
                   <span className="transition-transform duration-300">
                     {status === "loading" ? "Sending..." : "Send Message"}
                   </span>
 
-                  {/* The Reveal Engine: Expands width and margin on hover, clipping the icon until it slides in */}
-                  <div className="w-0 opacity-0 overflow-hidden flex items-center group-hover:w-6 md:group-hover:w-8 group-hover:ml-3 group-hover:opacity-100 transition-all duration-300 ease-out">
-                    <Send className="w-5 h-5 md:w-6 md:h-6 shrink-0 -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out" />
+                  <div className={`overflow-hidden flex items-center transition-all duration-300 ease-out ${status === "loading"
+                    ? "w-6 md:w-8 ml-3 opacity-100"
+                    : "w-0 opacity-0 group-hover:w-6 md:group-hover:w-8 group-hover:ml-3 group-hover:opacity-100"
+                    }`}>
+                    {status === "loading" ? (
+                      <Loader2 className="w-5 h-5 md:w-6 md:h-6 shrink-0 animate-spin" />
+                    ) : (
+                      <Send className="w-5 h-5 md:w-6 md:h-6 shrink-0 -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out" />
+                    )}
                   </div>
                 </button>
 
