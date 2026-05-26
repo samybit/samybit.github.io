@@ -171,7 +171,7 @@ export default function Contact() {
                   <textarea
                     id="message"
                     name="message"
-                    rows={4}
+                    rows={3}
                     value={values.message}
                     onChange={handleChange}
                     className={getInputStyle(isMessageValid, !!errors.message)}
