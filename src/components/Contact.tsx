@@ -179,10 +179,16 @@ export default function Contact() {
                   type="submit"
                   onClick={() => playPowerUp()}
                   disabled={status === "loading"}
-                  className="mt-2 flex items-center justify-center gap-3 bg-black text-white py-3 px-5 text-xl md:text-2xl font-black uppercase border-4 border-black hover:bg-white hover:text-black transition-all duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed group relative z-20 shadow-[8px_8px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:translate-x-1 hover:translate-y-1 active:shadow-none active:translate-x-2 active:translate-y-2"
+                  className="mt-2 flex items-center justify-center bg-black text-white py-3 px-5 text-xl md:text-2xl font-black uppercase border-4 border-black hover:bg-white hover:text-black transition-all duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed group relative z-20 shadow-[8px_8px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:translate-x-1 hover:translate-y-1 active:shadow-none active:translate-x-2 active:translate-y-2"
                 >
-                  {status === "loading" ? "Sending..." : "Send Message"}
-                  <Send className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  <span className="transition-transform duration-300">
+                    {status === "loading" ? "Sending..." : "Send Message"}
+                  </span>
+
+                  {/* The Reveal Engine: Expands width and margin on hover, clipping the icon until it slides in */}
+                  <div className="w-0 opacity-0 overflow-hidden flex items-center group-hover:w-6 md:group-hover:w-8 group-hover:ml-3 group-hover:opacity-100 transition-all duration-300 ease-out">
+                    <Send className="w-5 h-5 md:w-6 md:h-6 shrink-0 -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out" />
+                  </div>
                 </button>
 
                 {status === "error" && (
