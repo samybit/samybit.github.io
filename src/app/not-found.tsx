@@ -1,21 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowLeft, ShieldAlert } from "lucide-react";
 
 export default function NotFound() {
   return (
-    // h-[100dvh] strictly locks the section to the exact height of the browser window.
-    // pt-20 ensures it clears your fixed navbar without pushing the box off-screen.
     <section className="h-[100dvh] flex flex-col items-center justify-center px-6 pt-20">
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
-        // Reduced internal padding from !p-20 to p-8 md:p-12
-        className="brutalist-container w-full max-w-4xl flex flex-col items-center text-center p-8 md:p-12"
-      >
+      <div className="brutalist-container w-full max-w-4xl flex flex-col items-center text-center p-8 md:p-12">
         <ShieldAlert className="w-16 h-16 md:w-20 md:h-20 mb-4 text-black" />
 
         {/* Scaled down from 12rem to 9xl (8rem) to save vertical real estate */}
@@ -40,7 +31,7 @@ export default function NotFound() {
           <ArrowLeft className="mr-3 w-6 h-6 md:w-8 md:h-8 group-hover:-translate-x-2 transition-transform" />
           <span>Return Home</span>
         </Link>
-      </motion.div>
+      </div>
     </section>
   );
 }
