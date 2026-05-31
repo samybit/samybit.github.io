@@ -465,6 +465,7 @@ html.theme-neumorphic .bg-white.border-4 {
   background-color: #e0e5ec !important;
   border-color: transparent !important;
   transition: all 0.3s ease !important;
+  overflow: hidden !important;
 }
 
 /* Hover Shadows */
@@ -542,4 +543,68 @@ html.theme-neumorphic input[type='text'],
 html.theme-neumorphic input[type='email'],
 html.theme-neumorphic textarea {
   cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjNGI1NTYzIiBzdHJva2U9IiNlMGU1ZWMiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciI+PHBhdGggZD0iTSA2IDIgTCAxOCAyIEwgMTggNiBMIDE0IDYgTCAxNCAxOCBMIDE4IDE4IEwgMTggMjIgTCA2IDIyIEwgNiAxOCBMIDEwIDE4IEwgMTAgNiBMIDYgNiBaIi8+PC9zdmc+") 12 12, text !important;
+  border-radius: 1rem !important;
+  background-color: #e0e5ec !important;
+  color: #4b5563 !important;
+  box-shadow: inset 4px 4px 8px rgba(163, 177, 198, 0.6), inset -4px -4px 8px rgba(255, 255, 255, 0.5) !important;
+  border: 1px solid rgba(163, 177, 198, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+html.theme-neumorphic input[type='text']:focus,
+html.theme-neumorphic input[type='email']:focus,
+html.theme-neumorphic textarea:focus {
+  box-shadow: inset 6px 6px 12px rgba(163, 177, 198, 0.8), inset -6px -6px 12px rgba(255, 255, 255, 0.6) !important;
+  outline: none !important;
+}
+
+/* Valid Inputs (soft success tint/inset shadow) */
+html.theme-neumorphic input.bg-black,
+html.theme-neumorphic textarea.bg-black {
+  background-color: #f0fdf4 !important;
+  color: #16a34a !important;
+  border: 1px solid rgba(22, 163, 74, 0.2) !important;
+  box-shadow: inset 4px 4px 8px rgba(22, 163, 74, 0.1), inset -4px -4px 8px rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Invalid / Error Inputs (soft warning red tint/inset shadow) */
+html.theme-neumorphic .border-red-600,
+html.theme-neumorphic .bg-red-50 {
+  background-color: #fef2f2 !important;
+  color: #dc2626 !important;
+  border: 1px solid rgba(220, 38, 38, 0.2) !important;
+  box-shadow: inset 4px 4px 8px rgba(220, 38, 38, 0.1), inset -4px -4px 8px rgba(255, 255, 255, 0.5) !important;
+}
+
+html.theme-neumorphic .border-red-600:focus,
+html.theme-neumorphic .bg-red-50:focus {
+  box-shadow: inset 5px 5px 10px rgba(220, 38, 38, 0.25), inset -5px -5px 10px rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Neumorphic Error Validation Labels & Borders */
+html.theme-neumorphic .text-red-600 {
+  color: #dc2626 !important;
+}
+
+html.theme-neumorphic span.border-red-600 {
+  border-left: 4px solid #dc2626 !important;
+}
+
+/* Success Card */
+html.theme-neumorphic .bg-green-400 {
+  background-color: #f0fdf4 !important;
+  color: #16a34a !important;
+  border: 1px solid rgba(22, 163, 74, 0.2) !important;
+  border-radius: 1.5rem !important;
+  box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.4), -9px -9px 16px rgba(255, 255, 255, 0.5) !important;
+}
+
+html.theme-neumorphic .bg-green-400 .text-black {
+  color: #16a34a !important;
+}
+
+/* Live indicator dot style */
+html.theme-neumorphic .animate-ping,
+html.theme-neumorphic a .bg-black.rounded-full {
+  background-color: #10b981 !important;
 }

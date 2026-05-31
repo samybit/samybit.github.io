@@ -177,13 +177,23 @@ const ProjectCard = ({ project, animate = false, disableObserver = false }: Proj
       {/* Added min-h-[48px] md:min-h-[52px] to force the exact same physical footprint even if empty */}
       <div className="flex flex-wrap gap-4 border-t-4 border-black pt-3 md:pt-4 flex-none relative z-20 min-h-[48px] md:min-h-[52px]">
         {hasGithub && (
-          <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-sm md:text-base font-bold uppercase hover:underline">
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-1.5 text-sm md:text-base font-bold uppercase hover:bg-white hover:text-black px-3 py-1.5 transition-all border-2 border-black shrink-0"
+          >
             <GithubIcon size={20} /> Repo
           </a>
         )}
 
         {hasDemo && (
-          <a href={project.demo} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-1.5 text-sm md:text-base font-bold uppercase hover:bg-white hover:text-black px-2 transition-colors border-2 border-transparent hover:border-black shrink-0">
+          <a
+            href={project.demo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-1.5 text-sm md:text-base font-bold uppercase hover:bg-white hover:text-black px-3 py-1.5 transition-all border-2 border-black shrink-0"
+          >
             <span className="relative flex h-2.5 w-2.5 mr-1">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-black opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-black"></span>
