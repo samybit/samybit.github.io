@@ -133,7 +133,8 @@
 /* --- CUSTOM BRUTALIST HARDWARE CURSOR --- */
 /* Native OS shape, perfectly straight vertical left edge. Zero JS lag. */
 
-body {
+body,
+div[class*="project-image-overlay"] {
   /* Default: Size 28x28, Black fill, White stroke. Hotspot calibrated to tip (2 2). */
   cursor: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOCIgaGVpZ2h0PSIyOCIgdmlld0JveD0iMCAwIDI4IDI4IiBmaWxsPSJibGFjayIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNIDIgMiBMIDIgMTggTCA2IDE0IEwgMTAgMjMgTCAxMyAyMSBMIDkgMTMgTCAxNSAxMyBaIi8+PC9zdmc+') 2 2, auto;
 }
@@ -373,15 +374,15 @@ html.theme-color textarea {
   width: 30vmax;
   height: 30vmax;
   border: 2px solid currentColor;
-  opacity: 0.12; 
+  opacity: 0.12;
   transform-style: preserve-3d;
-  
+
   /* The mathematical foundation using React's injected --i */
   --angle: calc(var(--i) * 10deg);
-  
+
   /* Uses sin() to morph shapes from square to rounded continuously around the sphere */
   border-radius: calc(25% + 25% * sin(var(--angle)));
-  
+
   animation: shape-morph 8s infinite ease-in-out alternate;
   /* Stagger the wave effect */
   animation-delay: calc(var(--i) * -0.2s);
@@ -389,22 +390,22 @@ html.theme-color textarea {
 
 @keyframes shape-morph {
   0% {
-    transform: 
-      rotateZ(var(--angle)) 
-      rotateX(calc(sin(var(--angle)) * 70deg)) 
-      translateZ(calc(cos(var(--angle)) * 12vmax))
-      scale(calc(0.7 + 0.3 * sin(var(--angle))));
+    transform:
+      rotateZ(var(--angle)) rotateX(calc(sin(var(--angle)) * 70deg)) translateZ(calc(cos(var(--angle)) * 12vmax)) scale(calc(0.7 + 0.3 * sin(var(--angle))));
   }
+
   100% {
-    transform: 
-      rotateZ(var(--angle)) 
-      rotateX(calc(cos(var(--angle)) * -70deg)) 
-      translateZ(calc(sin(var(--angle)) * 12vmax))
-      scale(calc(0.7 + 0.3 * cos(var(--angle))));
+    transform:
+      rotateZ(var(--angle)) rotateX(calc(cos(var(--angle)) * -70deg)) translateZ(calc(sin(var(--angle)) * 12vmax)) scale(calc(0.7 + 0.3 * cos(var(--angle))));
   }
 }
 
 @keyframes core-spin {
-  0% { transform: rotateX(15deg) rotateY(0deg) rotateZ(0deg); }
-  100% { transform: rotateX(15deg) rotateY(360deg) rotateZ(180deg); }
+  0% {
+    transform: rotateX(15deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  100% {
+    transform: rotateX(15deg) rotateY(360deg) rotateZ(180deg);
+  }
 }
