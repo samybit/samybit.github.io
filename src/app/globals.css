@@ -409,3 +409,137 @@ html.theme-color textarea {
     transform: rotateX(15deg) rotateY(360deg) rotateZ(180deg);
   }
 }
+
+/* =========================================
+   --- THEME 4: NEUMORPHIC (SOFT UI) ---
+========================================= */
+
+html.theme-neumorphic,
+html.theme-neumorphic body {
+  background-color: #e0e5ec !important;
+  color: #4b5563 !important;
+  background-image: none !important;
+}
+
+/* Remove hard borders */
+html.theme-neumorphic * {
+  border-color: transparent !important;
+}
+
+/* Base backgrounds */
+html.theme-neumorphic .bg-white,
+html.theme-neumorphic .bg-black,
+html.theme-neumorphic [class*='bg-white'],
+html.theme-neumorphic [class*='bg-black'],
+html.theme-neumorphic [class*='hover:bg-white']:hover,
+html.theme-neumorphic [class*='hover:bg-black']:hover {
+  background-color: #e0e5ec !important;
+}
+
+/* Base text */
+html.theme-neumorphic .text-white,
+html.theme-neumorphic .text-black,
+html.theme-neumorphic [class*='hover:text-white']:hover,
+html.theme-neumorphic [class*='hover:text-black']:hover {
+  color: #4b5563 !important;
+}
+
+/* Secondary text */
+html.theme-neumorphic .text-zinc-800,
+html.theme-neumorphic .text-zinc-500 {
+  color: #6b7280 !important;
+}
+
+/* Neumorphic Shadows for Containers & Buttons */
+html.theme-neumorphic .brutalist-container,
+html.theme-neumorphic .brutalist-shadow,
+html.theme-neumorphic .brutalist-shadow-static,
+html.theme-neumorphic a.border-2,
+html.theme-neumorphic a.border-4,
+html.theme-neumorphic button.border-2,
+html.theme-neumorphic button.border-4,
+html.theme-neumorphic .project-card,
+html.theme-neumorphic .bg-white.border-4 {
+  border-radius: 1.5rem !important;
+  box-shadow: 9px 9px 16px rgba(163,177,198,0.6), -9px -9px 16px rgba(255,255,255,0.5) !important;
+  background-color: #e0e5ec !important;
+  border-color: transparent !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Hover Shadows */
+html.theme-neumorphic .brutalist-container:hover,
+html.theme-neumorphic .brutalist-shadow:hover,
+html.theme-neumorphic a.border-2:hover,
+html.theme-neumorphic a.border-4:hover,
+html.theme-neumorphic button.border-2:hover,
+html.theme-neumorphic button.border-4:hover {
+  box-shadow: 12px 12px 20px rgba(163,177,198,0.7), -12px -12px 20px rgba(255,255,255,0.6) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Active / Pressed Shadows */
+html.theme-neumorphic a:active,
+html.theme-neumorphic button:active,
+html.theme-neumorphic [role='button']:active {
+  box-shadow: inset 6px 6px 10px 0 rgba(163,177,198,0.7), inset -6px -6px 10px 0 rgba(255,255,255,0.5) !important;
+  transform: translateY(2px) !important;
+}
+
+/* Keep images normal but rounded */
+html.theme-neumorphic img {
+  border-radius: 1rem !important;
+  border-color: transparent !important;
+  filter: none !important;
+}
+
+/* Neumorphic GlitchText block */
+html.theme-neumorphic .bg-black.text-white {
+  background-color: transparent !important;
+  box-shadow: 9px 9px 16px rgba(163,177,198,0.6), -9px -9px 16px rgba(255,255,255,0.5) !important;
+  border-radius: 1rem !important;
+  color: #4b5563 !important;
+}
+
+/* Scrollbar styling */
+html.theme-neumorphic ::-webkit-scrollbar-track {
+  background: #e0e5ec !important;
+  border-left: 2px solid #a3b1c6 !important;
+}
+
+html.theme-neumorphic ::-webkit-scrollbar-thumb {
+  background-color: #a3b1c6 !important;
+  border: 4px solid #e0e5ec !important;
+  border-radius: 10px !important;
+}
+
+html.theme-neumorphic ::-webkit-scrollbar-thumb:hover {
+  background-color: #8c9bb0 !important;
+}
+
+/* Hide 3D Parametric Background */
+html.theme-neumorphic .bg-parametric-shape {
+  border-color: rgba(163,177,198,0.3) !important;
+}
+
+/* Custom Cursors */
+html.theme-neumorphic body {
+  cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOCIgaGVpZ2h0PSIyOCIgdmlld0JveD0iMCAwIDI4IDI4IiBmaWxsPSIjZTBlNWVjIiBzdHJva2U9IiM0YjU1NjMiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTSAyIDIgTCAyIDE4IEwgNiAxNCBMIDEwIDIzIEwgMTMgMjEgTCA5IDEzIEwgMTUgMTMgWiIvPjwvc3ZnPg==") 2 2, auto !important;
+}
+
+html.theme-neumorphic a,
+html.theme-neumorphic button,
+html.theme-neumorphic [role='button'],
+html.theme-neumorphic label,
+html.theme-neumorphic select,
+html.theme-neumorphic input[type='submit'],
+html.theme-neumorphic input[type='button'],
+html.theme-neumorphic [class*='cursor-pointer'] {
+  cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNCIgaGVpZ2h0PSIzNCIgdmlld0JveD0iMCAwIDI4IDI4IiBmaWxsPSIjNGI1NTYzIiBzdHJva2U9IiNlMGU1ZWMiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTSAyIDIgTCAyIDE4IEwgNiAxNCBMIDEwIDIzIEwgMTMgMjEgTCA5IDEzIEwgMTUgMTMgWiIvPjwvc3ZnPg==") 2 2, pointer !important;
+}
+
+html.theme-neumorphic input[type='text'],
+html.theme-neumorphic input[type='email'],
+html.theme-neumorphic textarea {
+  cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjNGI1NTYzIiBzdHJva2U9IiNlMGU1ZWMiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciI+PHBhdGggZD0iTSA2IDIgTCAxOCAyIEwgMTggNiBMIDE0IDYgTCAxNCAxOCBMIDE4IDE4IEwgMTggMjIgTCA2IDIyIEwgNiAxOCBMIDEwIDE4IEwgMTAgNiBMIDYgNiBaIi8+PC9zdmc+") 12 12, text !important;
+}

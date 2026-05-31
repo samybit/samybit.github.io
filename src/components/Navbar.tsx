@@ -78,6 +78,9 @@ export default function Navbar() {
       html.classList.add("theme-color");
     } else if (html.classList.contains("theme-color")) {
       html.classList.remove("theme-color");
+      html.classList.add("theme-neumorphic");
+    } else if (html.classList.contains("theme-neumorphic")) {
+      html.classList.remove("theme-neumorphic");
     } else {
       html.classList.add("invert-theme");
     }
